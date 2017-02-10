@@ -3,9 +3,11 @@
 
 #include "stdafx.h"
 
+using namespace std;
 
 int main()
 {
+	cout << "this is sportsbook" << endl;
     return 0;
 }
 
