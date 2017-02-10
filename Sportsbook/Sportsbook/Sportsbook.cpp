@@ -8,6 +8,8 @@ using namespace std;
 int main()
 {
 	cout << "this is sportsbook" << endl;
+	int i = 0;
+	cout << i << endl; 
     return 0;
 }
 
