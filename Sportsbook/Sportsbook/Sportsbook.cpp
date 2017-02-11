@@ -18,12 +18,11 @@ int main(int argc, char *argv[])
 		cin >> username;
 		cout << endl;
 		cin >> password;
-		int offset;
 		fstream file("registrations.csv");
 		if (file.is_open()) {
 			while (!file.eof()) {
-				getline(file, appuser);
-				if ((offset = appuser.find(username, 0)) != string::npos) {
+				getline(file, appuser); //this takes the line and put it to string appuser
+				if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
 					cout << "There is already a register with that username." << endl;
 					file.close(); //to kleinw prin termatisei to programma
 					return 0;
@@ -44,12 +43,11 @@ int main(int argc, char *argv[])
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
-		int offset;
 		fstream file("registrations.csv");
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser);
-				if ((offset = appuser.find(username, 0)) != string::npos) {
+				if ((appuser.find(username, 0)) != string::npos) {
 					registration_flag = true;
 					break;
 				}
