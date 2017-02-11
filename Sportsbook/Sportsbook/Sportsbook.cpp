@@ -2,6 +2,8 @@
 //
 
 #include "stdafx.h"
+#include "Users_categories.h"
+#include "Main_functions.h"
 
 using namespace std;
 
@@ -29,6 +31,7 @@ int main(int argc, char *argv[])
 				}
 			}
 			cout << "Registration succesfull" << endl;
+			//construction call for user class
 			//this is the part where registration is succesfull, the user logins and his username and password are passed in csv
 		}
 		else {
@@ -47,6 +50,7 @@ int main(int argc, char *argv[])
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser);
+				//here will have to be a line where delete all the useless part of the line, and keeps only the username
 				if ((appuser.find(username, 0)) != string::npos) {
 					registration_flag = true;
 					break;
