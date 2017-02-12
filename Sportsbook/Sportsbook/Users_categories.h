@@ -1,33 +1,31 @@
 #pragma once
 
-class Person {
-public:
-	virtual void Operation(char) = 0;
-};
-
-class Guest {
+class Guest { 
+	protected:
+		//access by all the others too.
 	public:
-		void Operation(char);
+		virtual void Operation(char);
 
 };
 
-class Punter {
+class Punter : public Guest{
 private:
 	Wallet wallet;
 public:
 	void Operation(char);
 };
 
-class Wallet {
+class Wallet : Punter{
+protected:
 	double amount;
 };
 
-class Trader {
+class Trader : Guest{
 public:
 	void Operation(char);
 };
 
-class Director {
+class Director : Guest{
 public:
 	void Operation(char);
 };

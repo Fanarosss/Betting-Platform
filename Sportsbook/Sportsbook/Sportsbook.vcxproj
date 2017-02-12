@@ -145,6 +145,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BetAtzis.h" />
+    <ClInclude Include="hierarchy.h" />
     <ClInclude Include="Main_functions.h" />
     <ClInclude Include="Users_categories.h" />
     <ClInclude Include="stdafx.h" />
