@@ -9,4 +9,3 @@ class BetAtzis {
 	Guest ** users; //pinakas me tous users.
 	Node hierarchy;
 };
-mmmmm
