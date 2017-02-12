@@ -3,64 +3,100 @@
 
 using namespace std;
 
-void Guest::Operation(char leitourgia) {
-	if (leitourgia == 'c') {
+void Guest::Operation(string leitourgia) {
+	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0)) {
 
 	}
-	else if (leitourgia == 't') {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
 
 	}
-	else if (leitourgia == 'x') {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
 		return ; //eksodos apo to sistima
 	}
 }
 
-void Punter::Operation(char leitourgia) {
-	if (leitourgia == 'c') {
+void Punter::Operation(string leitourgia) {
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
 
 	}
-	else if (leitourgia == 't') {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
 
 	}
-	else if (leitourgia == 'a') {
+	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0)) {
 
 	}
-	else if (leitourgia == 'x') {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
 		return; //eksodos apo to sistima
 	}
 }
 
-void Trader::Operation(char leitourgia) {
-	if (leitourgia == 'c') {
+void Trader::Operation(string leitourgia) {
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
 
 	}
-	else if (leitourgia == 't') {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0))) {
 
 	}
-	else if (leitourgia == 'b') {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
 
 	}
-	else if (leitourgia == 'f') {
+	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
 
 	}
-	else if (leitourgia == 'x') {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
 		return; //eksodos apo to sistima
 	}
 }
 
-void Director::Operation(char leitourgia) {
-	if (leitourgia == 'c') {
+void Director::Operation(string leitourgia) {
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
 
 	}
-	else if (leitourgia == 't') {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0))) {
 
 	}
-	else if (leitourgia == 's') {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
 
 	}
-	else if (leitourgia == 'x') {
+	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
+
+	}
+	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0)) {
+
+	}
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
 		return; //eksodos apo to sistima
 	}
+}
+
+void Guest::Print_Operations() {
+	cout << "H(Home), to return to home screen." << endl;
+	cout << "T(Toggle), to toggle prices." << endl;
+	cout << "X(Exit), to exit." << endl;
+}
+
+void Punter::Print_Operations() {
+	cout << "H(Home), to return to home screen." << endl;
+	cout << "T(Toggle), to toggle prices." << endl;
+	cout << "A(Account), to change your account settings." << endl;
+	cout << "X(Exit), to exit." << endl;
+}
+
+void Trader::Print_Operations() {
+	cout << "H(Home), to return to home screen." << endl;
+	cout << "T(Toggle), to toggle prices." << endl;
+	cout << "B(Bets), to see the last 20 bets." << endl;
+	cout << "F(Freebets), to give coupon to punter." << endl;
+	cout << "X(Exit), to exit." << endl;
+}
+
+void Director::Print_Operations() {
+	cout << "H(Home), to return to home screen." << endl;
+	cout << "T(Toggle), to toggle prices." << endl;
+	cout << "B(Bets), to see the last 20 bets." << endl;
+	cout << "F(Freebets), to give coupon to punter." << endl;
+	cout << "S(Save), to save current state and synchronize system files." << endl;
+	cout << "X(Exit), to exit." << endl;
 }
 
 void Trader::Bets() {

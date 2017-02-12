@@ -3,14 +3,16 @@
 class User {
 //abstract class
 public:
-	virtual void Operation(char)=0;
-	virtual void Bets() = 0;
+	virtual void Operation(string)= 0;
+	virtual void Bets()= 0;
+	virtual void Print_Operations()= 0;
 };
 
 class Guest : User{ 
 public:
-	void Operation(char);
+	void Operation(string);
 	void Bets() {}
+	void Print_Operations();
 
 };
 
@@ -23,18 +25,21 @@ class Punter : public User{
 private:
 	Wallet wallet;
 public:
-	void Operation(char);
+	void Operation(string);
 	void Bets() {}
+	void Print_Operations();
 };
 
 class Trader : User{
 public:
-	void Operation(char);
+	void Operation(string);
 	void Bets();
+	void Print_Operations();
 };
 
 class Director : User{
 public:
+	void Operation(string);
 	void Bets();
-	void Operation(char);
+	void Print_Operations();
 };
