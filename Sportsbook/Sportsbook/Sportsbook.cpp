@@ -10,12 +10,12 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	//for starters we are not going to use the preprocessing #ifdef, but remain in a known environment of argv,argc
-	char parameter = atof(argv[0]);
+	string parameter = argv[1];
 	string username, password, appuser;
 	bool registration_flag = true;
 	// Eggrafi part
 	// #ifdef -R    // preproccesing compilation of registration part
-	if (parameter == 'R') {
+	if (parameter.compare("-R")) {
 		cout << "<username>" << endl << "<password>" << endl;
 		cin >> username;
 		cout << endl;
