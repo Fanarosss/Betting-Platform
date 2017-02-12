@@ -19,12 +19,17 @@ public:
 class Wallet {
 protected:
 	double amount;
+public:
+	Wallet(double money) {
+		amount = money;
+	}
 };
 
 class Punter : public User{
 private:
 	Wallet wallet;
 public:
+	Punter(double money):wallet(money){}
 	void Operation(string);
 	void Bets() {}
 	void Print_Operations();
