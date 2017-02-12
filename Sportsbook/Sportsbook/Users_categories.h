@@ -1,7 +1,11 @@
 #pragma once
 
 class User {
-//abstract class
+	int user_id;
+	string username;
+	string fullname;
+	string password;
+	int type;
 public:
 	virtual void Operation(string)= 0;
 	virtual void Bets()= 0;
@@ -27,9 +31,11 @@ public:
 
 class Punter : public User{
 private:
-	Wallet wallet;
+	string status;
+	Wallet balance;
+	string freebets;
 public:
-	Punter(double money):wallet(money){}
+	Punter(double money):balance(money){}
 	void Operation(string);
 	void Bets() {}
 	void Print_Operations();
