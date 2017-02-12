@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
 			bool is_password_correct = check_for_password(username); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
 			if (is_password_correct) {
 				cout << "You have been logged in to the system succesfully" << endl;
-				file.close(); //apti stigmi pou den tha ksanaxreiastei to arxeio me ta registrations
 			}
 		}
 		else {
