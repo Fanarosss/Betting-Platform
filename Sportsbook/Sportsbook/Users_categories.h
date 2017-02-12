@@ -7,8 +7,6 @@ public:
 };
 
 class Guest : User{ 
-protected:
-	//access by all the others too.
 public:
 	void Operation(char);
 
