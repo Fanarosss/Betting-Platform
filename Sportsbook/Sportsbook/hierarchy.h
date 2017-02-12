@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 
+using namespace std;
+
 class Node {
 
 };
@@ -13,18 +15,21 @@ class Category : public Node {
 
 class Subcategory : public Category {
 	int id;
+	vector<Event> Events;
 };
 
 class Event : public Subcategory {
 	int id;
-	std::string name;
-	std::string date;
-	std::string time;
+	vector<Market> Markets;
+	string name;
+	string date;
+	string time;
 
 };
 
 class Market : public Event {
 	int id;
+	vector<Selection> Selections;
 	Selection ** selection_menu;
 };
 
