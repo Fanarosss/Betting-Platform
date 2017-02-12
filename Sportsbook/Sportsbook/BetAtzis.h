@@ -6,6 +6,6 @@
 class BetAtzis {
 	long double profits;
 	double promitheia;
-	Guest ** users; //pinakas me tous users.
+	User ** users; //pinakas me tous users.
 	Node hierarchy;
 };
