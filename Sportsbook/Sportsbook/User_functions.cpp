@@ -62,3 +62,27 @@ void Director::Operation(char leitourgia) {
 		return; //eksodos apo to sistima
 	}
 }
+
+void Trader::Bets() {
+	fstream myfile("user_logs.txt");
+	if (myfile.is_open()) {
+		while (!myfile.eof()) {
+			//cout << ta 20 teleutaia bets
+		}
+	}
+	else {
+		cout << "Error while loading file. ";
+	}
+}
+
+void Director::Bets() {
+	fstream myfile("user_logs.txt");
+	if (myfile.is_open()) {
+		while (!myfile.eof()) {
+			//cout << ta 20 teleutaia bets
+		}
+	}
+	else {
+		cout << "Error while loading file. ";
+	}
+}
