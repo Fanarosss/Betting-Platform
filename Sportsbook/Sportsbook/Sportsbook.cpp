@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		cin >> username;
 		cout << endl;
 		cin >> password;
-		fstream file("registrations.csv");
+		fstream file("users.txt");
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser); //this takes the line and put it to string appuser
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
-		fstream file("registrations.csv");
+		fstream file("users.txt");
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser);
@@ -65,10 +65,32 @@ int main(int argc, char *argv[])
 			bool is_password_correct = check_for_password(username); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
 			if (is_password_correct) {
 				cout << "You have been logged in to the system succesfully" << endl;
+				//procedure for finding the type
+				//type in .csv is the 5th element
+				int type_pos = 4;
+				size_t pos;
+				for (int i = 0; i<type_pos; i++) {
+					pos = appuser.find("|");
+					appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+				}
+				appuser.erase(appuser.begin() + 1, appuser.end()); //now appuser = type
+				//int type = stoi(appuser); //warning!!! c++11 ONLY!!!
+				int type;
+				stringstream converter(appuser);
+				converter >> type;
+				if (type == 1) {
+					//constructor for punter
+				}
+				else if (type == 2) {
+					//constructor for trader
+				}
+				else if (type == 3) {
+					//constructor for director
+				}
 			}
 		}
 		else {
-			cout << "Registration files are missing. End of program!";
+			cout << "User files are missing. End of program!";
 				return 0;
 		}
 	} //else -> an telika ekane type guest os username!!! --> xreiazetai enchancement na erxetai edo kai an apla pataei enter !!! <--
@@ -77,4 +99,3 @@ int main(int argc, char *argv[])
 	}
     return 0;
 }
-
