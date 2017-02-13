@@ -19,6 +19,7 @@ string read_from_csv(int my_pos,string appuser) {
 	while ((appuser[count_of_string] != '|')) {
 		count_of_string++;
 	}
+	count_of_string--;
 	appuser.erase(appuser.begin() + count_of_string, appuser.end()); //now appuser = what im looking for
 	//svistike kai to deksia
 	return appuser;
