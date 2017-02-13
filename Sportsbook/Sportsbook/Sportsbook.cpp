@@ -84,13 +84,13 @@ int main(int argc, char *argv[])
 				//type in .csv is the 5th element
 				int type = get_type(username);
 				if (type == 1) {
-					//constructor for punter
+					Punter punter(username, get_fullname(username), /*den xriazetai to password*/ , get_balance(username));
 				}
 				else if (type == 2) {
-					//constructor for trader
+					Trader trader(username, get_fullname(username), /*den xriazetai to password*/);
 				}
 				else if (type == 3) {
-					//constructor for director
+					Director director(username, get_fullname(username), /*den xriazetai to password*/);
 				}
 			}
 		}

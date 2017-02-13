@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 
 bool check_for_password(string);
 
@@ -13,3 +14,5 @@ string get_status(string);
 string get_freebets(string);
 
 int get_id(string);
+
+string get_fullname(string);

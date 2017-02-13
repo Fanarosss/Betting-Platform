@@ -15,9 +15,9 @@ public:
 		password = Password;
 		type = Type;
 	}
-	virtual void Operation(string)= 0;
-	virtual void Bets()= 0;
-	virtual void Print_Operations()= 0;
+	virtual void Operation(string){}
+	virtual void Bets(){}
+	virtual void Print_Operations(){}
 };
 
 class Guest : User{ 
@@ -58,7 +58,7 @@ public:
 
 class Trader : User{
 public:
-	Trader (string username, string fullname, string password, double money):User(username, fullname, password, 2){
+	Trader (string username, string fullname, string password):User(username, fullname, password, 2){
 		std::cout << "Welcome back mr." << username << endl;
 	}
 	void Operation(string);
@@ -68,7 +68,7 @@ public:
 
 class Director : User{
 public:
-	Director (string username, string fullname, string password, double money):User(username, fullname, password, 3) {
+	Director (string username, string fullname, string password):User(username, fullname, password, 3) {
 		std::cout << "Welcome back boss" << endl;
 	}
 	void Operation(string);
