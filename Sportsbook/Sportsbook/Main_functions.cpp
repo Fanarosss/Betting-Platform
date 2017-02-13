@@ -47,6 +47,7 @@ double get_balance(string username) {
 																	   //svistike kai to deksia
 	stringstream converter(appuser);
 	converter >> balance;
+	file.close();
 	return balance;
 }
 
@@ -73,6 +74,7 @@ int get_type(string username) {
 	//svistike kai to deksia
 	stringstream converter(appuser);
 	converter >> type;
+	file.close();
 	return type;
 }
 
@@ -98,6 +100,7 @@ string get_status(string username) {
 	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
 																	   //svistike kai to deksia
 	status = appuser;
+	file.close();
 	return status;
 }
 
@@ -123,19 +126,13 @@ string get_freebets(string username) {
 	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
 																	   //svistike kai to deksia
 	appuser = freebets;
+	file.close();
 	return freebets;
 }
 
-int get_id(string username) {
+int get_id(string appuser) {
 	int id;
-	string appuser;
 	fstream file("users.csv", std::fstream::in);
-	while (!file.eof()) {
-		getline(file, appuser); //this takes the line and put it to string appuser
-		if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
-			break;
-		}
-	}
 	size_t pos;
 	for (int i = 1; i<1; i++) {
 		pos = appuser.find("|");
@@ -149,5 +146,6 @@ int get_id(string username) {
 																	   //svistike kai to deksia
 	stringstream converter(appuser);
 	converter >> id;
+	file.close();
 	return id;
 }

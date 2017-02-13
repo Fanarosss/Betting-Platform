@@ -38,12 +38,9 @@ int main(int argc, char *argv[])
 			while (!file.eof) {
 				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
 			}
-			string sid = read_from_csv(1, last_appuser); //tote diavazei to teleutaio id
-			stringstream converter(sid); //converting from string to int
-			int id = 0;
-			converter >> id; //now we know the last id
+			int id = get_id(appuser); // prosoxi thelei fix
 			id++;
-			sid = to_string(id);
+			string sid = to_string(id);
 			string stype = to_string(1);
 			file.close();
 			file.open("users.csv", std::fstream::out);
