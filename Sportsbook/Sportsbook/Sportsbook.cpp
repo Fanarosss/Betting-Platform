@@ -68,12 +68,7 @@ int main(int argc, char *argv[])
 				//procedure for finding the type
 				//type in .csv is the 5th element
 				int type_pos = 4;
-				size_t pos;
-				for (int i = 0; i<type_pos; i++) {
-					pos = appuser.find("|");
-					appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
-				}
-				appuser.erase(appuser.begin() + 1, appuser.end()); //now appuser = type
+				appuser = read_from_csv(type_pos, appuser);
 				//int type = stoi(appuser); //warning!!! c++11 ONLY!!!
 				int type;
 				stringstream converter(appuser);
