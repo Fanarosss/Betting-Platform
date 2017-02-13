@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		cin >> username;
 		cout << endl;
 		cin >> password;
-		fstream file("users.txt");
+		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser); //this takes the line and put it to string appuser
@@ -30,23 +30,41 @@ int main(int argc, char *argv[])
 					return 0;
 				}
 			}
+			cout << "Please enter your full name" << endl;
+			string fullname;
+			cin >> fullname;
 			cout << "Registration succesfull" << endl;
-			//construction call for user class
-			//this is the part where registration is succesfull, the user logins and his username and password are passed in csv
+			string last_appuser = appuser;
+			while (!file.eof) {
+				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
+			}
+			string sid = read_from_csv(1, last_appuser); //tote diavazei to teleutaio id
+			stringstream converter(sid); //converting from string to int
+			int id = 0;
+			converter >> id; //now we know the last id
+			id++;
+			sid = to_string(id);
+			string stype = to_string(1);
+			file.close();
+			file.open("users.csv", std::fstream::out);
+			string new_user;
+			new_user = id + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
+			file << new_user << endl;
+			file.close();
 		}
 		else {
 			cout << "Can't open file.";
 			return 0;
 		}
 	}
-	// end of eggrafi!
+	// end of registration!
 	// #endif 
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
-		fstream file("users.txt");
+		fstream file("users.csv" , std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser);
@@ -63,12 +81,12 @@ int main(int argc, char *argv[])
 			cin >> password;
 			cout << endl;
 			bool is_password_correct = check_for_password(username); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
-			if (is_password_correct) {
+			if (is_password_correct == true) {
 				cout << "You have been logged in to the system succesfully" << endl;
 				//procedure for finding the type
 				//type in .csv is the 5th element
 				int type_pos = 4;
-				appuser = read_from_csv(type_pos, appuser);
+				int type = read_from_csv(type_pos, appuser);
 				//int type = stoi(appuser); //warning!!! c++11 ONLY!!!
 				int type;
 				stringstream converter(appuser);

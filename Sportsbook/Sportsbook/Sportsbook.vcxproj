@@ -142,9 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="bets.txt" />
+    <Text Include="bets.csv" />
     <Text Include="ReadMe.txt" />
-    <Text Include="users.txt" />
+    <Text Include="users.csv" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BetAtzis.h" />
@@ -165,6 +165,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="User_functions.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hierarchy.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

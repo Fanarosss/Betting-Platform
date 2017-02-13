@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Main_functions.h"
+
 class User {
 	int user_id;
 	string username;
@@ -7,6 +9,12 @@ class User {
 	string password;
 	int type;
 public:
+	User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
+		username = Username;
+		fullname = Fullname;
+		password = Password;
+		type = Type;
+	}
 	virtual void Operation(string)= 0;
 	virtual void Bets()= 0;
 	virtual void Print_Operations()= 0;
@@ -14,6 +22,9 @@ public:
 
 class Guest : User{ 
 public:
+	Guest ():User() {
+		std::cout << "Welcome!" << endl;
+	}
 	void Operation(string);
 	void Bets() {}
 	void Print_Operations();
@@ -35,7 +46,11 @@ private:
 	Wallet balance;
 	string freebets;
 public:
-	Punter(double money):balance(money){}
+	Punter (string username, string fullname, string password, double money):User(username, fullname, password, 1):balance(money) {
+		status = get_status(username);
+		freebets = get_freebets(username);
+		std::cout << "Welcome mr." << username << endl;
+	}
 	void Operation(string);
 	void Bets() {}
 	void Print_Operations();
@@ -43,6 +58,9 @@ public:
 
 class Trader : User{
 public:
+	Trader (string username, string fullname, string password, double money):User(username, fullname, password, 2){
+		std::cout << "Welcome back mr." << username << endl;
+	}
 	void Operation(string);
 	void Bets();
 	void Print_Operations();
@@ -50,6 +68,9 @@ public:
 
 class Director : User{
 public:
+	Director (string username, string fullname, string password, double money):User(username, fullname, password, 3) {
+		std::cout << "Welcome back boss" << endl;
+	}
 	void Operation(string);
 	void Bets();
 	void Print_Operations();
