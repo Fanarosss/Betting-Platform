@@ -5,7 +5,7 @@
 using namespace std;
 
 class Node {
-
+	vector<Category> Categories;
 };
 
 class Category : public Node {
