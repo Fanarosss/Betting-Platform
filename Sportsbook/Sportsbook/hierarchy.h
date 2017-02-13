@@ -5,39 +5,82 @@
 using namespace std;
 
 class Node {
+	int id;
+	string name;
 	vector<Category> Categories;
+public:
+	Node(int ID, string NAME);
+	virtual ~Node();
+	inline void set_id(int ID) { id = ID; }
+	inline void get_id(int &ID) { ID = id; }
+	inline void print_id() { cout << id; }
+	inline void set_name(string NAME) { name = NAME; }
+	inline void get_name(string &NAME) { NAME = name; }
+	inline void print_name() { cout << name; }
+	virtual void set_location(string &LOCATION) {};
+	virtual void set_date_time(string DATE_TIME) {}
+	virtual void get_date_time(string &DATE_TIME) {}
+	virtual void print_date_time() {}
+	virtual void set_profit(double PROFIT) {}
+	virtual void get_profit(double &PROFIT) {}
+	virtual void print_profit() {}
 };
 
 class Category : public Node {
-	int id;
 	vector<Subcategory> Subcategories;
+public:
+	Category(int ID, string NAME);
+	~Category();
+	void set_location(string &LOCATION);
 };
 
-class Subcategory : public Category {
-	int id;
+class Subcategory : public Node {
 	vector<Event> Events;
+public:
+	Subcategory(int ID, string NAME);
+	~Subcategory();
+	void set_location(string &LOCATION);
 };
 
-class Event : public Subcategory {
-	int id;
+class Event : public Node {
+	string date_time;
 	vector<Market> Markets;
-	string name;
-	string date;
-	string time;
-
+public:
+	Event(int ID, string NAME, string DATE_TIME);
+	~Event();
+	void set_location(string &LOCATION);
+	void set_date_time(string DATE_TIME) {
+		date_time = DATE_TIME;
+	};
+	void get_date_time(string &DATE_TIME) {
+		DATE_TIME = date_time;
+	};
+	void print_date_time() {
+		cout << date_time;
+	};
 };
 
-class Market : public Event {
-	int id;
+class Market : public Node {
 	vector<Selection> Selections;
-	Selection ** selection_menu;
+public:
+	Market(int ID, string NAME);
+	~Market();
+	void set_location(string &LOCATION);
 };
 
-class Price {
-	double price;
-};
-
-class Selection : public Market {
-	int id;
-	Price apodosi;
+class Selection : public Node {
+	double profit;
+public:
+	Selection(int ID, string NAME, double profit);
+	~Selection();
+	void set_location(string &LOCATION);
+	void set_profit(double PROFIT) {
+		profit = PROFIT;
+	};
+	void get_profit(double &PROFIT) {
+		PROFIT = profit;
+	};
+	void print_profit() {
+		cout << profit;
+	};
 };

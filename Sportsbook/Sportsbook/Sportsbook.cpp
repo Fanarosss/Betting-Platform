@@ -97,5 +97,6 @@ int main(int argc, char *argv[])
 	else { 
 		cout << "Logged in as guest" << endl;
 	}
+	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
     return 0;
 }
