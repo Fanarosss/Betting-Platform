@@ -85,12 +85,7 @@ int main(int argc, char *argv[])
 				cout << "You have been logged in to the system succesfully" << endl;
 				//procedure for finding the type
 				//type in .csv is the 5th element
-				int type_pos = 4;
-				int type = read_from_csv(type_pos, appuser);
-				//int type = stoi(appuser); //warning!!! c++11 ONLY!!!
-				int type;
-				stringstream converter(appuser);
-				converter >> type;
+				int type = get_type(username);
 				if (type == 1) {
 					//constructor for punter
 				}

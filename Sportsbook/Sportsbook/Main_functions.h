@@ -11,3 +11,5 @@ int get_type(string);
 string get_status(string);
 
 string get_freebets(string);
+
+int get_id(string);
