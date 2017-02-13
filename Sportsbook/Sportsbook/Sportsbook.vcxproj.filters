@@ -19,6 +19,9 @@
     <Text Include="users.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="bets.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

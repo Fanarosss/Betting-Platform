@@ -1,0 +1,1 @@
+bet_id|user_id|node_id|stake|result|
