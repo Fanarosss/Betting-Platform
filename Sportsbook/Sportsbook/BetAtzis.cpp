@@ -7,7 +7,7 @@ BetAtzis::BetAtzis() {
 	fstream hierarchy("hierarchy.dat", std::fstream::in);
 	//read from hierarchy.dat and create the categeories in home, subcategories in categories etc.
 	string HierLine,temp,name,time;
-	short int NodeCounter = 1;
+	short int NodeCounter = 0;
 	while (!hierarchy.eof()) {
 		getline(hierarchy, HierLine);
 		temp = HierLine;
@@ -20,7 +20,9 @@ BetAtzis::BetAtzis() {
 				temp.substr(temp.find(".") + 1);
 			}
 		}
-		NodeCounter += 2;
+		if (NodeCounter > 1) {
+			NodeCounter++;
+		}
 		name = HierLine;
 		size_t position = name.find(" ");
 		name.substr(position + 1); //svinei tous arithmous kai to space
