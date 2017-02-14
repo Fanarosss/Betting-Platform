@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
-bool check_for_password(string);
+bool check_for_password(string,string);
 
 string read_from_csv(int ,string);
 
@@ -16,3 +16,5 @@ string get_freebets(string);
 int get_id(string);
 
 string get_fullname(string);
+
+string get_password(string);

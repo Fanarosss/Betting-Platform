@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			while (!file.eof) {
 				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
 			}
-			int id = get_id(appuser); // prosoxi thelei fix
+			int id = get_id(appuser); 
 			id++;
 			string sid = to_string(id);
 			string stype = to_string(1);
@@ -81,22 +81,22 @@ int main(int argc, char *argv[])
 			cout << endl << "Password: ";
 			cin >> password;
 			cout << endl;
-			bool is_password_correct = check_for_password(username); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
+			bool is_password_correct = check_for_password(username,password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
 			if (is_password_correct == true) {
 				cout << "You have been logged in to the system succesfully" << endl;
 				//procedure for finding the type
 				//type in .csv is the 5th element
 				int type = get_type(username);
 				if (type == 1) {
-					Punter punter(username, get_fullname(username), /*den xriazetai to password*/ , get_balance(username));
+					Punter punter(username, get_fullname(username), get_password(username), get_balance(username));
 				}
 				else if (type == 2) {
-					Trader trader(username, get_fullname(username), /*den xriazetai to password*/);
+					Trader trader(username, get_fullname(username), get_password(username));
 				}
 				else if (type == 3) {
-					Director director(username, get_fullname(username), /*den xriazetai to password*/);
+					Director director(username, get_fullname(username), get_password(username));
 				}
-				Node Home;
+				Home home;
 
 			}
 		} //an den anoigei o fakelos!!!

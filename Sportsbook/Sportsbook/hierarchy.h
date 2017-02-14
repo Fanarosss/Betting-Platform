@@ -7,7 +7,6 @@ using namespace std;
 class Node {
 	int id;
 	string name;
-	vector<Category> Categories;
 public:
 	Node(int ID, string NAME);
 	virtual ~Node();
@@ -26,29 +25,40 @@ public:
 	virtual void print_profit() {}
 };
 
+class Home{
+	vector<Category*> Categories;
+public:
+	Home();
+	~Home();
+	void set_category(string);
+};
+
 class Category : public Node {
-	vector<Subcategory> Subcategories;
+	vector<Subcategory*> Subcategories;
 public:
 	Category(int ID, string NAME);
 	~Category();
 	void set_location(string &LOCATION);
+	void set_subcategory(string);
 };
 
 class Subcategory : public Node {
-	vector<Event> Events;
+	vector<Event*> Events;
 public:
 	Subcategory(int ID, string NAME);
 	~Subcategory();
 	void set_location(string &LOCATION);
+	void set_event(string,string);
 };
 
 class Event : public Node {
 	string date_time;
-	vector<Market> Markets;
+	vector<Market*> Markets;
 public:
 	Event(int ID, string NAME, string DATE_TIME);
 	~Event();
 	void set_location(string &LOCATION);
+	void set_market(string);
 	void set_date_time(string DATE_TIME) {
 		date_time = DATE_TIME;
 	};
@@ -61,11 +71,12 @@ public:
 };
 
 class Market : public Node {
-	vector<Selection> Selections;
+	vector<Selection*> Selections;
 public:
 	Market(int ID, string NAME);
 	~Market();
 	void set_location(string &LOCATION);
+	void set_selection(string,double);
 };
 
 class Selection : public Node {

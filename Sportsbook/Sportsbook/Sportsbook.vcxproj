@@ -155,6 +155,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BetAtzis.cpp" />
     <ClCompile Include="Hierarchy_functions.cpp" />
     <ClCompile Include="Main_functions.cpp" />
     <ClCompile Include="Sportsbook.cpp" />

@@ -4,8 +4,13 @@
 #include "hierarchy.h"
 
 class BetAtzis {
+private:
 	long double profits;
 	double promitheia;
-	User ** users; //pinakas me tous users.
-	Node hierarchy;
+	int users; //arithmos users.
+	Home home;
+public:
+	BetAtzis();
+	~BetAtzis();
+	}
 };
