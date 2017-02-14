@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Users_categories.h"
 #include "Main_functions.h"
+#include "hierarchy.h"
 
 using namespace std;
 
@@ -56,6 +57,9 @@ int main(int argc, char *argv[])
 	}
 	// end of registration!
 	// #endif 
+	//Loading hierarchy
+	
+
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
 	cout << "Username: ";
@@ -92,8 +96,10 @@ int main(int argc, char *argv[])
 				else if (type == 3) {
 					Director director(username, get_fullname(username), /*den xriazetai to password*/);
 				}
+				Node Home;
+
 			}
-		}
+		} //an den anoigei o fakelos!!!
 		else {
 			cout << "User files are missing. End of program!";
 				return 0;
