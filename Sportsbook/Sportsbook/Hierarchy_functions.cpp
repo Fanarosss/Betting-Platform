@@ -30,7 +30,7 @@ Market::Market(int ID, string NAME) :Node(ID, NAME) {
 	//cout<<"A Market has been constructed."<<endl;
 }
 
-Selection::Selection(int ID, string NAME, double PROFIT) :Node(ID, NAME) {
+Selection::Selection(int ID, string NAME, string PROFIT) :Node(ID, NAME) {
 	profit = PROFIT;
 	//cout<<"A Selection has been constructed."<<endl;
 }
@@ -129,7 +129,7 @@ Market* Event::set_market(string NAME) {
 	return mrk_ptr;
 }
 
-Selection* Market::set_selection(string NAME,double profit) {
+Selection* Market::set_selection(string NAME,string profit) {
 	Selection * sl_ptr;
 	sl_ptr = new Selection(Selections.size(), NAME, profit); //vector.size = ID
 	Selections.push_back(sl_ptr);

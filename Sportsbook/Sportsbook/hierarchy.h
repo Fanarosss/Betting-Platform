@@ -76,19 +76,19 @@ public:
 	Market(int ID, string NAME);
 	~Market();
 	void set_location(string &LOCATION);
-	Selection* set_selection(string,double);
+	Selection* set_selection(string,string);
 };
 
 class Selection : public Node {
-	double profit;
+	string profit;
 public:
-	Selection(int ID, string NAME, double profit);
+	Selection(int ID, string NAME, string profit);
 	~Selection();
 	void set_location(string &LOCATION);
-	void set_profit(double PROFIT) {
+	void set_profit(string PROFIT) {
 		profit = PROFIT;
 	};
-	void get_profit(double &PROFIT) {
+	void get_profit(string &PROFIT) {
 		PROFIT = profit;
 	};
 	void print_profit() {
