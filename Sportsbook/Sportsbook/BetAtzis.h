@@ -12,5 +12,4 @@ private:
 public:
 	BetAtzis();
 	~BetAtzis();
-	}
 };

@@ -101,32 +101,37 @@ void Selection::set_location(string &LOCATION) {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //kosta poli pithanon auti i ylopoiisi na einai lathos, den tin allazw akoma, alla logika thelei to vector na einai sto node me vector < node * > Nodes kai oles oi sinartiseis virtual!
 
-void Home::set_category(string NAME) {
+Category* Home::set_category(string NAME) {
 	Category * ctg_ptr;
 	ctg_ptr = new Category(Categories.size(),NAME); //Categories.size = ID
 	Categories.push_back(ctg_ptr);
+	return ctg_ptr;
 }
 
-void Category::set_subcategory(string NAME) {
+Subcategory* Category::set_subcategory(string NAME) {
 	Subcategory * sctg_ptr;
 	sctg_ptr = new Subcategory(Subcategories.size(), NAME); //vector.size = ID
 	Subcategories.push_back(sctg_ptr);
+	return sctg_ptr;
 }
 
-void Subcategory::set_event(string NAME,string DATE_TIME) {
+Event* Subcategory::set_event(string NAME,string DATE_TIME) {
 	Event * event_ptr;
 	event_ptr = new Event(Events.size(), NAME, DATE_TIME); //vector.size = ID
 	Events.push_back(event_ptr);
+	return event_ptr;
 }
 
-void Event::set_market(string NAME) {
+Market* Event::set_market(string NAME) {
 	Market * mrk_ptr;
 	mrk_ptr = new Market(Markets.size(), NAME); //vector.size = ID
 	Markets.push_back(mrk_ptr);
+	return mrk_ptr;
 }
 
-void Market::set_selection(string NAME,double profit) {
+Selection* Market::set_selection(string NAME,double profit) {
 	Selection * sl_ptr;
 	sl_ptr = new Selection(Selections.size(), NAME, profit); //vector.size = ID
 	Selections.push_back(sl_ptr);
+	return sl_ptr;
 }

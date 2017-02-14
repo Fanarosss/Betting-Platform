@@ -30,7 +30,7 @@ class Home{
 public:
 	Home();
 	~Home();
-	void set_category(string);
+	Category *  set_category(string);
 };
 
 class Category : public Node {
@@ -39,7 +39,7 @@ public:
 	Category(int ID, string NAME);
 	~Category();
 	void set_location(string &LOCATION);
-	void set_subcategory(string);
+	Subcategory* set_subcategory(string);
 };
 
 class Subcategory : public Node {
@@ -48,7 +48,7 @@ public:
 	Subcategory(int ID, string NAME);
 	~Subcategory();
 	void set_location(string &LOCATION);
-	void set_event(string,string);
+	Event* set_event(string,string);
 };
 
 class Event : public Node {
@@ -58,7 +58,7 @@ public:
 	Event(int ID, string NAME, string DATE_TIME);
 	~Event();
 	void set_location(string &LOCATION);
-	void set_market(string);
+	Market* set_market(string);
 	void set_date_time(string DATE_TIME) {
 		date_time = DATE_TIME;
 	};
@@ -76,7 +76,7 @@ public:
 	Market(int ID, string NAME);
 	~Market();
 	void set_location(string &LOCATION);
-	void set_selection(string,double);
+	Selection* set_selection(string,double);
 };
 
 class Selection : public Node {
