@@ -30,7 +30,10 @@ BetAtzis::BetAtzis() {
 						name.erase((name.begin() + (name.length() - length + 1)),name.end());
 						Event* evptr = scptr->set_event(name, time);
 						break;
-				case 4: Market* market_ptr = 
+				case 4: Market* market_ptr = evptr->set_market(name);
+						break;
+				case 5: Selection * slptr = market_ptr->set_selection(name);
+						break;
 			}
 			temp = HierLine;
 			temp.erase((temp.begin() + 1), temp.end());
