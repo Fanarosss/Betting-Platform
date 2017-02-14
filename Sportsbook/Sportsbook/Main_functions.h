@@ -1,5 +1,8 @@
 #pragma once
+
 #include "stdafx.h"
+
+using namespace std;
 
 bool check_for_password(string,string);
 

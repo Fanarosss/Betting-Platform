@@ -1,6 +1,8 @@
 #pragma once
-
+#include "stdafx.h"
 #include "Main_functions.h"
+
+using namespace std;
 
 class User {
 	int user_id;
