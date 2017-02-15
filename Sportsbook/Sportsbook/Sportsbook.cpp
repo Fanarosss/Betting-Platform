@@ -5,6 +5,7 @@
 #include "Users_categories.h"
 #include "Main_functions.h"
 #include "hierarchy.h"
+#include "BetAtzis.h"
 
 using namespace std;
 
@@ -109,5 +110,6 @@ int main(int argc, char *argv[])
 		cout << "Logged in as guest" << endl;
 	}
 	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
+	BetAtzis* Interface = new BetAtzis;
 	return 0;
 }

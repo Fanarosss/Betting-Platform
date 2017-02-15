@@ -135,3 +135,48 @@ Selection* Market::set_selection(string NAME,string profit) {
 	Selections.push_back(sl_ptr);
 	return sl_ptr;
 }
+
+void Home::print_options() {
+	for (int i = 0; i <= Categories.size(); i++) {
+		Categories[i]->print_id;
+		cout << ". ";
+		Categories[i]->print_name;
+		cout << endl;
+	}
+}
+
+void Category::print_options() {
+	for (int i = 0; i <= Subcategories.size(); i++) {
+		Subcategories[i]->print_id;
+		cout << ". ";
+		Subcategories[i]->print_name;
+		cout << endl;
+	}
+}
+
+void Subcategory::print_options() {
+	for (int i = 0; i <= Events.size(); i++) {
+		Events[i]->print_id;
+		cout << ". ";
+		Events[i]->print_name;
+		cout << endl;
+	}
+}
+
+void Event::print_options() {
+	for (int i = 0; i <= Markets.size(); i++) {
+		Markets[i]->print_id;
+		cout << ". ";
+		Markets[i]->print_name;
+		cout << endl;
+	}
+}
+
+void Market::print_options() {
+	for (int i = 0; i <= Selections.size(); i++) {
+		Selections[i]->print_id;
+		cout << ". ";
+		Selections[i]->print_name;
+		cout << endl;
+	}
+}

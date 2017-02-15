@@ -23,6 +23,7 @@ public:
 	virtual void set_profit(double PROFIT) {}
 	virtual void get_profit(double &PROFIT) {}
 	virtual void print_profit() {}
+	virtual void print_options() {}
 };
 
 class Selection : public Node {
@@ -49,6 +50,7 @@ public:
 	~Market();
 	void set_location(string &LOCATION);
 	Selection* set_selection(string, string);
+	void print_options();
 };
 
 class Event : public Node {
@@ -68,6 +70,7 @@ public:
 	void print_date_time() {
 		cout << date_time;
 	};
+	void print_options();
 };
 
 class Subcategory : public Node {
@@ -77,6 +80,7 @@ public:
 	~Subcategory();
 	void set_location(string &LOCATION);
 	Event* set_event(string, string);
+	void print_options();
 };
 
 class Category : public Node {
@@ -86,6 +90,7 @@ public:
 	~Category();
 	void set_location(string &LOCATION);
 	Subcategory* set_subcategory(string);
+	void print_options();
 };
 
 class Home {
@@ -93,5 +98,6 @@ class Home {
 public:
 	Home();
 	~Home();
-	Category*  set_category(string);
+	Category* set_category(string);
+	void print_options();
 };
