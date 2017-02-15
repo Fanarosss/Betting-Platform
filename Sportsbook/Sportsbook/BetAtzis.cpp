@@ -13,7 +13,7 @@ BetAtzis::BetAtzis() {
 	Event* Eptr = NULL;
 	Market* Mptr = NULL;
 	Selection* Sptr = NULL;
-	while (!hierarchy.eof()) {
+	do{
 		getline(hierarchy, HierLine);
 		temp = HierLine;
 		size_t pos;
@@ -57,7 +57,7 @@ BetAtzis::BetAtzis() {
 					Sptr = sptr;
 					break; }
 			}
-	}
+	} while (!HierLine.empty() && !hierarchy.eof());
 }
 
 BetAtzis::~BetAtzis() {

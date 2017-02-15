@@ -35,9 +35,10 @@ int main(int argc, char *argv[])
 				}
 			}
 			file.close();
-			cout << "Please enter your full name" << endl;
+			cout << "Please enter your full name: ";
 			string fullname;
 			cin >> fullname;
+			cout << endl;
 			cout << "Registration succesfull" << endl;
 			string last_appuser; 
 			//get last line
