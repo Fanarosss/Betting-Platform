@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
 			cin >> fullname;
 			cout << "Registration succesfull" << endl;
 			string last_appuser = appuser;
-			while (!file.eof) {
+			while (!file.eof()) {
 				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
 			}
-			int id = get_id(appuser); 
+			int id = get_id(appuser);
 			id++;
 			string sid = to_string(id);
 			string stype = to_string(1);
@@ -58,14 +58,14 @@ int main(int argc, char *argv[])
 	// end of registration!
 	// #endif 
 	//Loading hierarchy
-	
+
 
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
-		fstream file("users.csv" , std::fstream::in);
+		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof()) {
 				getline(file, appuser);
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 			cout << endl << "Password: ";
 			cin >> password;
 			cout << endl;
-			bool is_password_correct = check_for_password(username,password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
+			bool is_password_correct = check_for_password(username, password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
 			if (is_password_correct == true) {
 				cout << "You have been logged in to the system succesfully" << endl;
 				//procedure for finding the type
@@ -102,12 +102,12 @@ int main(int argc, char *argv[])
 		} //an den anoigei o fakelos!!!
 		else {
 			cout << "User files are missing. End of program!";
-				return 0;
+			return 0;
 		}
 	} //else -> an telika ekane type guest os username!!! --> xreiazetai enchancement na erxetai edo kai an apla pataei enter !!! <--
-	else { 
+	else {
 		cout << "Logged in as guest" << endl;
 	}
 	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
-    return 0;
+	return 0;
 }

@@ -9,7 +9,7 @@ Node::Node(int ID, string NAME) {
 	//cout<<"A Node has been constructed."<<endl;
 }
 
-Home::Home() {
+Home::Home(){
 	//cout << "Home has been constructed" << endl;
 }
 
@@ -103,35 +103,35 @@ void Selection::set_location(string &LOCATION) {
 
 Category* Home::set_category(string NAME) {
 	Category * ctg_ptr;
-	ctg_ptr = new Category(Categories.size(),NAME); //Categories.size = ID
+	ctg_ptr = new Category(Categories.size()+1,NAME); //Categories.size = ID
 	Categories.push_back(ctg_ptr);
 	return ctg_ptr;
 }
 
 Subcategory* Category::set_subcategory(string NAME) {
 	Subcategory * sctg_ptr;
-	sctg_ptr = new Subcategory(Subcategories.size(), NAME); //vector.size = ID
+	sctg_ptr = new Subcategory(Subcategories.size()+1, NAME); //vector.size = ID
 	Subcategories.push_back(sctg_ptr);
 	return sctg_ptr;
 }
 
 Event* Subcategory::set_event(string NAME,string DATE_TIME) {
 	Event * event_ptr;
-	event_ptr = new Event(Events.size(), NAME, DATE_TIME); //vector.size = ID
+	event_ptr = new Event(Events.size()+1, NAME, DATE_TIME); //vector.size = ID
 	Events.push_back(event_ptr);
 	return event_ptr;
 }
 
 Market* Event::set_market(string NAME) {
 	Market * mrk_ptr;
-	mrk_ptr = new Market(Markets.size(), NAME); //vector.size = ID
+	mrk_ptr = new Market(Markets.size()+1, NAME); //vector.size = ID
 	Markets.push_back(mrk_ptr);
 	return mrk_ptr;
 }
 
 Selection* Market::set_selection(string NAME,string profit) {
 	Selection * sl_ptr;
-	sl_ptr = new Selection(Selections.size(), NAME, profit); //vector.size = ID
+	sl_ptr = new Selection(Selections.size()+1, NAME, profit); //vector.size = ID
 	Selections.push_back(sl_ptr);
 	return sl_ptr;
 }

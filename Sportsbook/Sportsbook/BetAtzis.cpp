@@ -8,6 +8,11 @@ BetAtzis::BetAtzis() {
 	//read from hierarchy.dat and create the categeories in home, subcategories in categories etc.
 	string HierLine,temp,name,time;
 	short int NodeCounter = 0;
+	Category* Cptr = NULL;
+	Subcategory* SCptr = NULL;
+	Event* Eptr = NULL;
+	Market* Mptr = NULL;
+	Selection* Sptr = NULL;
 	while (!hierarchy.eof()) {
 		getline(hierarchy, HierLine);
 		temp = HierLine;
@@ -27,25 +32,30 @@ BetAtzis::BetAtzis() {
 		size_t position = name.find(" ");
 		name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
-			case 1: Category * cptr = home.set_category(name);
-					break;
-			case 2: Subcategory* scptr = cptr->set_subcategory(name);
-					break;
-			case 3: size_t pos;
+			case 1: {Category * cptr = home.set_category(name);
+					Cptr = cptr;
+					break; }
+			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);
+					SCptr = scptr;
+					break; }
+			case 3: {size_t pos;
 					time = name;
 					pos = time.find(" ");
 					time = time.substr(pos + 1);
-					int length = time.length();
-					name.erase((name.begin() + (name.length() - length + 1)),name.end());
-					Event* evptr = scptr->set_event(name, time);
-					break;
-			case 4: Market* market_ptr = evptr->set_market(name);
-					break;
-			case 5: string profit = name;
+					size_t length = time.length();
+					name.erase((name.begin() + (name.length() - length + 1)), name.end());
+					Event* eptr = SCptr->set_event(name, time);
+					Eptr = eptr;
+					break; }
+			case 4: {Market* mptr = Eptr->set_market(name);
+					Mptr = mptr;
+					break; }
+			case 5: {string profit = name;
 					pos = profit.find(" ");
 					profit = profit.substr(pos + 1);
-					Selection * slptr = market_ptr->set_selection(name,profit);
-					break;
+					Selection * sptr = Mptr->set_selection(name, profit);
+					Sptr = sptr;
+					break; }
 			}
 	}
 }

@@ -25,30 +25,30 @@ public:
 	virtual void print_profit() {}
 };
 
-class Home{
-	vector<Category*> Categories;
+class Selection : public Node {
+	string profit;
 public:
-	Home();
-	~Home();
-	Category *  set_category(string);
+	Selection(int ID, string NAME, string profit);
+	~Selection();
+	void set_location(string &LOCATION);
+	void set_profit(string PROFIT) {
+		profit = PROFIT;
+	};
+	void get_profit(string &PROFIT) {
+		PROFIT = profit;
+	};
+	void print_profit() {
+		cout << profit;
+	};
 };
 
-class Category : public Node {
-	vector<Subcategory*> Subcategories;
+class Market : public Node {
+	vector<Selection*> Selections;
 public:
-	Category(int ID, string NAME);
-	~Category();
+	Market(int ID, string NAME);
+	~Market();
 	void set_location(string &LOCATION);
-	Subcategory* set_subcategory(string);
-};
-
-class Subcategory : public Node {
-	vector<Event*> Events;
-public:
-	Subcategory(int ID, string NAME);
-	~Subcategory();
-	void set_location(string &LOCATION);
-	Event* set_event(string,string);
+	Selection* set_selection(string, string);
 };
 
 class Event : public Node {
@@ -70,28 +70,28 @@ public:
 	};
 };
 
-class Market : public Node {
-	vector<Selection*> Selections;
+class Subcategory : public Node {
+	vector<Event*> Events;
 public:
-	Market(int ID, string NAME);
-	~Market();
+	Subcategory(int ID, string NAME);
+	~Subcategory();
 	void set_location(string &LOCATION);
-	Selection* set_selection(string,string);
+	Event* set_event(string, string);
 };
 
-class Selection : public Node {
-	string profit;
+class Category : public Node {
+	vector<Subcategory*> Subcategories;
 public:
-	Selection(int ID, string NAME, string profit);
-	~Selection();
+	Category(int ID, string NAME);
+	~Category();
 	void set_location(string &LOCATION);
-	void set_profit(string PROFIT) {
-		profit = PROFIT;
-	};
-	void get_profit(string &PROFIT) {
-		PROFIT = profit;
-	};
-	void print_profit() {
-		cout << profit;
-	};
+	Subcategory* set_subcategory(string);
+};
+
+class Home {
+	vector<Category*> Categories;
+public:
+	Home();
+	~Home();
+	Category*  set_category(string);
 };

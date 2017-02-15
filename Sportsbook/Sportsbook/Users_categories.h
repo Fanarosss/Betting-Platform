@@ -48,7 +48,7 @@ private:
 	Wallet balance;
 	string freebets;
 public:
-	Punter (string username, string fullname, string password, double money):User(username, fullname, password, 1):balance(money) {
+	Punter (string username, string fullname, string password, double money): User(username, fullname, password, 1), balance(money) {
 		status = get_status(username);
 		freebets = get_freebets(username);
 		std::cout << "Welcome mr." << username << endl;
