@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
 	//for starters we are not going to use the preprocessing #ifdef, but remain in a known environment of argv,argc
 	string parameter = argv[1];
-	string username, password, appuser;
+	string username, password, appuser="smth";
 	bool registration_flag = true;
 	// Eggrafi part
 	// #ifdef -R    // preproccesing compilation of registration part
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		cout << endl;
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
-			while (!file.eof()) {
+			while (!appuser.empty() && !file.eof()) {
 				getline(file, appuser); //this takes the line and put it to string appuser
 				if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
 					cout << "There is already a register with that username." << endl;
@@ -34,19 +34,20 @@ int main(int argc, char *argv[])
 					//return 0;
 				}
 			}
+			file.close();
 			cout << "Please enter your full name" << endl;
 			string fullname;
 			cin >> fullname;
 			cout << "Registration succesfull" << endl;
 			string last_appuser; 
 			//get last line
+			file.open("users.csv", std::fstream::in);
 			do {
 				last_appuser = appuser;
 				getline(file, appuser); //mexri na ftasei stin teleutaia grammi
 			} while (!appuser.empty() && !file.eof());
 			string last_app = last_appuser;
 			int id;
-			cout << "Last app:" << last_app << "|" << last_appuser << endl;
 			last_app.erase((last_app.begin() + 1), last_app.end());
 			if (last_app.compare("u") || last_app.compare("U")) {
 				id = get_id(last_appuser);
@@ -61,7 +62,12 @@ int main(int argc, char *argv[])
 			file.open("users.csv", std::fstream::out | std::fstream::app);
 			string new_user;
 			new_user = sid + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
-			file << endl << new_user << endl;
+			if (id == 1) {
+				file << endl << new_user << endl;
+			}
+			else {
+				file << new_user << endl;
+			}
 			file.close();
 		}
 		else {
@@ -113,6 +119,9 @@ int main(int argc, char *argv[])
 				Home home;
 
 			}
+			else {
+				cout << "Password incorrect. Please try again!" << endl;
+			}
 		} //an den anoigei o fakelos!!!
 		else {
 			cout << "User files are missing. End of program!";
@@ -122,7 +131,8 @@ int main(int argc, char *argv[])
 	else {
 		cout << "Logged in as guest" << endl;
 	}
-	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
+	string Location = "/BetAtzis/Home"; //krataei thn 8esh ths ierarxias pou vriskomaste
+	cout << endl << "Location: " << Location;
 	BetAtzis* Interface = new BetAtzis;
 	return 0;
 }
