@@ -16,55 +16,55 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-    <Text Include="Resource Files\bets.csv">
+    <Text Include="bets.csv">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resource Files\users.csv">
+    <Text Include="users.csv">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header Files\BetAtzis.h">
+    <ClInclude Include="BetAtzis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\hierarchy.h">
+    <ClInclude Include="hierarchy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Main_functions.h">
+    <ClInclude Include="Main_functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\stdafx.h">
+    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\targetver.h">
+    <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Users_categories.h">
+    <ClInclude Include="Users_categories.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\BetAtzis.cpp">
+    <ClCompile Include="BetAtzis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Hierarchy_functions.cpp">
+    <ClCompile Include="Hierarchy_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Main_functions.cpp">
+    <ClCompile Include="Main_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Sportsbook.cpp">
+    <ClCompile Include="Sportsbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\stdafx.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\User_functions.cpp">
+    <ClCompile Include="User_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resource Files\hierarchy.dat">
+    <None Include="hierarchy.dat">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
