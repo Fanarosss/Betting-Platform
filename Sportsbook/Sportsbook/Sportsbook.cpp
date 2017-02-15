@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 				if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
 					cout << "There is already a register with that username." << endl;
 					file.close(); //to kleinw prin termatisei to programma
-					//return 0;
+					return 0;
 				}
 			}
 			file.close();
