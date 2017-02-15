@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
 			string fullname;
 			cin >> fullname;
 			cout << "Registration succesfull" << endl;
-			string last_appuser;
+			string last_appuser; 
+			//get last line
 			do {
 				last_appuser = appuser;
 				getline(file, appuser); //mexri na ftasei stin teleutaia grammi
@@ -46,8 +47,8 @@ int main(int argc, char *argv[])
 			string last_app = last_appuser;
 			int id;
 			cout << "Last app:" << last_app << "|" << last_appuser << endl;
-			//last_app.erase((last_app.begin() + 1), last_app.end());
-			if (last_app.compare("i") || last_app.compare("I")) {
+			last_app.erase((last_app.begin() + 1), last_app.end());
+			if (last_app.compare("u") || last_app.compare("U")) {
 				id = get_id(last_appuser);
 				id++;
 			}
@@ -57,10 +58,10 @@ int main(int argc, char *argv[])
 			string sid = to_string(id);
 			string stype = to_string(1);
 			file.close();
-			file.open("users.csv", std::fstream::out);
+			file.open("users.csv", std::fstream::out | std::fstream::app);
 			string new_user;
 			new_user = sid + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
-			file << new_user << endl;
+			file << endl << new_user << endl;
 			file.close();
 		}
 		else {
