@@ -16,55 +16,55 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-    <Text Include="bets.csv">
+    <Text Include="Resource Files\bets.csv">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="users.csv">
+    <Text Include="Resource Files\users.csv">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="Header Files\BetAtzis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="Header Files\hierarchy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Users_categories.h">
+    <ClInclude Include="Header Files\Main_functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_functions.h">
+    <ClInclude Include="Header Files\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BetAtzis.h">
+    <ClInclude Include="Header Files\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hierarchy.h">
+    <ClInclude Include="Header Files\Users_categories.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Source Files\BetAtzis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sportsbook.cpp">
+    <ClCompile Include="Source Files\Hierarchy_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_functions.cpp">
+    <ClCompile Include="Source Files\Main_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="User_functions.cpp">
+    <ClCompile Include="Source Files\Sportsbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hierarchy_functions.cpp">
+    <ClCompile Include="Source Files\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BetAtzis.cpp">
+    <ClCompile Include="Source Files\User_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="hierarchy.dat">
+    <None Include="Resource Files\hierarchy.dat">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

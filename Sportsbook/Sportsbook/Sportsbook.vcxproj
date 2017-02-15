@@ -142,33 +142,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="bets.csv" />
+    <Text Include="Resource Files\bets.csv" />
     <Text Include="ReadMe.txt" />
-    <Text Include="users.csv" />
+    <Text Include="Resource Files\users.csv" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BetAtzis.h" />
-    <ClInclude Include="hierarchy.h" />
-    <ClInclude Include="Main_functions.h" />
-    <ClInclude Include="Users_categories.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Header Files\BetAtzis.h" />
+    <ClInclude Include="Header Files\hierarchy.h" />
+    <ClInclude Include="Header Files\Main_functions.h" />
+    <ClInclude Include="Header Files\Users_categories.h" />
+    <ClInclude Include="Header Files\stdafx.h" />
+    <ClInclude Include="Header Files\targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BetAtzis.cpp" />
-    <ClCompile Include="Hierarchy_functions.cpp" />
-    <ClCompile Include="Main_functions.cpp" />
-    <ClCompile Include="Sportsbook.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Source Files\BetAtzis.cpp" />
+    <ClCompile Include="Source Files\Hierarchy_functions.cpp" />
+    <ClCompile Include="Source Files\Main_functions.cpp" />
+    <ClCompile Include="Source Files\Sportsbook.cpp" />
+    <ClCompile Include="Source Files\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="User_functions.cpp" />
+    <ClCompile Include="Source Files\User_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hierarchy.dat" />
+    <None Include="Resource Files\hierarchy.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
