@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 		cout << "Logged in as guest" << endl;
 	}
 	string Location = "/BetAtzis/Home"; //krataei thn 8esh ths ierarxias pou vriskomaste
-	cout << endl << "Location: " << Location;
+	cout << endl << "Location: " << Location << endl;
 	BetAtzis* Interface = new BetAtzis;
 	return 0;
 }

@@ -180,7 +180,7 @@ string get_password(string username) {
 		}
 	}
 	size_t pos;
-	for (int i = 1; i<3; i++) {
+	for (int i = 1; i<4; i++) {
 		pos = appuser.find("|");
 		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
 	} //krataei olo to string deksia apo auto pou psaxnw
