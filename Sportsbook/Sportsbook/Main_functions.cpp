@@ -134,13 +134,11 @@ string get_freebets(string username) {
 }
 
 int get_id(string appuser) {
-	int id;
-	int count_of_string = 0;
-	while ((appuser[count_of_string] != '|')) {
-		count_of_string++;
-	}
-	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
-																	   //svistike kai to deksia
+	int id = 0;
+	size_t pos;
+	pos = appuser.find("|");
+	if (pos != string::npos)
+		appuser.erase((appuser.begin() + pos), appuser.end());
 	stringstream converter(appuser);
 	converter >> id;
 	return id;

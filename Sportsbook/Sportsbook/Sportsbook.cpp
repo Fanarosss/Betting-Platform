@@ -31,27 +31,35 @@ int main(int argc, char *argv[])
 				if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
 					cout << "There is already a register with that username." << endl;
 					file.close(); //to kleinw prin termatisei to programma
-					return 0;
+					//return 0;
 				}
 			}
 			cout << "Please enter your full name" << endl;
 			string fullname;
 			cin >> fullname;
 			cout << "Registration succesfull" << endl;
-			string last_appuser = appuser;
-			while (!file.eof()) { //edo ginetai i patata, den stamataei stin teleutaia grami alla sinexizei, opote mpainei nea keno string sto get_id
-				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
+			string last_appuser;
+			do {
+				last_appuser = appuser;
+				getline(file, appuser); //mexri na ftasei stin teleutaia grammi
+			} while (!appuser.empty() && !file.eof());
+			string last_app = last_appuser;
+			int id;
+			cout << "Last app:" << last_app << "|" << last_appuser << endl;
+			//last_app.erase((last_app.begin() + 1), last_app.end());
+			if (last_app.compare("i") || last_app.compare("I")) {
+				id = get_id(last_appuser);
+				id++;
 			}
-			cout << "get passed eof" << endl;
-			int id = get_id(last_appuser);
-			cout << "get passed id" << endl;
-			id++;
+			else {
+				id = 1;
+			}
 			string sid = to_string(id);
 			string stype = to_string(1);
 			file.close();
 			file.open("users.csv", std::fstream::out);
 			string new_user;
-			new_user = id + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
+			new_user = sid + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
 			file << new_user << endl;
 			file.close();
 		}
