@@ -17,11 +17,13 @@ int main(int argc, char *argv[])
 	bool registration_flag = true;
 	// Eggrafi part
 	// #ifdef -R    // preproccesing compilation of registration part
-	if (parameter.compare("-R")) {
-		cout << "<username>" << endl << "<password>" << endl;
+	//if (parameter.compare("2")) {
+		cout << "<username> ";
 		cin >> username;
 		cout << endl;
+		cout << "<password> ";
 		cin >> password;
+		cout << endl;
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof()) {
@@ -37,10 +39,12 @@ int main(int argc, char *argv[])
 			cin >> fullname;
 			cout << "Registration succesfull" << endl;
 			string last_appuser = appuser;
-			while (!file.eof()) {
+			while (!file.eof()) { //edo ginetai i patata, den stamataei stin teleutaia grami alla sinexizei, opote mpainei nea keno string sto get_id
 				getline(file, last_appuser); //mexri na ftasei stin teleutaia grammi
 			}
-			int id = get_id(appuser);
+			cout << "get passed eof" << endl;
+			int id = get_id(last_appuser);
+			cout << "get passed id" << endl;
 			id++;
 			string sid = to_string(id);
 			string stype = to_string(1);
@@ -55,7 +59,7 @@ int main(int argc, char *argv[])
 			cout << "Can't open file.";
 			return 0;
 		}
-	}
+	//}
 	// end of registration!
 	// #endif 
 	//Loading hierarchy

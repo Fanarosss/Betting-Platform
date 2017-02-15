@@ -138,45 +138,45 @@ Selection* Market::set_selection(string NAME,string profit) {
 
 void Home::print_options() {
 	for (int i = 0; i < Categories.size(); i++) { // kosta evgala to <= giati ama einai =0 tote tha mpei sto for eno den exei kanena stoixeio, an =1 tha mpei gia 2 ofres ena exei mono 1 stoixeio kai paei legontas
-		Categories[i]->print_id;
+		Categories[i]->print_id();
 		cout << ". ";
-		Categories[i]->print_name;
+		Categories[i]->print_name();
 		cout << endl;
 	}
 }
 
 void Category::print_options() {
 	for (int i = 0; i < Subcategories.size(); i++) {
-		Subcategories[i]->print_id;
+		Subcategories[i]->print_id();
 		cout << ". ";
-		Subcategories[i]->print_name;
+		Subcategories[i]->print_name();
 		cout << endl;
 	}
 }
 
 void Subcategory::print_options() {
 	for (int i = 0; i < Events.size(); i++) {
-		Events[i]->print_id;
+		Events[i]->print_id();
 		cout << ". ";
-		Events[i]->print_name;
+		Events[i]->print_name();
 		cout << endl;
 	}
 }
 
 void Event::print_options() {
 	for (int i = 0; i < Markets.size(); i++) {
-		Markets[i]->print_id;
+		Markets[i]->print_id();
 		cout << ". ";
-		Markets[i]->print_name;
+		Markets[i]->print_name();
 		cout << endl;
 	}
 }
 
 void Market::print_options() {
 	for (int i = 0; i < Selections.size(); i++) {
-		Selections[i]->print_id;
+		Selections[i]->print_id();
 		cout << ". ";
-		Selections[i]->print_name;
+		Selections[i]->print_name();
 		cout << endl;
 	}
 }

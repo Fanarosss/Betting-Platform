@@ -135,12 +135,6 @@ string get_freebets(string username) {
 
 int get_id(string appuser) {
 	int id;
-	fstream file("users.csv", std::fstream::in);
-	size_t pos;
-	for (int i = 1; i<1; i++) {
-		pos = appuser.find("|");
-		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
-	} //krataei olo to string deksia apo auto pou psaxnw
 	int count_of_string = 0;
 	while ((appuser[count_of_string] != '|')) {
 		count_of_string++;
@@ -149,7 +143,6 @@ int get_id(string appuser) {
 																	   //svistike kai to deksia
 	stringstream converter(appuser);
 	converter >> id;
-	file.close();
 	return id;
 }
 
