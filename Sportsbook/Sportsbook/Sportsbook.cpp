@@ -12,29 +12,37 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	//for starters we are not going to use the preprocessing #ifdef, but remain in a known environment of argv,argc
-	string parameter = argv[1];
-	string username, password, appuser="smth";
+	string username, password, appuser;
+	string parameter;
+	if (argv[1] != NULL) {
+		parameter = argv[1];
+	}
 	bool registration_flag = true;
 	// Eggrafi part
 	// #ifdef -R    // preproccesing compilation of registration part
-	//if (parameter.compare("2")) {
+	if (parameter == "-R") {
 		cout << "<username> ";
 		cin >> username;
-		cout << endl;
-		cout << "<password> ";
-		cin >> password;
-		cout << endl;
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
+			getline(file, appuser); //this takes the line and put it to string appuser
 			while (!appuser.empty() && !file.eof()) {
-				getline(file, appuser); //this takes the line and put it to string appuser
-				if ((appuser.find(username, 0)) != string::npos) { //this takes the line and check if there is a word in there mathcing to the given username
-					cout << "There is already a register with that username." << endl;
+				size_t pos1, pos2;
+				pos1 = appuser.find("|");
+				appuser = appuser.substr(pos1+1);
+				pos2 = appuser.find("|");
+				appuser = appuser.erase(pos2);
+				if ((appuser.compare(username) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
+					cout << "There is already a register with that username!" << endl;
+					registration_flag = false;
 					file.close(); //to kleinw prin termatisei to programma
-					return 0;
+					return 1;
 				}
+				getline(file, appuser);
 			}
 			file.close();
+			cout << "<password> ";
+			cin >> password;
 			cout << "Please enter your full name: ";
 			string fullname;
 			cin >> fullname;
@@ -75,7 +83,7 @@ int main(int argc, char *argv[])
 			cout << "Can't open file.";
 			return 0;
 		}
-	//}
+	}
 	// end of registration!
 	// #endif 
 	//Loading hierarchy
@@ -99,7 +107,7 @@ int main(int argc, char *argv[])
 			if (!registration_flag) {
 				cout << "There is no register with that username. Please try again! " << endl;
 			}
-			cout << endl << "Password: ";
+			cout << "Password: ";
 			cin >> password;
 			cout << endl;
 			bool is_password_correct = check_for_password(username, password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
@@ -132,7 +140,7 @@ int main(int argc, char *argv[])
 	else {
 		cout << "Logged in as guest" << endl;
 	}
-	string Location = "/BetAtzis/Home"; //krataei thn 8esh ths ierarxias pou vriskomaste
+	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
 	cout << endl << "Location: " << Location << endl;
 	BetAtzis* Interface = new BetAtzis;
 	return 0;
