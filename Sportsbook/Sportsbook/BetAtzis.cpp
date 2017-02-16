@@ -8,11 +8,14 @@ BetAtzis::BetAtzis() {
 	//read from hierarchy.dat and create the categeories in home, subcategories in categories etc.
 	string HierLine,temp,name,time;
 	short int NodeCounter;
+	type_ofProfits = "Klasmatika"; // by deafult, if you toggle it goes dekadika
 	Category* Cptr = NULL;
 	Subcategory* SCptr = NULL;
 	Event* Eptr = NULL;
 	Market* Mptr = NULL;
 	Selection* Sptr = NULL;
+	home = new Home();
+	node = home;
 	do{
 		NodeCounter = 0;
 		getline(hierarchy, HierLine);
@@ -32,9 +35,10 @@ BetAtzis::BetAtzis() {
 		}
 		name = HierLine;
 		size_t position = name.find(" ");
-		name.substr(position + 1); //svinei tous arithmous kai to space
+		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
-			case 1: {Category* cptr = home.set_category(name);
+			case 1: {
+					Category* cptr = home->set_category(name);
 					Cptr = cptr;
 					break; }
 			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);

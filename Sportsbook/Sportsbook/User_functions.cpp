@@ -70,12 +70,14 @@ void Director::Operation(string leitourgia) {
 }
 
 void Guest::Print_Operations() {
+	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "X(Exit), to exit." << endl;
 }
 
 void Punter::Print_Operations() {
+	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "A(Account), to change your account settings." << endl;
@@ -83,6 +85,7 @@ void Punter::Print_Operations() {
 }
 
 void Trader::Print_Operations() {
+	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "B(Bets), to see the last 20 bets." << endl;
@@ -91,6 +94,7 @@ void Trader::Print_Operations() {
 }
 
 void Director::Print_Operations() {
+	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "B(Bets), to see the last 20 bets." << endl;
@@ -100,9 +104,11 @@ void Director::Print_Operations() {
 }
 
 void Trader::Bets() {
-	fstream myfile("user_logs.txt");
+	fstream myfile("bets.csv" ,std::fstream::app);
+	string bet;
 	if (myfile.is_open()) {
-		while (!myfile.eof()) {
+		getline(myfile, bet);
+		while (!myfile.eof() && bet.empty()) {
 			//cout << ta 20 teleutaia bets
 		}
 	}
@@ -112,9 +118,11 @@ void Trader::Bets() {
 }
 
 void Director::Bets() {
-	fstream myfile("user_logs.txt");
+	fstream myfile("bets.csv", std::fstream::app);
+	string bet;
 	if (myfile.is_open()) {
-		while (!myfile.eof()) {
+		getline(myfile, bet);
+		while (!myfile.eof() && bet.empty()) {
 			//cout << ta 20 teleutaia bets
 		}
 	}

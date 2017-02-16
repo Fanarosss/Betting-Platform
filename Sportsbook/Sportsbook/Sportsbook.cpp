@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 					cout << "There is already a register with that username!" << endl;
 					registration_flag = false;
 					file.close(); //to kleinw prin termatisei to programma
-					return 1;
+					return 0;
 				}
 				getline(file, appuser);
 			}
@@ -88,15 +88,15 @@ int main(int argc, char *argv[])
 	// #endif 
 	//Loading hierarchy
 
-
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
+	User * uptr = new User;
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
-			while (!file.eof()) {
+			while (!file.eof() || appuser.empty()) {
 				getline(file, appuser);
 				//here will have to be a line where delete all the useless part of the line, and keeps only the username
 				if ((appuser.find(username, 0)) != string::npos) {
@@ -118,18 +118,20 @@ int main(int argc, char *argv[])
 				int type = get_type(username);
 				if (type == 1) {
 					Punter punter(username, get_fullname(username), get_password(username), get_balance(username));
+					uptr = &punter;
 				}
 				else if (type == 2) {
 					Trader trader(username, get_fullname(username), get_password(username));
+					uptr = &trader;
 				}
 				else if (type == 3) {
 					Director director(username, get_fullname(username), get_password(username));
+					uptr = &director;
 				}
-				Home home;
-
 			}
 			else {
 				cout << "Password incorrect. Please try again!" << endl;
+				return 0;
 			}
 		} //an den anoigei o fakelos!!!
 		else {
@@ -139,9 +141,21 @@ int main(int argc, char *argv[])
 	} //else -> an telika ekane type guest os username!!! --> xreiazetai enchancement na erxetai edo kai an apla pataei enter !!! <--
 	else {
 		cout << "Logged in as guest" << endl;
+		Guest guest;
+		uptr =  &guest;
 	}
-	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
-	cout << endl << "Location: " << Location << endl;
 	BetAtzis* Interface = new BetAtzis;
+	Interface->set_user(uptr);
+	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
+	Interface->set_level("Home");
+	bool flag = true;
+	char operation;
+	do {
+		cout << endl << "Location: " << Location << endl;
+		Interface->print();
+		Interface->print_operations();
+		cin >> operation;
+	} while (flag == true);
+	system("pause");
 	return 0;
 }

@@ -9,7 +9,7 @@ Node::Node(int ID, string NAME) {
 	//cout<<"A Node has been constructed."<<endl;
 }
 
-Home::Home(){
+Home::Home() :Node(0,"Home"){ //auti einai i mia prosgisi opou to home einai kai auto ksexoristi klasi paidi tou node, i alli prosegisi einai to home na einai to betatzis
 	//cout << "Home has been constructed" << endl;
 }
 

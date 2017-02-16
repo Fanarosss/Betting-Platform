@@ -22,7 +22,7 @@ public:
 	virtual void Print_Operations(){}
 };
 
-class Guest : User{ 
+class Guest : public User{ 
 public:
 	Guest ():User() {
 		std::cout << "Welcome!" << endl;
@@ -58,7 +58,7 @@ public:
 	void Print_Operations();
 };
 
-class Trader : User{
+class Trader : public User{
 public:
 	Trader (string username, string fullname, string password):User(username, fullname, password, 2){
 		std::cout << "Welcome back mr." << username << endl;
@@ -68,7 +68,7 @@ public:
 	void Print_Operations();
 };
 
-class Director : User{
+class Director : public User{
 public:
 	Director (string username, string fullname, string password):User(username, fullname, password, 3) {
 		std::cout << "Welcome back boss" << endl;

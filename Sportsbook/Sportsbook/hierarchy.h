@@ -7,6 +7,7 @@ using namespace std;
 class Node {
 	int id;
 	string name;
+	Node * back;
 public:
 	Node(int ID, string NAME);
 	virtual ~Node();
@@ -93,7 +94,7 @@ public:
 	void print_options();
 };
 
-class Home {
+class Home : public Node {
 	vector<Category*> Categories;
 public:
 	Home();
