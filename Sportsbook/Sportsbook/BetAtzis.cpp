@@ -18,13 +18,20 @@ BetAtzis::BetAtzis() {
 		temp = HierLine;
 		size_t pos;
 		pos = temp.find(" ");
-		temp.erase(temp.begin() + pos, temp.end()); //adeiazo to temp apo ta ipoloipa
-		while (temp != " ") {
-			if (temp.find(".") != string::npos) {
+		temp.erase((temp.begin() + pos), temp.end()); //adeiazo to temp apo ta ipoloipa
+		while (!temp.empty()) {
+			if (pos = temp.find(".") != string::npos) {
 				NodeCounter++;
-				temp.substr(temp.find(".") + 1);
+				cout << temp << endl; //debugging
+				temp = temp.substr(pos + 1);
+				cout << temp << endl; //debugging
 			}
+			else if (temp.length() < 3) {
+				NodeCounter++;
+				temp.clear();
+				}
 		}
+		cout << "exited" << endl;
 		if (NodeCounter > 1) {
 			NodeCounter++;
 		}
