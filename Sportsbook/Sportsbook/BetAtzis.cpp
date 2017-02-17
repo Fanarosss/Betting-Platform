@@ -49,10 +49,15 @@ BetAtzis::BetAtzis() {
 					break; }
 			case 3: {size_t pos;
 					time = name;
-					pos = time.find(" ");
-					time = time.substr(pos + 1);
-					size_t length = time.length();
-					name.erase((name.begin() + (name.length() - length + 1)), name.end());
+					pos = time.find("-");
+					if (pos != string::npos) {   //uparxoun gegonota pou DEN EXOUN TIME
+						time = time.substr(pos + 1);
+						size_t length = time.length();
+						name.erase((name.begin() + (name.length() - length - 1)), name.end());
+					}
+					else {
+						time = "";
+					}
 					Event* eptr = SCptr->set_event(name, time);
 					eptr->set_back(SCptr);
 					eptr->set_location("");
@@ -66,6 +71,8 @@ BetAtzis::BetAtzis() {
 			case 5: {string profit = name;
 					pos = profit.find("#");
 					profit = profit.substr(pos + 1);
+					size_t length = profit.length();
+					name.erase((name.begin() + (name.length() - length - 1)), name.end());
 					Selection* sptr = Mptr->set_selection(name, profit);
 					sptr->set_back(Mptr);
 					sptr->set_location("");

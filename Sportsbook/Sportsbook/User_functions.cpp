@@ -5,7 +5,7 @@ using namespace std;
 
 void Guest::Operation(string leitourgia) {
 	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0)) {
-
+		
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
 

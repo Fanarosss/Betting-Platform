@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 	User * uptr = new User;
 	cout << "Username: ";
 	cin >> username;
-	if(username != "guest") {
+	if (username != "guest") {
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof() || appuser.empty()) {
@@ -159,7 +159,9 @@ int main(int argc, char *argv[])
 			Interface->set_level(operation);
 		}
 		else {
+
 			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			cout << "Input is character" << endl;
 		}
 	} while (flag == true);

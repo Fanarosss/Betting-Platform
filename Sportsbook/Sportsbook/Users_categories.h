@@ -11,7 +11,7 @@ class User {
 	string password;
 	int type;
 public:
-	User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
+		User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
 		username = Username;
 		fullname = Fullname;
 		password = Password;
