@@ -20,9 +20,10 @@ public:
 	inline void print_name() { cout << name; }
 	inline void set_back(Node* NODE) { back = NODE; } //deikths ston proigoymeno komvo
 	inline Node* get_back() { return back; }
+	virtual Node* get_next(int NEXT) { return NULL; } //epistrefei ton komvo tou vector poy deixnei o ari8mos NEXT
 	virtual void set_location(string LOCATION) { location = LOCATION; }
 	virtual void get_location(string &LOCATION) { LOCATION = location; }
-	virtual void print_location() { cout << location; }
+	virtual void print_location() { cout << location << endl; }
 	virtual void set_date_time(string DATE_TIME) {}
 	virtual void get_date_time(string &DATE_TIME) {}
 	virtual void print_date_time() {}
@@ -57,6 +58,9 @@ public:
 	void set_location(string LOCATION);
 	Selection* set_selection(string, string);
 	void print_options();
+	Node* get_next(int NEXT) {
+		return Selections[NEXT - 1];
+	};
 };
 
 class Event : public Node {
@@ -77,6 +81,9 @@ public:
 		cout << date_time;
 	};
 	void print_options();
+	Node* get_next(int NEXT) {
+		return Markets[NEXT - 1];
+	};
 };
 
 class Subcategory : public Node {
@@ -87,6 +94,9 @@ public:
 	void set_location(string LOCATION);
 	Event* set_event(string, string);
 	void print_options();
+	Node* get_next(int NEXT) {
+		return Events[NEXT - 1];
+	};
 };
 
 class Category : public Node {
@@ -97,6 +107,9 @@ public:
 	void set_location(string LOCATION);
 	Subcategory* set_subcategory(string);
 	void print_options();
+	Node* get_next(int NEXT) {
+		return Subcategories[NEXT - 1];
+	};
 };
 
 class Home : public Node {
@@ -107,4 +120,7 @@ public:
 	void set_location(string LOCATION);
 	Category* set_category(string);
 	void print_options();
+	Node* get_next(int NEXT) {
+		return Categories[NEXT - 1];
+	};
 };

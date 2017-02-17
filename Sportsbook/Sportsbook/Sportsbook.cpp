@@ -145,17 +145,23 @@ int main(int argc, char *argv[])
 		uptr =  &guest;
 	}
 	BetAtzis* Interface = new BetAtzis;
-	string level = "Home"; 
 	Interface->set_user(uptr);
-	Interface->set_level(level);
-	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
 	bool flag = true;
-	char operation;
+	int operation;
 	do {
-		cout << endl << "Location: " << Location << endl;
+		cout << endl << "Location: ";
+		Interface->print_location(); //ektupwnei thn trexon topo8esia
 		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
 		Interface->print_operations(); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
+		if (cin.fail() == 0) {
+			cout << "Input is number" << endl;
+			Interface->set_level(operation);
+		}
+		else {
+			cin.clear();
+			cout << "Input is character" << endl;
+		}
 	} while (flag == true);
 	system("pause");
 	return 0;
