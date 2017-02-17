@@ -7,7 +7,8 @@ using namespace std;
 class Node {
 	int id;
 	string name;
-	Node * back;
+	string location;
+	Node* back;
 public:
 	Node(int ID, string NAME);
 	virtual ~Node();
@@ -17,7 +18,11 @@ public:
 	inline void set_name(string NAME) { name = NAME; }
 	inline void get_name(string &NAME) { NAME = name; }
 	inline void print_name() { cout << name; }
-	virtual void set_location(string &LOCATION) {};
+	inline void set_back(Node* NODE) { back = NODE; } //deikths ston proigoymeno komvo
+	inline Node* get_back() { return back; }
+	virtual void set_location(string LOCATION) { location = LOCATION; }
+	virtual void get_location(string &LOCATION) { LOCATION = location; }
+	virtual void print_location() { cout << location; }
 	virtual void set_date_time(string DATE_TIME) {}
 	virtual void get_date_time(string &DATE_TIME) {}
 	virtual void print_date_time() {}
@@ -32,7 +37,7 @@ class Selection : public Node {
 public:
 	Selection(int ID, string NAME, string profit);
 	~Selection();
-	void set_location(string &LOCATION);
+	void set_location(string LOCATION);
 	void set_profit(string PROFIT) {
 		profit = PROFIT;
 	};
@@ -49,7 +54,7 @@ class Market : public Node {
 public:
 	Market(int ID, string NAME);
 	~Market();
-	void set_location(string &LOCATION);
+	void set_location(string LOCATION);
 	Selection* set_selection(string, string);
 	void print_options();
 };
@@ -60,7 +65,7 @@ class Event : public Node {
 public:
 	Event(int ID, string NAME, string DATE_TIME);
 	~Event();
-	void set_location(string &LOCATION);
+	void set_location(string LOCATION);
 	Market* set_market(string);
 	void set_date_time(string DATE_TIME) {
 		date_time = DATE_TIME;
@@ -79,7 +84,7 @@ class Subcategory : public Node {
 public:
 	Subcategory(int ID, string NAME);
 	~Subcategory();
-	void set_location(string &LOCATION);
+	void set_location(string LOCATION);
 	Event* set_event(string, string);
 	void print_options();
 };
@@ -89,7 +94,7 @@ class Category : public Node {
 public:
 	Category(int ID, string NAME);
 	~Category();
-	void set_location(string &LOCATION);
+	void set_location(string LOCATION);
 	Subcategory* set_subcategory(string);
 	void print_options();
 };
@@ -99,6 +104,7 @@ class Home : public Node {
 public:
 	Home();
 	~Home();
+	void set_location(string LOCATION);
 	Category* set_category(string);
 	void print_options();
 };

@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 	User * uptr = new User;
 	cout << "Username: ";
 	cin >> username;
-	if (username != "guest") {
+	if(username != "guest") {
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof() || appuser.empty()) {
@@ -145,15 +145,16 @@ int main(int argc, char *argv[])
 		uptr =  &guest;
 	}
 	BetAtzis* Interface = new BetAtzis;
+	string level = "Home"; 
 	Interface->set_user(uptr);
+	Interface->set_level(level);
 	string Location = "/BetAtzis"; //krataei thn 8esh ths ierarxias pou vriskomaste
-	Interface->set_level("Home");
 	bool flag = true;
 	char operation;
 	do {
 		cout << endl << "Location: " << Location << endl;
-		Interface->print();
-		Interface->print_operations();
+		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
+		Interface->print_operations(); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
 	} while (flag == true);
 	system("pause");

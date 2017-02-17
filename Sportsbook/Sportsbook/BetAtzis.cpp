@@ -38,9 +38,13 @@ BetAtzis::BetAtzis() {
 		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
 			case 1: {Category* cptr = home->set_category(name);
+					cptr->set_back(home);
+					cptr->set_location("");
 					Cptr = cptr;
 					break; }
 			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);
+					scptr->set_back(Cptr);
+					scptr->set_location("");
 					SCptr = scptr;
 					break; }
 			case 3: {size_t pos;
@@ -50,15 +54,21 @@ BetAtzis::BetAtzis() {
 					size_t length = time.length();
 					name.erase((name.begin() + (name.length() - length + 1)), name.end());
 					Event* eptr = SCptr->set_event(name, time);
+					eptr->set_back(SCptr);
+					eptr->set_location("");
 					Eptr = eptr;
 					break; }
 			case 4: {Market* mptr = Eptr->set_market(name);
+					mptr->set_back(Eptr);
+					mptr->set_location("");
 					Mptr = mptr;
 					break; }
 			case 5: {string profit = name;
 					pos = profit.find("#");
 					profit = profit.substr(pos + 1);
 					Selection* sptr = Mptr->set_selection(name, profit);
+					sptr->set_back(Mptr);
+					sptr->set_location("");
 					Sptr = sptr;
 					break; }
 			}

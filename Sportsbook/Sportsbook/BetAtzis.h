@@ -15,19 +15,19 @@ private:
 public:
 	BetAtzis();
 	~BetAtzis();
-	void print() {
+	void print_options() {
 		node->print_options();
 	};
 	void print_operations() {
 		user->Print_Operations();
 	}
-	void set_level(string lvl) {
-		Current_lvl = lvl;
-	}
-	string get_level() {
-		return Current_lvl;
-	}
 	void set_user(User *usr) {
 		user = usr;
+	}
+	Node* get_level() {
+		return node;
+	}
+	void set_level(string lvl) {
+		Current_lvl = lvl;
 	}
 };
