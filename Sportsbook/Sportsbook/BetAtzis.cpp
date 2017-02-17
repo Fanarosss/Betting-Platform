@@ -28,7 +28,7 @@ BetAtzis::BetAtzis() {
 				NodeCounter++;
 				temp = temp.substr(pos + 1);
 			}
-			else if (temp.length() < 3) {
+			else if (temp.length() < 5) {
 				NodeCounter++;
 				temp.clear();
 				}
@@ -37,8 +37,7 @@ BetAtzis::BetAtzis() {
 		size_t position = name.find(" ");
 		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
-			case 1: {
-					Category* cptr = home->set_category(name);
+			case 1: {Category* cptr = home->set_category(name);
 					Cptr = cptr;
 					break; }
 			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);
@@ -57,7 +56,7 @@ BetAtzis::BetAtzis() {
 					Mptr = mptr;
 					break; }
 			case 5: {string profit = name;
-					pos = profit.find(" ");
+					pos = profit.find("#");
 					profit = profit.substr(pos + 1);
 					Selection* sptr = Mptr->set_selection(name, profit);
 					Sptr = sptr;
