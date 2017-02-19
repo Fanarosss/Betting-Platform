@@ -3,14 +3,14 @@
 #include "stdafx.h"
 #include "hierarchy.h"
 
+
 class BetAtzis {
 private:
 	long double profits;
 	double promitheia;
 	string type_ofProfits;
 	//string Current_lvl;
-	friend class User;
-	User* user; //arithmos users.
+	User* user; // deikths ston sugkekrimeno user
 	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back
 	Node* node;
 public:
@@ -41,11 +41,16 @@ public:
 		return node;
 	}
 
+	Node* get_home() {
+		return home;
+	}
+
 	void return_home() {
 		node = home;
 	}
 
-	bool operation(string op) {
-
+	bool operation(string op, BetAtzis* interface) {
+		bool OP = user->Operation(op, *interface); 
+		return OP;
 	}
 };

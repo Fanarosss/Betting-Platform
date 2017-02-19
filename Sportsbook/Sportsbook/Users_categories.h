@@ -1,9 +1,11 @@
 #pragma once
 #include "stdafx.h"
 #include "Main_functions.h"
+#include "hierarchy.h"
+//#include "BetAtzis.h"
 
 using namespace std;
-
+class BetAtzis;
 class User {
 	int user_id;
 	string username;
@@ -11,13 +13,13 @@ class User {
 	string password;
 	int type;
 public:
-		User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
+	User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
 		username = Username;
 		fullname = Fullname;
 		password = Password;
 		type = Type;
 	}
-	virtual void Operation(string){}
+	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
 };
@@ -27,7 +29,7 @@ public:
 	Guest ():User() {
 		std::cout << "Welcome!" << endl;
 	}
-	void Operation(string);
+	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations();
 
@@ -53,7 +55,7 @@ public:
 		freebets = get_freebets(username);
 		std::cout << "Welcome mr." << username << endl;
 	}
-	void Operation(string);
+	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations();
 };
@@ -63,7 +65,7 @@ public:
 	Trader (string username, string fullname, string password):User(username, fullname, password, 2){
 		std::cout << "Welcome back mr." << username << endl;
 	}
-	void Operation(string);
+	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
 };
@@ -73,7 +75,7 @@ public:
 	Director (string username, string fullname, string password):User(username, fullname, password, 3) {
 		std::cout << "Welcome back boss" << endl;
 	}
-	void Operation(string);
+	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
 };

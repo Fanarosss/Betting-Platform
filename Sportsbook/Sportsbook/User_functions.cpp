@@ -3,69 +3,93 @@
 
 using namespace std;
 
-void Guest::Operation(string leitourgia) {
+bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0)) {
-		
+		//interface.return_home();
+		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
-		return ; //eksodos apo to sistima
+		cout << "Exiting the program..." << endl;
+		return 0; //eksodos apo to sistima
+	}
+	else {
+		cout << "WRONG INPUT" << endl;
+		return 1;
 	}
 }
 
-void Punter::Operation(string leitourgia) {
+bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-
+		//interface.return_home();
+		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
-		return; //eksodos apo to sistima
+		cout << "Exiting the program..." << endl;
+		return 0; //eksodos apo to sistima
+	}
+	else {
+		cout << "WRONG INPUT" << endl;
+		return 1;
 	}
 }
 
-void Trader::Operation(string leitourgia) {
+bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-
+		//interface.return_home();
+		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
-		return; //eksodos apo to sistima
+		cout << "Exiting the program..." << endl;
+		return 0; //eksodos apo to sistima
+	}
+	else {
+		cout << "WRONG INPUT" << endl;
+		return 1;
 	}
 }
 
-void Director::Operation(string leitourgia) {
+bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-
+		//interface.return_home();
+		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0)) {
-
+		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
-		return; //eksodos apo to sistima
+		cout << "Exiting the program..." << endl;
+		return 0; //eksodos apo to sistima
+	}
+	else {
+		cout << "WRONG INPUT" << endl;
+		return 1;
 	}
 }
 
