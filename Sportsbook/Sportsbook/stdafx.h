@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <fstream>

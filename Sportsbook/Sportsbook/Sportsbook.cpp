@@ -147,22 +147,23 @@ int main(int argc, char *argv[])
 	BetAtzis* Interface = new BetAtzis;
 	Interface->set_user(uptr);
 	bool flag = true;
-	int operation;
+	string operation;
 	do {
 		cout << endl << "Location: ";
 		Interface->print_location(); //ektupwnei thn trexon topo8esia
 		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
 		Interface->print_operations(); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
-		if (cin.fail() == 0) {
-			cout << "Input is number" << endl;
-			Interface->set_level(operation);
+		if ((isdigit(operation[0])==0)) {
+			cout << "Input is character" << endl;
 		}
 		else {
-
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "Input is character" << endl;
+			cout << "Input is number" << endl;
+			int choice;
+			if (!(istringstream(operation) >> choice)) choice = 0;
+			Interface->set_level(choice);
+			//flag = Interface->operation(operation); 
+			
 		}
 	} while (flag == true);
 	system("pause");

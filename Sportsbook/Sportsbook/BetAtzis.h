@@ -9,6 +9,7 @@ private:
 	double promitheia;
 	string type_ofProfits;
 	//string Current_lvl;
+	friend class User;
 	User* user; //arithmos users.
 	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back
 	Node* node;
@@ -31,6 +32,11 @@ public:
 		user = usr;
 	}
 
+	void set_level(int lvl) {
+		//Current_lvl = lvl;
+		node = node->get_next(lvl);
+	}
+
 	Node* get_level() {
 		return node;
 	}
@@ -39,8 +45,7 @@ public:
 		node = home;
 	}
 
-	void set_level(int lvl) {
-		//Current_lvl = lvl;
-		node = node->get_next(lvl);
+	bool operation(string op) {
+
 	}
 };
