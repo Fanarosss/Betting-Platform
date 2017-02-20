@@ -82,6 +82,11 @@ BetAtzis::BetAtzis() {
 	} while (!HierLine.empty() && !hierarchy.eof());
 }
 
+bool BetAtzis::operation(string op, BetAtzis* interface) {
+	bool OP = user->Operation(op, *interface);
+	return OP;
+}
+
 BetAtzis::~BetAtzis() {
 	//cout << "System destroyed" << endl;
 }

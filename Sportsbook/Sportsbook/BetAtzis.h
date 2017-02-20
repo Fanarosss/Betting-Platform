@@ -49,8 +49,5 @@ public:
 		node = home;
 	}
 
-	bool operation(string op, BetAtzis* interface) {
-		bool OP = user->Operation(op, *interface); 
-		return OP;
-	}
+	bool operation(string, BetAtzis*);
 };

@@ -1,17 +1,18 @@
 #include "stdafx.h"
+#include "BetAtzis.h"
 #include "Users_categories.h"
 
 using namespace std;
 
 bool Guest::Operation(string leitourgia, BetAtzis& interface) {
-	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0)) {
-		//interface.return_home();
+	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
+		interface.return_home();
 		return 1;
 	}
-	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
@@ -22,8 +23,8 @@ bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 }
 
 bool Punter::Operation(string leitourgia, BetAtzis& interface) {
-	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-		//interface.return_home();
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
+		interface.return_home();
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
