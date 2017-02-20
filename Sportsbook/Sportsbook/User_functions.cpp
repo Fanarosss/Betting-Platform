@@ -27,13 +27,13 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		interface.return_home();
 		return 1;
 	}
-	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0)) {
+	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0) || (leitourgia.compare("a") == 0) || (leitourgia.compare("account") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
@@ -44,20 +44,20 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 }
 
 bool Trader::Operation(string leitourgia, BetAtzis& interface) {
-	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-		//interface.return_home();
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
+		interface.return_home();
 		return 1;
 	}
-	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || leitourgia.compare("b") || (leitourgia.compare("Bets") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
+	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
@@ -68,23 +68,23 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 }
 
 bool Director::Operation(string leitourgia, BetAtzis& interface) {
-	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0)) {
-		//interface.return_home();
+	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
+		interface.return_home();
 		return 1;
 	}
-	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0)) {
+	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0)) {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || leitourgia.compare("b") || (leitourgia.compare("Bets") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0)) {
+	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0)) {
+	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("save") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0)) {
+	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
