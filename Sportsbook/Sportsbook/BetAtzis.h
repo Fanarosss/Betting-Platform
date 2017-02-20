@@ -32,6 +32,10 @@ public:
 		user = usr;
 	}
 
+	User* get_user() {
+		return user;
+	}
+
 	void set_level(int lvl) {
 		//Current_lvl = lvl;
 		node = node->get_next(lvl);

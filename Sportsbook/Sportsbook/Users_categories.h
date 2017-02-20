@@ -19,6 +19,11 @@ public:
 		password = Password;
 		type = Type;
 	}
+	inline void print_username() { cout << username; }
+	inline void print_fullname() { cout << fullname; }
+	inline void print_password() { cout << password; }
+	virtual void print_balance(){}
+	virtual void print_freebets(){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
@@ -36,12 +41,13 @@ public:
 };
 
 class Wallet {
-protected:
+private:
 	double amount;
 public:
 	Wallet(double money) {
 		amount = money;
 	}
+	void print_wallet() { cout << amount; }
 };
 
 class Punter : public User{
@@ -58,6 +64,8 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations();
+	void print_balance() { balance.print_wallet(); }
+	void print_freebets() { cout << freebets;; }
 };
 
 class Trader : public User{

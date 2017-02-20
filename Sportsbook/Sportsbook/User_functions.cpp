@@ -31,6 +31,21 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0) || (leitourgia.compare("a") == 0) || (leitourgia.compare("account") == 0)) {
+		User* user = interface.get_user();
+		cout << endl << "Username: ";
+		user->print_username();
+		cout << endl << "Balance: ";
+		user->print_balance();
+		cout << endl << "Freebets: ";
+		user->print_freebets();
+		cout << endl;
+		cout << "(R)Rename, to change your username." << endl;
+		cout << "(P)Password, to change your password." << endl;
+		cout << "(B)Bets, to see your bets." << endl;
+		cout << "(D)Deposit, to change your balance." << endl;
+		string option;
+		cin >> option;
+
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
@@ -42,6 +57,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 }
+	
 
 bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
