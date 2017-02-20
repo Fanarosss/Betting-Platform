@@ -10,9 +10,10 @@ private:
 	double promitheia;
 	string type_ofProfits;
 	//string Current_lvl;
-	User* user; // deikths ston sugkekrimeno user
+	User* user; // deikths ston current user
 	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back
 	Node* node;
+	vector <User*> users;
 public:
 	BetAtzis();
 	~BetAtzis();

@@ -29,3 +29,13 @@ string get_password(string);
 void print_lastbets();
 
 int get_betid(string);
+
+string extract_username(string);
+
+string extract_password(string);
+
+string extract_fullname(string);
+
+double extract_balance(string);
+
+int extract_tye(string);

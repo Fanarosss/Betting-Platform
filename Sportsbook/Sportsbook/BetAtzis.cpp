@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BetAtzis.h"
+#include "Main_functions.h"
 
 using namespace std;
 
@@ -80,6 +81,25 @@ BetAtzis::BetAtzis() {
 					break; }
 			}
 	} while (!HierLine.empty() && !hierarchy.eof());
+	hierarchy.close();
+	ifstream Users("users.csv"); //initializing the vector with all of the users.
+	if (Users.is_open()) {
+		string suser;
+		getline(Users, suser);
+		while (!Users.eof() && !suser.empty()) {
+			int Type = get_type(suser);
+			switch (Type) {
+			case 1: users.push_back(new Punter(extract_username(suser), extract_password(suser), extract_fullname(suser),extract_balance(suser));
+				break;
+			case 2: users.push_back(new Trader(extract_username(suser), extract_password(suser), extract_fullname(suser)));
+				break;
+			case 3: users.push_back(new Director(extract_username(suser), extract_password(suser), extract_fullname(suser)));
+			}
+		}
+	}
+	else {
+		cout << "Error opening file users.csv " << endl;
+	}
 }
 
 bool BetAtzis::operation(string op, BetAtzis* interface) {
