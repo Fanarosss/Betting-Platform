@@ -22,6 +22,8 @@ public:
 	void print_username() { cout << username; }
 	void print_fullname() { cout << fullname; }
 	void print_password() { cout << password; }
+	string get_username() { return username; }
+	string get_fullname() { return fullname; }
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
@@ -65,7 +67,7 @@ public:
 	void Bets() {}
 	void Print_Operations();
 	void print_balance() { balance.print_wallet(); }
-	void print_freebets() { cout << freebets;; }
+	void print_freebets() { cout << freebets; }
 };
 
 class Trader : public User{

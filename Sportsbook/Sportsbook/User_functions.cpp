@@ -48,7 +48,8 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cin >> option;
 		if ((option == "R") || (option == "Rename")) {
 			cout << endl << "Please enter your new username:" << endl;
-			string nusername;
+			string nusername;	//new username
+			string ousername = user->get_username;	//old username
 			string appuser;
 			bool flag;
 			do {
@@ -64,7 +65,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 						pos2 = appuser.find("|");
 						appuser = appuser.erase(pos2);
 						if ((appuser.compare(nusername) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
-							cout << "This username is taken!" << endl;
+							cout << "This username is already taken!" << endl;
 							flag = false;
 							file.close();
 							break;
