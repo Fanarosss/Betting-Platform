@@ -39,7 +39,7 @@ double get_balance(string username) {
 		}
 	} while (!file.eof() && !appuser.empty());
 	size_t pos;
-	for (int i = 1; i<6; i++) {
+	for (int i = 1; i<=6; i++) {
 		pos = appuser.find("|");
 		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
 	} //krataei olo to string deksia apo auto pou psaxnw
@@ -48,9 +48,13 @@ double get_balance(string username) {
 		count_of_string++;
 	}
 	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
-																	   //svistike kai to deksia
-	stringstream converter(appuser);
-	converter >> balance;
+	if (appuser == "-") {
+		balance = 0;
+	}
+	else {
+		stringstream converter(appuser);
+		converter >> balance;
+	}
 	file.close();
 	return balance;
 }
