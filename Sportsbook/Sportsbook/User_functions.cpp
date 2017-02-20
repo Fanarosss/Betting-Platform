@@ -45,7 +45,35 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "(D)Deposit, to change your balance." << endl;
 		string option;
 		cin >> option;
-
+		if ((option == "R") || (option == "Rename")) {
+			cout << endl << "Please enter your new username:" << endl;
+			string nusername;
+			string appuser;
+			bool flag;
+			do {
+				cin >> nusername;
+				flag = true;
+				fstream file("users.csv", std::fstream::in);
+				if ((file.is_open())&&(flag==true)) {
+					getline(file, appuser); //this takes the line and put it to string appuser
+					while (!appuser.empty() && !file.eof()) {
+						size_t pos1, pos2;
+						pos1 = appuser.find("|");
+						appuser = appuser.substr(pos1 + 1);
+						pos2 = appuser.find("|");
+						appuser = appuser.erase(pos2);
+						if ((appuser.compare(nusername) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
+							cout << "This username is taken!" << endl;
+							flag = false;
+							file.close();
+							break;
+						}
+						getline(file, appuser);
+					}
+					file.close();
+				}
+			} while (flag == false);
+		}
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {

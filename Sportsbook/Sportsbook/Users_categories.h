@@ -19,9 +19,9 @@ public:
 		password = Password;
 		type = Type;
 	}
-	inline void print_username() { cout << username; }
-	inline void print_fullname() { cout << fullname; }
-	inline void print_password() { cout << password; }
+	void print_username() { cout << username; }
+	void print_fullname() { cout << fullname; }
+	void print_password() { cout << password; }
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
