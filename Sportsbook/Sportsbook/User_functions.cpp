@@ -96,6 +96,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || leitourgia.compare("b") || (leitourgia.compare("bets") == 0)) {
+		print_lastbets();
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {

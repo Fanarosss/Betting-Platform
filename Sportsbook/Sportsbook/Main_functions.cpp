@@ -200,3 +200,38 @@ string get_password(string username) {
 	file.close();
 	return password;
 }
+
+//reading from csv;
+
+void print_lastbets() {
+	string bet;
+	fstream bets("bets.csv", std::fstream::in);
+	if (bets.is_open()) {
+		getline(bets, bet);
+		cout << bet << endl;
+		getline(bets, bet);
+		while (get_betid(bet) <= 20) {
+			cout << bet << endl;
+			getline(bets, bet);
+		}
+	}
+	else {
+		cout << "Missing file bets. " << endl;
+		return;
+	}
+}
+
+int get_betid(string bet) {
+	string sid;
+	int id;
+	size_t pos = bet.find("|");
+	bet.erase(bet.begin() + pos, bet.end());
+	stringstream converter(bet);
+	converter >> id;
+	return id;
+}
+
+void place_bet() {
+
+	return;
+}
