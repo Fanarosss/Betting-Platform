@@ -43,7 +43,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "(R)Rename, to change your username." << endl;
 		cout << "(P)Password, to change your password." << endl;
 		cout << "(B)Bets, to see your bets." << endl;
-		cout << "(D)Deposit, to change your balance." << endl;
+		cout << "(D)Deposit, to change your account balance." << endl;
 		string option;
 		cin >> option;
 		if ((option == "R") || (option == "Rename")) {
@@ -75,9 +75,32 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 					file.close();
 				}
 			} while (flag == false);
+			//eisagw to kainourgio username sto arxeio
 		}
 		else if ((option == "P") || (option == "Password")) {
+			string pw1, pw2;
+			cout << endl << "Please enter your new password:" << endl;
+			cin >> pw1;
+			cout << "One more time:" << endl;
+			cin >> pw2;
+			if (pw1 == pw2) {
+				//eisagw ton kainoyrgio kwdiko sto arxeio
+			}
+			else {
+				cout << "Your passwords don't match!" << endl;
+			}
+		}
+		else if ((option == "B") || (option == "Bets")) {
 
+		}
+		else if ((option == "D") || (option == "Deposit")) {
+			double add;
+			cout << endl << "Please enter the amount you want to add to your balance:" << endl;
+			cin >> add;
+			//eisagw to upoloipo sto arxeio
+		}
+		else {
+			cout << "WRONG INPUT" << endl;
 		}
 		return 1;
 	}
@@ -105,6 +128,13 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
+		string user;
+		double amount;
+		cout << endl << "Enter the name of the user." << endl;
+		cin >> user;
+		cout << endl << "Enter the amount to be given." << endl;
+		cin >> amount;
+		//eisagw sto arxeio to freebet;
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
