@@ -38,4 +38,6 @@ string extract_fullname(string);
 
 double extract_balance(string);
 
-int extract_tye(string);
+string extract_status(string);
+
+int extract_type(string);

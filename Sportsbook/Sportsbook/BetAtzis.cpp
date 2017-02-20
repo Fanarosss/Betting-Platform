@@ -85,9 +85,10 @@ BetAtzis::BetAtzis() {
 	ifstream Users("users.csv"); //initializing the vector with all of the users.
 	if (Users.is_open()) {
 		string suser;
-		getline(Users, suser);
+		getline(Users, suser); //1. gia na parei tous titlous
+		getline(Users, suser); //2. gia na ksekinsei apo tin proti grammi
 		while (!Users.eof() && !suser.empty()) {
-			int Type = get_type(suser);
+			int Type = extract_type(suser);
 			switch (Type) {
 			case 1: users.push_back(new Punter(extract_username(suser), extract_password(suser), extract_fullname(suser),extract_balance(suser));
 				break;
@@ -95,6 +96,7 @@ BetAtzis::BetAtzis() {
 				break;
 			case 3: users.push_back(new Director(extract_username(suser), extract_password(suser), extract_fullname(suser)));
 			}
+			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
 		}
 	}
 	else {
