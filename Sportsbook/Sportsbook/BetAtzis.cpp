@@ -102,6 +102,7 @@ BetAtzis::BetAtzis() {
 	else {
 		cout << "Error opening file users.csv " << endl;
 	}
+	Users.close();
 }
 
 bool BetAtzis::operation(string op, BetAtzis* interface) {
