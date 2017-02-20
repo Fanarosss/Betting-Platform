@@ -95,6 +95,7 @@ BetAtzis::BetAtzis() {
 			case 2: users.push_back(new Trader(extract_username(suser), extract_password(suser), extract_fullname(suser)));
 				break;
 			case 3: users.push_back(new Director(extract_username(suser), extract_password(suser), extract_fullname(suser)));
+				break;
 			}
 			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
 		}
