@@ -90,7 +90,7 @@ BetAtzis::BetAtzis() {
 		while (!Users.eof() && !suser.empty()) {
 			int Type = extract_type(suser);
 			switch (Type) {
-			case 1: users.push_back(new Punter(extract_username(suser), extract_password(suser), extract_fullname(suser),extract_balance(suser));
+			case 1: users.push_back(new Punter(extract_username(suser), extract_password(suser), extract_fullname(suser),extract_balance(suser)));
 				break;
 			case 2: users.push_back(new Trader(extract_username(suser), extract_password(suser), extract_fullname(suser)));
 				break;
