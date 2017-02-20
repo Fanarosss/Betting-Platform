@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BetAtzis.h"
+#include "Main_functions.h"
 #include "Users_categories.h"
 
 using namespace std;
