@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
-	User * uptr = new User;
+	User * uptr = NULL;
 	cout << "Username: ";
 	cin >> username;
 	if (username != "guest") {
@@ -117,16 +117,13 @@ int main(int argc, char *argv[])
 				//type in .csv is the 5th element
 				int type = get_type(username);
 				if (type == 1) {
-					Punter punter(username, get_fullname(username), get_password(username), get_balance(username));
-					uptr = &punter;
+					uptr = new Punter(username, get_fullname(username), get_password(username), get_balance(username));
 				}
 				else if (type == 2) {
-					Trader trader(username, get_fullname(username), get_password(username));
-					uptr = &trader;
+					uptr = new Trader(username, get_fullname(username), get_password(username));
 				}
 				else if (type == 3) {
-					Director director(username, get_fullname(username), get_password(username));
-					uptr = &director;
+					uptr = new Director(username, get_fullname(username), get_password(username));
 				}
 			}
 			else {
@@ -142,7 +139,6 @@ int main(int argc, char *argv[])
 	else {
 		cout << "Logged in as guest" << endl;
 		Guest guest;
-		uptr =  &guest;
 	}
 	BetAtzis* Interface = new BetAtzis;
 	Interface->set_user(uptr);

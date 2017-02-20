@@ -49,7 +49,9 @@ public:
 	Wallet(double money) {
 		amount = money;
 	}
-	void print_wallet() { cout << amount; }
+	void print_wallet() {
+		cout << amount;
+	}
 };
 
 class Punter : public User{

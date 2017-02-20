@@ -49,7 +49,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		if ((option == "R") || (option == "Rename")) {
 			cout << endl << "Please enter your new username:" << endl;
 			string nusername;	//new username
-			string ousername = user->get_username;	//old username
+			string ousername = user->get_username();	//old username
 			string appuser;
 			bool flag;
 			do {
@@ -75,6 +75,9 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 					file.close();
 				}
 			} while (flag == false);
+		}
+		else if ((option == "P") || (option == "Password")) {
+
 		}
 		return 1;
 	}
