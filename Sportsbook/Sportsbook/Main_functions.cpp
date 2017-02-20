@@ -231,7 +231,7 @@ int get_betid(string bet) {
 	return id;
 }
 
-void place_bet() {
+void place() {
 
 	return;
 }
