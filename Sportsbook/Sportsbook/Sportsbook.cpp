@@ -104,7 +104,6 @@ int main(int argc, char *argv[])
 				appuser = appuser.substr(pos1 + 1);
 				pos2 = appuser.find("|");
 				appuser = appuser.erase(pos2);
-				cout << appuser << endl;
 				if (appuser.compare(username) == 0) {
 					registration_flag = true;
 					break;
