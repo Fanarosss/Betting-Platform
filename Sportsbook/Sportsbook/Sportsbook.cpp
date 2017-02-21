@@ -99,13 +99,20 @@ int main(int argc, char *argv[])
 			while (!file.eof() || appuser.empty()) {
 				getline(file, appuser);
 				//here will have to be a line where delete all the useless part of the line, and keeps only the username
-				if ((appuser.find(username, 0)) != string::npos) {
+				size_t pos1, pos2;
+				pos1 = appuser.find("|");
+				appuser = appuser.substr(pos1 + 1);
+				pos2 = appuser.find("|");
+				appuser = appuser.erase(pos2);
+				cout << appuser << endl;
+				if (appuser.compare(username) == 0) {
 					registration_flag = true;
 					break;
 				}
 			}
-			if (!registration_flag) {
+			if (registration_flag == false) {
 				cout << "There is no register with that username. Please try again! " << endl;
+				return 0;
 			}
 			cout << "Password: ";
 			cin >> password;
