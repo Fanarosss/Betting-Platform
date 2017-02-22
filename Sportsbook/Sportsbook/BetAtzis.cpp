@@ -191,8 +191,13 @@ double extract_balance(string appuser) {
 	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
 																	   //svistike kai to deksia
 	double balance; //now appuser equals to username; pass it throught only for clarity issues.
-	stringstream converter(appuser);
-	converter >> balance;
+	if (appuser == "-") {
+		balance = 0;
+	}
+	else {
+		stringstream converter(appuser);
+		converter >> balance;
+	}
 	return balance;
 }
 
