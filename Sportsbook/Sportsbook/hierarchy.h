@@ -18,7 +18,7 @@ public:
 	inline void set_name(string NAME) { name = NAME; }
 	inline void get_name(string &NAME) { NAME = name; }
 	inline void print_name() { cout << name; }
-	inline void set_back(Node* NODE) { back = NODE; } //deikths ston proigoymeno komvo
+	inline void set_back(Node* NODE) { back = NODE; } //deikths ston proigoymeno komvo//
 	inline Node* get_back() { return back; }
 	virtual Node* get_next(int NEXT) { return NULL; } //epistrefei ton komvo tou vector poy deixnei o ari8mos NEXT
 	virtual void set_location(string LOCATION) { location = LOCATION; }

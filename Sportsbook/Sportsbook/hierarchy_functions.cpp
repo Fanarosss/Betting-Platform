@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "hierarchy.h"
 
-using namespace std;
+using namespace std; //
 
 Node::Node(int ID, string NAME) {
 	id = ID;

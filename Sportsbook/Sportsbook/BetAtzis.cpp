@@ -244,7 +244,7 @@ void BetAtzis::set_new_password(string name, string NEW) {
 		}
 	}
 	user->set_password(NEW);
-	//metafora vector se arxeio
+	//metafora vector se arxeio//
 }
 
 void BetAtzis::set_new_balance(string name, double ADD) {
