@@ -30,8 +30,8 @@ public:
 	void set_password(string npassword) { password = npassword; }
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
-	virtual double get_balance(){}
-	virtual string get_free_bets(){}
+	virtual double get_balance() { return 0; }
+	virtual string get_free_bets() { return NULL; }
 	virtual void set_balance(double namount){}
 	virtual void set_freebets(string freebet){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
