@@ -55,11 +55,22 @@ int main(int argc, char *argv[])
 				last_appuser = appuser;
 				getline(file, appuser); //mexri na ftasei stin teleutaia grammi
 			} while (!appuser.empty() && !file.eof());
-			string last_app = last_appuser;
+			string last_app;
+			if (appuser.empty()) {
+				last_app = last_appuser;
+			}
+			else {
+				last_app = appuser;
+			}
 			int id;
 			last_app.erase((last_app.begin() + 1), last_app.end());
 			if (last_app.compare("u") || last_app.compare("U")) {
-				id = get_id(last_appuser);
+				if (appuser.empty()) {
+					id = get_id(last_appuser);
+				}
+				else {
+					id = get_id(appuser);
+				}
 				id++;
 			}
 			else {
