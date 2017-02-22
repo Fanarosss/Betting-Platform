@@ -14,6 +14,7 @@ private:
 	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back
 	Node* node;
 	vector <User*> users;
+	vector <Node*> nodes;
 public:
 	BetAtzis();
 	~BetAtzis();
@@ -56,7 +57,8 @@ public:
 
 //functions for vector changes
 	void set_new_username(string OLD, string NEW);
-
+	void set_new_password(string name, string NEW);
+	void set_new_balance(string name, double ADD);
 	bool operation(string, BetAtzis*);
 };
 

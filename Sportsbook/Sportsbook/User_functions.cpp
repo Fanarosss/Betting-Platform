@@ -74,19 +74,23 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 					}
 					file.close();
 					if (flag == true) {
-						//interface.
+						interface.set_new_username(ousername, nusername);
+						cout << "Your username has changed successfully!" << endl;
 					}
 				}
 			} while (flag == false);
 			//eisagw to kainourgio username sto arxeio
 		}
 		else if ((option == "P") || (option == "Password")) {
+			string name = user->get_username();
 			string pw1, pw2;
 			cout << endl << "Please enter your new password:" << endl;
 			cin >> pw1;
 			cout << "One more time:" << endl;
 			cin >> pw2;
 			if (pw1 == pw2) {
+				interface.set_new_password(name, pw1);
+				cout << "Your password has changed successfully!" << endl;
 				//eisagw ton kainoyrgio kwdiko sto arxeio
 			}
 			else {
@@ -97,9 +101,14 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 
 		}
 		else if ((option == "D") || (option == "Deposit")) {
+			string name = user->get_username();
 			double add;
 			cout << endl << "Please enter the amount you want to add to your balance:" << endl;
 			cin >> add;
+			interface.set_new_balance(name, add);
+			cout << "Your balance has changed successfully!" << endl;
+			double nbalance = user->get_balance();
+			cout << "Your new balance is: " << nbalance << endl;
 			//eisagw to upoloipo sto arxeio
 		}
 		else {

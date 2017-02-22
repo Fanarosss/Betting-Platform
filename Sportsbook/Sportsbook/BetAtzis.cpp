@@ -221,7 +221,40 @@ int extract_type(string appuser) {
 
 //functions for vector changes
 
-void set_new_username(string OLD, string NEW) {
+void BetAtzis::set_new_username(string OLD, string NEW) {
 	User* user = NULL;
-	for(int i=0; i<=users.)
+	for (int i = 0; i <= users.size(); i++) {
+		string name = users[i]->get_username();
+		if (name == OLD) {
+			user = users[i];
+			break;
+		}
+	}
+	user->set_username(NEW);
+	//metafora vector se arxeio
+}
+
+void BetAtzis::set_new_password(string name, string NEW) {
+	User* user = NULL;
+	for (int i = 0; i <= users.size(); i++) {
+		string username = users[i]->get_username();
+		if (username == name) {
+			user = users[i];
+			break;
+		}
+	}
+	user->set_password(NEW);
+	//metafora vector se arxeio
+}
+
+void BetAtzis::set_new_balance(string name, double ADD) {
+	User* user = NULL;
+	for (int i = 0; i <= users.size(); i++) {
+		string username = users[i]->get_username();
+		if (username == name) {
+			user = users[i];
+			break;
+		}
+	}
+	user->set_balance(ADD);
 }

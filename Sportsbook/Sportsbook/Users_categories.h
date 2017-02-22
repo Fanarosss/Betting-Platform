@@ -30,6 +30,8 @@ public:
 	void set_password(string npassword) { password = npassword; }
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
+	virtual double get_balance(){}
+	virtual string get_free_bets(){}
 	virtual void set_balance(double namount){}
 	virtual void set_freebets(string freebet){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
@@ -58,6 +60,9 @@ public:
 	void print_wallet() {
 		cout << amount;
 	}
+	double get_wallet() {
+		return amount;
+	}
 	void set_wallet(double namount) {
 		amount = namount;
 	}
@@ -79,6 +84,8 @@ public:
 	void Print_Operations();
 	void print_balance() { balance.print_wallet(); }
 	void print_freebets() { cout << freebets; }
+	double get_balance() { double amount = balance.get_wallet(); return amount; }
+	string get_free_bets() { return freebets; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
 	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
 };
