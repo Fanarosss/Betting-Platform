@@ -75,6 +75,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 					file.close();
 					if (flag == true) {
 						interface.set_new_username(ousername, nusername);
+						interface.save();
 						cout << "Your username has changed successfully!" << endl;
 					}
 				}
