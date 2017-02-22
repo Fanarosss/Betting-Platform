@@ -99,6 +99,17 @@ BetAtzis::BetAtzis() {
 			}
 			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
 		}
+		if (!suser.empty()) { //for the last user.
+			int Type = extract_type(suser);
+			switch (Type) {
+			case 1: users.push_back(new Punter(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser), extract_balance(suser)));
+				break;
+			case 2: users.push_back(new Trader(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser)));
+				break;
+			case 3: users.push_back(new Director(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser)));
+				break;
+			}
+		}
 
 	}
 	else {
@@ -290,6 +301,9 @@ bool BetAtzis::save() {
 
 User * BetAtzis::current_user(string usrnm) {
 	for (int i = 0; i < users.size(); i++) {
-		if (usrnm == (users[i]->get_username()) ) return users[i];
+		if (usrnm == (users[i]->get_username())) {
+			return users[i];
+			break;
+		}
 	}
 }
