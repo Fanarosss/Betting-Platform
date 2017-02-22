@@ -252,11 +252,12 @@ void Director::Bets() {
 
 string Punter::conversion(int id) {
 	string sid, sbalance, appuser;
-	stringstream converter(id);
+	stringstream converter(id+1);
 	converter >> sid;
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
-	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets();
+	if (sbalance.empty()) sbalance = "-";
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
 	return appuser;
 }
 
