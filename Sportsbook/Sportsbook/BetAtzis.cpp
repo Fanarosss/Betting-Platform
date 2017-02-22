@@ -90,11 +90,11 @@ BetAtzis::BetAtzis() {
 		while (!Users.eof() && !suser.empty()) {
 			int Type = extract_type(suser);
 			switch (Type) {
-			case 1: users.push_back(new Punter(extract_username(suser), extract_password(suser), extract_fullname(suser),extract_balance(suser)));
+			case 1: users.push_back(new Punter(extract_username(suser), extract_fullname(suser), extract_password(suser),extract_balance(suser)));
 				break;
-			case 2: users.push_back(new Trader(extract_username(suser), extract_password(suser), extract_fullname(suser)));
+			case 2: users.push_back(new Trader(extract_username(suser), extract_fullname(suser), extract_password(suser)));
 				break;
-			case 3: users.push_back(new Director(extract_username(suser), extract_password(suser), extract_fullname(suser)));
+			case 3: users.push_back(new Director(extract_username(suser), extract_fullname(suser), extract_password(suser)));
 				break;
 			}
 			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
