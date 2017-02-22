@@ -258,3 +258,21 @@ void BetAtzis::set_new_balance(string name, double ADD) {
 	}
 	user->set_balance(ADD);
 }
+
+bool BetAtzis::save() {
+	fstream newfile("users.csv", std::fstream::out);
+	if (newfile.is_open()) {
+		newfile << "user_id|username|fullname|password|type|status|balance|freebets|" << endl;
+		for (int i = 0; i < users.size(); i++) {
+			newfile << users[i]->conversion(i) << endl;
+		}
+	}
+	else {
+		cout << "can't open file." << endl;
+		newfile.close();
+		return false;
+	}
+	newfile.close();
+	return true;
+}
+

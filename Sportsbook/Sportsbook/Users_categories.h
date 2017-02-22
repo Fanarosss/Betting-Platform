@@ -37,6 +37,7 @@ public:
 	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
+	virtual string conversion(int) { return NULL; }
 };
 
 class Guest : public User{ 
@@ -82,6 +83,7 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations();
+	string conversion(int);
 	void print_balance() { balance.print_wallet(); }
 	void print_freebets() { cout << freebets; }
 	double get_balance() { double amount = balance.get_wallet(); return amount; }
@@ -98,6 +100,7 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
+	string conversion(int);
 };
 
 class Director : public User{
@@ -108,4 +111,5 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
+	string conversion(int);
 };

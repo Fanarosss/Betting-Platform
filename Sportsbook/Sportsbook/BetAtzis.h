@@ -60,6 +60,8 @@ public:
 	void set_new_password(string name, string NEW);
 	void set_new_balance(string name, double ADD);
 	bool operation(string, BetAtzis*);
+//vector save
+	bool save();
 };
 
 //functions for vector initialization

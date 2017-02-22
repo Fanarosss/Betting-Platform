@@ -247,3 +247,35 @@ void Director::Bets() {
 		cout << "Error while loading file. ";
 	}
 }
+
+//saving vector to file
+
+string Punter::conversion(int id) {
+	string sid, sbalance, appuser;
+	stringstream converter(id);
+	converter >> sid;
+	stringstream converter2(this->get_balance());
+	converter2 >> sbalance;
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + this->get_balance() + "|" + this->get_free_bets() + "|";
+	return appuser;
+}
+
+string Trader::conversion(int id) {
+	string sid, sbalance, appuser;
+	stringstream converter(id);
+	converter >> sid;
+	stringstream converter2(this->get_balance());
+	converter2 >> sbalance;
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + " " + "|" + " " + "|";
+	return appuser;
+}
+
+string Director::conversion(int id) {
+	string sid, sbalance, appuser;
+	stringstream converter(id);
+	converter >> sid;
+	stringstream converter2(this->get_balance());
+	converter2 >> sbalance;
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + " " + "|" + " " + "|";
+	return appuser;
+}
