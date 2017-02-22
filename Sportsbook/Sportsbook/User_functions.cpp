@@ -251,32 +251,32 @@ void Director::Bets() {
 
 //saving vector to file//
 
-string Punter::conversion(int id) {
+string Punter::conversion() {
 	string sid, sbalance, appuser;
-	stringstream converter(id+1);
-	converter >> sid;
-	cout << "id: " << sid << endl;
+	stringstream converter;
+	converter << this->get_id();
+	//cout << "id: " << sid << endl;
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
 	if (sbalance.empty()) sbalance = "-";
-	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
+	appuser = converter.str() + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
 	return appuser;
 }
 
-string Trader::conversion(int id) {
+string Trader::conversion() {
 	string sid, sbalance, appuser;
-	stringstream converter(id);
-	converter >> sid;
+	stringstream converter;
+	converter << this->get_id();
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
 	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|2| | | |";
 	return appuser;
 }
 
-string Director::conversion(int id) {
+string Director::conversion() {
 	string sid, sbalance, appuser;
-	stringstream converter(id);
-	converter >> sid;
+	stringstream converter;
+	converter << this->get_id();
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
 	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|3| | | |";

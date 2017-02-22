@@ -90,11 +90,11 @@ BetAtzis::BetAtzis() {
 		while (!Users.eof() && !suser.empty()) {
 			int Type = extract_type(suser);
 			switch (Type) {
-			case 1: users.push_back(new Punter(extract_username(suser), extract_fullname(suser), extract_password(suser),extract_balance(suser)));
+			case 1: users.push_back(new Punter(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser),extract_balance(suser)));
 				break;
-			case 2: users.push_back(new Trader(extract_username(suser), extract_fullname(suser), extract_password(suser)));
+			case 2: users.push_back(new Trader(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser)));
 				break;
-			case 3: users.push_back(new Director(extract_username(suser), extract_fullname(suser), extract_password(suser)));
+			case 3: users.push_back(new Director(extract_id(suser), extract_username(suser), extract_fullname(suser), extract_password(suser)));
 				break;
 			}
 			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
@@ -219,6 +219,18 @@ int extract_type(string appuser) {
 	return type;
 }
 
+int extract_id(string appuser) {
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	int id;
+	stringstream converter(appuser);
+	converter >> id;
+	return id;
+}
 //functions for vector changes
 
 void BetAtzis::set_new_username(string OLD, string NEW) {
@@ -264,7 +276,7 @@ bool BetAtzis::save() {
 	if (newfile.is_open()) {
 		newfile << "user_id|username|fullname|password|type|status|balance|freebets|" << endl;
 		for (int i = 0; i < users.size(); i++) {
-			newfile << users[i]->conversion(i) << endl;
+			newfile << users[i]->conversion() << endl;
 		}
 	}
 	else {
@@ -276,3 +288,8 @@ bool BetAtzis::save() {
 	return true;
 }
 
+User * BetAtzis::current_user(string usrnm) {
+	for (int i = 0; i < users.size(); i++) {
+		if (usrnm == (users[i]->get_username()) ) return users[i];
+	}
+}

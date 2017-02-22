@@ -1,5 +1,5 @@
 // Sportsbook.cpp : Defines the entry point for the console application.
-//
+////
 
 #include "stdafx.h"
 #include "Users_categories.h"
@@ -114,18 +114,6 @@ int main(int argc, char *argv[])
 			bool is_password_correct = check_for_password(username, password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
 			if (is_password_correct == true) {
 				cout << "You have been logged in to the system succesfully" << endl;
-				//procedure for finding the type
-				//type in .csv is the 5th element
-				int type = get_type(username);
-				if (type == 1) {
-					uptr = new Punter(username, get_fullname(username), get_password(username), get_balance(username));
-				}
-				else if (type == 2) {
-					uptr = new Trader(username, get_fullname(username), get_password(username));
-				}
-				else if (type == 3) {
-					uptr = new Director(username, get_fullname(username), get_password(username));
-				}
 			}
 			else {
 				cout << "Password incorrect. Please try again!" << endl;
@@ -139,9 +127,10 @@ int main(int argc, char *argv[])
 	} //else -> an telika ekane type guest os username!!! --> xreiazetai enchancement na erxetai edo kai an apla pataei enter !!! <--
 	else {
 		cout << "Logged in as guest" << endl;
-		Guest guest;
+		uptr = new Guest;
 	}
 	BetAtzis* Interface = new BetAtzis;
+	uptr = Interface->current_user(username);
 	Interface->set_user(uptr);
 	bool flag = true;
 	string operation;

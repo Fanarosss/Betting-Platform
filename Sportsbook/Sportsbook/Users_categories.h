@@ -13,7 +13,8 @@ class User {
 	string password;
 	int type;
 public:
-	User (string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
+	User (int id = 0,string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
+		user_id = id;
 		username = Username;
 		fullname = Fullname;
 		password = Password;
@@ -22,6 +23,7 @@ public:
 	void print_username() { cout << username; }
 	void print_fullname() { cout << fullname; }
 	void print_password() { cout << password; }
+	int get_id() { return user_id; }
 	string get_username() { return username; }
 	string get_fullname() { return fullname; }
 	string get_password() { return password; }
@@ -40,7 +42,7 @@ public:
 	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
-	virtual string conversion(int) { return NULL; }
+	virtual string conversion() { return NULL; }
 };
 
 class Guest : public User{ 
@@ -78,7 +80,7 @@ private:
 	Wallet balance;
 	string freebets;
 public:
-	Punter (string username, string fullname, string password, double money): User(username, fullname, password, 1), balance(money) {
+	Punter (int id,string username, string fullname, string password, double money): User(id,username, fullname, password, 1), balance(money) {
 		status = get_status(username);
 		freebets = get_freebets(username);
 		std::cout << "Welcome mr." << username << endl;
@@ -86,7 +88,7 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations();
-	string conversion(int);
+	string conversion();
 	void print_status() { cout << status; }
 	void print_balance() { balance.print_wallet(); }
 	void print_freebets() { cout << freebets; }
@@ -100,22 +102,22 @@ public:
 
 class Trader : public User{
 public:
-	Trader (string username, string fullname, string password):User(username, fullname, password, 2){
+	Trader (int id,string username, string fullname, string password):User(id,username, fullname, password, 2){
 		std::cout << "Welcome back mr." << username << endl;
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
-	string conversion(int);
+	string conversion();
 };
 
 class Director : public User{
 public:
-	Director (string username, string fullname, string password):User(username, fullname, password, 3) {
+	Director (int id,string username, string fullname, string password):User(id,username, fullname, password, 3) {
 		std::cout << "Welcome back boss" << endl;
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();
 	void Print_Operations();
-	string conversion(int);
+	string conversion();
 };

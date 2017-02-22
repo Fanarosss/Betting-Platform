@@ -62,9 +62,13 @@ public:
 	bool operation(string, BetAtzis*);
 //vector save
 	bool save();
+
+	User * current_user(string usrnm);
 };
 
 //functions for vector initialization
+
+int extract_id(string);
 
 string extract_username(string);
 
