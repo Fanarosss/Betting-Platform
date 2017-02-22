@@ -29,15 +29,3 @@ string get_password(string);
 void print_lastbets();
 
 int get_betid(string);
-
-string extract_username(string);
-
-string extract_password(string);
-
-string extract_fullname(string);
-
-double extract_balance(string);
-
-string extract_status(string);
-
-int extract_type(string);

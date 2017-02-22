@@ -99,6 +99,7 @@ BetAtzis::BetAtzis() {
 			}
 			getline(Users, suser); //sto telos gia na mpainei ston elegxo toy while gia eof and empty
 		}
+
 	}
 	else {
 		cout << "Error opening file users.csv " << endl;
@@ -113,4 +114,114 @@ bool BetAtzis::operation(string op, BetAtzis* interface) {
 
 BetAtzis::~BetAtzis() {
 	//cout << "System destroyed" << endl;
+}
+
+
+//functions for vector initialization
+
+string extract_username(string appuser) {
+	size_t pos;
+	for (int i = 1; i<2; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	string username = appuser; //now appuser equals to username; pass it throught only for clarity issues.
+	return username;
+}
+
+string extract_password(string appuser) {
+	size_t pos;
+	for (int i = 1; i<4; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	string password = appuser; //now appuser equals to username; pass it throught only for clarity issues.
+	return password;
+}
+
+string extract_fullname(string appuser) {
+	size_t pos;
+	for (int i = 1; i<3; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	string fullname = appuser; //now appuser equals to username; pass it throught only for clarity issues.
+	return fullname;
+}
+
+double extract_balance(string appuser) {
+	size_t pos;
+	for (int i = 1; i<7; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	double balance; //now appuser equals to username; pass it throught only for clarity issues.
+	stringstream converter(appuser);
+	converter >> balance;
+	return balance;
+}
+
+string extract_status(string appuser) {
+	size_t pos;
+	for (int i = 1; i<6; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	string status = appuser; //now appuser equals to username; pass it throught only for clarity issues.
+	return status;
+}
+
+int extract_type(string appuser) {
+	size_t pos;
+	for (int i = 1; i<5; i++) {
+		pos = appuser.find("|");
+		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	int count_of_string = 0;
+	while ((appuser[count_of_string] != '|')) {
+		count_of_string++;
+	}
+	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
+																	   //svistike kai to deksia
+	int type;
+	stringstream converter(appuser);
+	converter >> type;
+	return type;
+}
+
+//functions for vector changes
+
+void set_new_username(string OLD, string NEW) {
+	User* user = NULL;
+	for(int i=0; i<=users.)
 }

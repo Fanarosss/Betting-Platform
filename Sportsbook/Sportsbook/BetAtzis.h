@@ -54,5 +54,22 @@ public:
 		node = home;
 	}
 
+//functions for vector changes
+	void set_new_username(string OLD, string NEW);
+
 	bool operation(string, BetAtzis*);
 };
+
+//functions for vector initialization
+
+string extract_username(string);
+
+string extract_password(string);
+
+string extract_fullname(string);
+
+double extract_balance(string);
+
+string extract_status(string);
+
+int extract_type(string);

@@ -73,6 +73,9 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 						getline(file, appuser);
 					}
 					file.close();
+					if (flag == true) {
+						//interface.
+					}
 				}
 			} while (flag == false);
 			//eisagw to kainourgio username sto arxeio

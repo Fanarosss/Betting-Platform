@@ -24,8 +24,14 @@ public:
 	void print_password() { cout << password; }
 	string get_username() { return username; }
 	string get_fullname() { return fullname; }
+	string get_password() { return password; }
+	void set_username(string nusername) { username = nusername; }
+	void set_fullname(string nfullname) { fullname = nfullname; }
+	void set_password(string npassword) { password = npassword; }
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
+	virtual void set_balance(double namount){}
+	virtual void set_freebets(string freebet){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
@@ -52,6 +58,9 @@ public:
 	void print_wallet() {
 		cout << amount;
 	}
+	void set_wallet(double namount) {
+		amount = namount;
+	}
 };
 
 class Punter : public User{
@@ -70,6 +79,8 @@ public:
 	void Print_Operations();
 	void print_balance() { balance.print_wallet(); }
 	void print_freebets() { cout << freebets; }
+	void set_balance(double namount) { balance.set_wallet(namount); }
+	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
 };
 
 class Trader : public User{
