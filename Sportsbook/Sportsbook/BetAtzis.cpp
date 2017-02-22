@@ -190,14 +190,16 @@ double extract_balance(string appuser) {
 	}
 	appuser.erase((appuser.begin() + count_of_string), appuser.end()); //now appuser = what im looking for
 																	   //svistike kai to deksia
-	double balance; //now appuser equals to username; pass it throught only for clarity issues.
+	double balance = 0.0; //now appuser equals to username; pass it throught only for clarity issues.
 	if (appuser == "-") {
 		balance = 0;
 	}
 	else {
-		stringstream converter(appuser);
+		stringstream converter;
+		converter << appuser;
 		converter >> balance;
 	}
+	cout << balance << endl;
 	return balance;
 }
 
@@ -285,14 +287,15 @@ void BetAtzis::set_new_balance(string name, double ADD) {
 		}
 	}
 	user->set_balance(ADD);
+	user->print_balance();
 }
 
 bool BetAtzis::save() {
 	fstream newfile("users.csv", std::fstream::out);
 	if (newfile.is_open()) {
-		newfile << "user_id|username|fullname|password|type|status|balance|freebets|" << endl;
+		newfile << "user_id|username|fullname|password|type|status|balance|freebets|";
 		for (int i = 0; i < users.size(); i++) {
-			newfile << users[i]->conversion() << endl;
+			newfile << endl << users[i]->conversion();
 		}
 	}
 	else {

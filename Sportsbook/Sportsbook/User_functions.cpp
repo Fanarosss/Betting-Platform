@@ -91,6 +91,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			cin >> pw2;
 			if (pw1 == pw2) {
 				interface.set_new_password(name, pw1);
+				interface.save();
 				cout << "Your password has changed successfully!" << endl;
 				//eisagw ton kainoyrgio kwdiko sto arxeio
 			}
@@ -107,6 +108,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			cout << endl << "Please enter the amount you want to add to your balance:" << endl;
 			cin >> add;
 			interface.set_new_balance(name, add);
+			interface.save();
 			cout << "Your balance has changed successfully!" << endl;
 			double nbalance = user->get_balance();
 			cout << "Your new balance is: " << nbalance << endl;
@@ -255,11 +257,12 @@ string Punter::conversion() {
 	string sid, sbalance, appuser;
 	stringstream converter;
 	converter << this->get_id();
-	//cout << "id: " << sid << endl;
-	stringstream converter2(this->get_balance());
-	converter2 >> sbalance;
+	sid = converter.str();
+	stringstream converter2;
+	converter2 << this->get_balance();
+	sbalance = converter.str();
 	if (sbalance.empty()) sbalance = "-";
-	appuser = converter.str() + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
 	return appuser;
 }
 

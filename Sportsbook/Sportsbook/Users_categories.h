@@ -70,7 +70,7 @@ public:
 		return amount;
 	}
 	void set_wallet(double namount) {
-		amount = namount;
+		amount += namount;
 	}
 };
 
