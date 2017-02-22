@@ -71,12 +71,7 @@ int main(int argc, char *argv[])
 			file.open("users.csv", std::fstream::out | std::fstream::app);
 			string new_user;
 			new_user = sid + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
-			if (id == 1) {
-				file << endl << new_user << endl;
-			}
-			else {
-				file << new_user << endl;
-			}
+			file << endl << new_user;
 			file.close();
 		}
 		else {

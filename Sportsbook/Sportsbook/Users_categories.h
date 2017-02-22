@@ -28,10 +28,13 @@ public:
 	void set_username(string nusername) { username = nusername; }
 	void set_fullname(string nfullname) { fullname = nfullname; }
 	void set_password(string npassword) { password = npassword; }
+	virtual void print_status(){}
 	virtual void print_balance(){}
 	virtual void print_freebets(){}
+	virtual string get_Status() { return NULL; }
 	virtual double get_balance() { return 0; }
 	virtual string get_free_bets() { return NULL; }
+	virtual void set_status(string nstatus){}
 	virtual void set_balance(double namount){}
 	virtual void set_freebets(string freebet){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
@@ -84,10 +87,13 @@ public:
 	void Bets() {}
 	void Print_Operations();
 	string conversion(int);
+	void print_status() { cout << status; }
 	void print_balance() { balance.print_wallet(); }
 	void print_freebets() { cout << freebets; }
+	string get_Status() { return status; }
 	double get_balance() { double amount = balance.get_wallet(); return amount; }
 	string get_free_bets() { return freebets; }
+	void set_status(string nstatus) { status = nstatus; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
 	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
 };
