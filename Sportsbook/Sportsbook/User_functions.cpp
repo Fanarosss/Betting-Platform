@@ -256,7 +256,7 @@ string Punter::conversion(int id) {
 	converter >> sid;
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
-	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + this->get_balance() + "|" + this->get_free_bets() + "|";
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets();
 	return appuser;
 }
 
@@ -266,7 +266,7 @@ string Trader::conversion(int id) {
 	converter >> sid;
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
-	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + " " + "|" + " " + "|";
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|2| | | |";
 	return appuser;
 }
 
@@ -276,6 +276,6 @@ string Director::conversion(int id) {
 	converter >> sid;
 	stringstream converter2(this->get_balance());
 	converter2 >> sbalance;
-	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|" + " " + "|" + " " + "|";
+	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|3| | | |";
 	return appuser;
 }
