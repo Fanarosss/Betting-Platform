@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "hierarchy.h"
+#include "BetAtzis.h"
 
 using namespace std; //
 

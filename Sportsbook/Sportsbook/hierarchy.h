@@ -1,8 +1,11 @@
 #pragma once
 
 #include "stdafx.h"
+//#include "BetAtzis.h"//
 
 using namespace std;
+
+class BetAtzis;
 
 class Node {
 	int id;
@@ -31,6 +34,8 @@ public:
 	virtual void get_profit(double &PROFIT) {}
 	virtual void print_profit() {}
 	virtual void print_options() {}
+	virtual bool is_operation_valid(string operation) { return false; }
+	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
 };
 
 class Selection : public Node {
@@ -41,13 +46,13 @@ public:
 	void set_location(string LOCATION);
 	void set_profit(string PROFIT) {
 		profit = PROFIT;
-	};
+	}
 	void get_profit(string &PROFIT) {
 		PROFIT = profit;
-	};
+	}
 	void print_profit() {
 		cout << profit;
-	};
+	}
 };
 
 class Market : public Node {
@@ -58,9 +63,30 @@ public:
 	void set_location(string LOCATION);
 	Selection* set_selection(string, string);
 	void print_options();
+
 	Node* get_next(int NEXT) {
 		return Selections[NEXT - 1];
-	};
+	}
+
+	bool is_operation_valid(string operation) {
+		int oprtion = 0, i = 0;
+		if ((operation == "Cancel") || (operation == "cancel")) {
+			return true;
+		}
+		for (i = 0; i < Selections.size(); i++) {
+			stringstream converter(operation);
+			converter >> oprtion;
+			if (oprtion == i) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void place(BetAtzis* Interface) {
+		(Interface->get_user())->place(Interface);
+	}
+
 };
 
 class Event : public Node {
@@ -122,5 +148,5 @@ public:
 	void print_options();
 	Node* get_next(int NEXT) {
 		return Categories[NEXT - 1];
-	};
+	}
 };

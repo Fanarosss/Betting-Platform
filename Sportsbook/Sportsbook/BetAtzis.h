@@ -15,6 +15,7 @@ private:
 	Node* node;
 	vector <User*> users;
 	vector <Node*> nodes;
+	vector <bet*> bets;
 public:
 	BetAtzis();
 	~BetAtzis();
@@ -37,6 +38,14 @@ public:
 	User* get_user() {
 		return user;
 	}
+	
+	Node* get_node() {
+		return node;
+	}
+
+	User* get_userptr(int user_id) {
+		return users[user_id];
+	}
 
 	void set_level(int lvl) {
 		//Current_lvl = lvl;
@@ -55,6 +64,12 @@ public:
 		node = home;
 	}
 
+	void place() {
+		user->place(this);
+	}
+
+	void set_bet(string node_id, double stake);
+
 //functions for vector changes
 	void set_new_username(string OLD, string NEW);
 	void set_new_password(string name, string NEW);
@@ -62,6 +77,8 @@ public:
 	bool operation(string, BetAtzis*);
 //vector save
 	bool save();
+
+	string get_bet(int bet_id);
 
 	User * current_user(string usrnm);
 };
@@ -81,3 +98,13 @@ double extract_balance(string);
 string extract_status(string);
 
 int extract_type(string);
+
+int extract_betid(string);
+
+int extract_userid(string);
+
+double extract_stake(string);
+
+string extract_result(string);
+
+string extract_nodeid(string);

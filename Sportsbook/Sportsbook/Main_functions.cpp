@@ -234,8 +234,3 @@ int get_betid(string bet) {
 	converter >> id;
 	return id;
 }
-
-void place() {
-	//place bet;//
-	return;
-}

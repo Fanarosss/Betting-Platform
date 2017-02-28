@@ -116,6 +116,20 @@ BetAtzis::BetAtzis() {
 		cout << "Error opening file users.csv " << endl;
 	}
 	Users.close();
+	ifstream Bets("bets.csv");
+	if (Bets.is_open()) {
+		string sbet;
+		getline(Bets, sbet);
+		getline(Bets, sbet);
+		while (!Bets.eof() && !sbet.empty()) {
+			bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet),this->get_userptr(extract_userid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
+			getline(Bets, sbet);
+		}
+	}
+	else {
+		cout << "Error opening bets" << endl;
+	}
+	Bets.close();
 }
 
 bool BetAtzis::operation(string op, BetAtzis* interface) {
@@ -249,6 +263,75 @@ int extract_id(string appuser) {
 	converter >> id;
 	return id;
 }
+
+//functions for bets csv
+
+int extract_betid(string sbet) {
+	size_t pos;
+	int ibet;
+	pos = sbet.find("|");
+	if (pos != -1)
+	sbet.erase(sbet.begin() + pos, sbet.end());
+	stringstream converter(sbet);
+	converter >> ibet;
+	return ibet;
+}
+
+int extract_userid(string sbet) {
+	size_t pos;
+	int user_id;
+	for (int i = 1; i<2; i++) {
+		pos = sbet.find("|");
+		sbet = sbet.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	pos = sbet.find("|");
+	sbet.erase(sbet.begin() + pos, sbet.end());
+	stringstream converter(sbet);
+	converter >> user_id;
+	return user_id;
+}
+
+string extract_nodeid(string sbet) {
+	string node_id;
+	size_t pos;
+	for (int i = 1; i<3; i++) {
+		pos = sbet.find("|");
+		sbet = sbet.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	pos = sbet.find("|");
+	sbet.erase(sbet.begin() + pos, sbet.end());
+	node_id = sbet;
+	return node_id;
+}
+
+double extract_stake(string sbet) {
+	double stake = 0.0;
+	size_t pos;
+	for (int i = 1; i<4; i++) {
+		pos = sbet.find("|");
+		sbet = sbet.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	pos = sbet.find("|");
+	sbet.erase(sbet.begin() + pos, sbet.end());
+	stringstream converter(sbet);
+	converter >> stake;
+	return stake;
+}
+
+string extract_result(string sbet) {
+	string outcome;
+	size_t pos;
+	for (int i = 1; i<5; i++) {
+		pos = sbet.find("|");
+		sbet = sbet.substr(pos + 1); //gia na aferesei kai tin pavla mazi
+	} //krataei olo to string deksia apo auto pou psaxnw
+	pos = sbet.find("|");
+	sbet.erase(sbet.begin() + pos, sbet.end());
+	outcome = sbet;
+	return outcome;
+
+}
+
 //functions for vector changes
 
 void BetAtzis::set_new_username(string OLD, string NEW) {
@@ -291,6 +374,7 @@ void BetAtzis::set_new_balance(string name, double ADD) {
 }
 
 bool BetAtzis::save() {
+	//users save
 	fstream newfile("users.csv", std::fstream::out);
 	if (newfile.is_open()) {
 		newfile << "user_id|username|fullname|password|type|status|balance|freebets|";
@@ -304,6 +388,20 @@ bool BetAtzis::save() {
 		return false;
 	}
 	newfile.close();
+	//bets save
+	fstream Bets("bets.csv", std::fstream::out);
+	if (Bets.is_open()) {
+		Bets << "bet_id|user_id|node_id|stake|result|";
+		for (int i = 0; i < bets.size(); i++) {
+			Bets << endl << bets[i]->conversion();
+		}
+	}
+	else {
+		cout << "can't open file." << endl;
+		Bets.close();
+		return false;
+	}
+	Bets.close();
 	return true;
 }
 
@@ -314,4 +412,24 @@ User * BetAtzis::current_user(string usrnm) {
 			break;
 		}
 	}
+}
+
+void BetAtzis::set_bet(string node_id, double stake) {
+	int bet_id, user_id = 0;
+	bet_id = bets.size();
+	for (int i = 0; i < users.size(); i++) {
+		if (user = users[i]) {
+			user_id = i;
+			break;
+		}
+		string result = "-";
+		bets.push_back(new bet(bet_id, user_id, node_id, stake, result, user));
+	}
+}
+
+string BetAtzis::get_bet(int bet_id) {
+	string bet= "-";
+	string sbetid, userid, stake, node_id, result;
+	//getting all of those putting them into bet and returning bet;
+	return bet;
 }

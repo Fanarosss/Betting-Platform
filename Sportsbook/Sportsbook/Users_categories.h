@@ -5,13 +5,16 @@
 //#include "BetAtzis.h"//
 
 using namespace std;
+
 class BetAtzis;
+
 class User {
 	int user_id;
 	string username;
 	string fullname;
 	string password;
 	int type;
+	//vector <bet*> bets;
 public:
 	User (int id = 0,string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
 		user_id = id;
@@ -24,6 +27,7 @@ public:
 	void print_fullname() { cout << fullname; }
 	void print_password() { cout << password; }
 	int get_id() { return user_id; }
+	//void set_bet(bet &bt) { bets.push_back(&bt); }
 	string get_username() { return username; }
 	string get_fullname() { return fullname; }
 	string get_password() { return password; }
@@ -43,6 +47,7 @@ public:
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
 	virtual string conversion() { return NULL; }
+	virtual void place(BetAtzis*){}
 };
 
 class Guest : public User{ 
@@ -98,6 +103,7 @@ public:
 	void set_status(string nstatus) { status = nstatus; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
 	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
+	void place(BetAtzis*);
 };
 
 class Trader : public User{
@@ -120,4 +126,49 @@ public:
 	void Bets();
 	void Print_Operations();
 	string conversion();
+};
+
+class bet {
+private:
+	int bet_id;
+	int user_id;
+	User* user;
+	string node_id;
+	double stake;
+	string result;
+public:
+	bet(int betid, int userid, string nodeid, double stk, string rslt, User * user);
+	~bet() {}
+	string conversion();
+	void set_user(User *usr) {
+		user = usr;
+		user_id = usr->get_id();
+	}
+	void set_user_byid(int id) {
+		//search in vector
+	}
+	User * get_user() {
+		return user;
+	}
+	int get_bet_id() {
+		return bet_id;
+	}
+	int get_user_id() {
+		return user_id;
+	}
+	string get_nodeid() {
+		return node_id;
+	}
+	void set_stake(double stk) {
+		stake = stk;
+	}
+	double get_stake() {
+		return stake;
+	}
+	void set_result(string outcome) {
+		result = outcome;
+	}
+	string get_result() {
+		return result;
+	}
 };

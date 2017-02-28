@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 			while (!appuser.empty() && !file.eof()) {
 				size_t pos1, pos2;
 				pos1 = appuser.find("|");
-				appuser = appuser.substr(pos1+1);
+				appuser = appuser.substr(pos1 + 1);
 				pos2 = appuser.find("|");
 				appuser = appuser.erase(pos2);
 				if ((appuser.compare(username) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 			cin >> fullname;
 			cout << endl;
 			cout << "Registration succesfull" << endl;
-			string last_appuser; 
+			string last_appuser;
 			//get last line
 			file.open("users.csv", std::fstream::in);
 			do {
@@ -151,9 +151,9 @@ int main(int argc, char *argv[])
 		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
 		Interface->print_operations(); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
-		if ((isdigit(operation[0])==0)) {
+		if ((isdigit(operation[0]) == 0)) {
 			cout << "Input is character" << endl;
-			flag = Interface->operation(operation, Interface); 
+			flag = Interface->operation(operation, Interface);
 		}
 		else {
 			cout << "Input is number" << endl;
