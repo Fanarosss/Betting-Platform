@@ -9,7 +9,7 @@ private:
 	long double profits;
 	double promitheia;
 	string type_ofProfits;
-	//string Current_lvl;
+	int Current_lvl;
 	User* user; // deikths ston current user
 	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back//
 	Node* node;
@@ -27,8 +27,8 @@ public:
 		node->print_options();
 	}
 
-	void print_operations() {
-		user->Print_Operations();
+	void print_operations(BetAtzis* interface) {
+		user->Print_Operations(*interface);
 	}
 
 	void set_user(User *usr) {
@@ -48,8 +48,17 @@ public:
 	}
 
 	void set_level(int lvl) {
-		//Current_lvl = lvl;
+		Current_lvl++;
 		node = node->get_next(lvl);
+	}
+
+	void return_home() {
+		Current_lvl = 0;
+		node = home;
+	}
+
+	int get_current_level() {
+		return Current_lvl;
 	}
 
 	Node* get_level() {
@@ -58,10 +67,6 @@ public:
 
 	Node* get_home() {
 		return home;
-	}
-
-	void return_home() {
-		node = home;
 	}
 
 	void place() {

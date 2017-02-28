@@ -203,22 +203,25 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	}
 }
 
-void Guest::Print_Operations() {
+void Guest::Print_Operations(BetAtzis& interface) {
 	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "X(Exit), to exit." << endl;
 }
 
-void Punter::Print_Operations() {
+void Punter::Print_Operations(BetAtzis& interface) {
 	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "A(Account), to change your account settings." << endl;
+	if (interface.get_current_level() == 4) {
+		cout << "P(Place), to place your bet." << endl;
+	}
 	cout << "X(Exit), to exit." << endl;
 }
 
-void Trader::Print_Operations() {
+void Trader::Print_Operations(BetAtzis& interface) {
 	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;
@@ -227,7 +230,7 @@ void Trader::Print_Operations() {
 	cout << "X(Exit), to exit." << endl;
 }
 
-void Director::Print_Operations() {
+void Director::Print_Operations(BetAtzis& interface) {
 	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
 	cout << "T(Toggle), to toggle prices." << endl;

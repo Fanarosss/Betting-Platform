@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 		cout << endl << "Location: ";
 		Interface->print_location(); //ektupwnei thn trexon topo8esia
 		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
-		Interface->print_operations(); //ektupwnei tis leitourgies tou xrhsth
+		Interface->print_operations(Interface); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
 		if ((isdigit(operation[0]) == 0)) {
 			cout << "Input is character" << endl;

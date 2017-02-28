@@ -17,6 +17,7 @@ BetAtzis::BetAtzis() {
 	Selection* Sptr = NULL;
 	home = new Home();
 	node = home;
+	Current_lvl = 0;
 	do{
 		NodeCounter = 0;
 		getline(hierarchy, HierLine);

@@ -45,7 +45,7 @@ public:
 	virtual void set_freebets(string freebet){}
 	virtual bool Operation(string, BetAtzis&) { return 1; }
 	virtual void Bets(){}
-	virtual void Print_Operations(){}
+	virtual void Print_Operations(BetAtzis&){}
 	virtual string conversion() { return NULL; }
 	virtual void place(BetAtzis&){}
 };
@@ -57,7 +57,7 @@ public:
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
-	void Print_Operations();
+	void Print_Operations(BetAtzis&);
 
 };
 
@@ -92,7 +92,7 @@ public:
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
-	void Print_Operations();
+	void Print_Operations(BetAtzis&);
 	string conversion();
 	void print_status() { cout << status; }
 	void print_balance() { balance.print_wallet(); }
@@ -113,7 +113,7 @@ public:
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();
-	void Print_Operations();
+	void Print_Operations(BetAtzis&);
 	string conversion();
 };
 
@@ -124,7 +124,7 @@ public:
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();
-	void Print_Operations();
+	void Print_Operations(BetAtzis&);
 	string conversion();
 };
 
