@@ -363,7 +363,7 @@ void Punter::place(BetAtzis& Interface) {
 					set_balance(get_balance() - bounty);
 					string node_id;
 					//it recursively needs to go back to all nodes and get their id;
-					//node_id = (Interface->get_node())->get_id();
+					node_id = (Interface.get_node())->get_full_id();
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
 					Interface.set_bet(node_id, bounty);
 				}

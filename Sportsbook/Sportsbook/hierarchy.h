@@ -24,6 +24,7 @@ public:
 	inline void set_back(Node* NODE) { back = NODE; } //deikths ston proigoymeno komvo//
 	inline Node* get_back() { return back; }
 	virtual Node* get_next(int NEXT) { return NULL; } //epistrefei ton komvo tou vector poy deixnei o ari8mos NEXT
+	virtual string get_full_id() { return NULL; }
 	virtual void set_location(string LOCATION) { location = LOCATION; }
 	virtual void get_location(string &LOCATION) { LOCATION = location; }
 	virtual void print_location() { cout << location << endl; }
@@ -52,6 +53,17 @@ public:
 	}
 	void print_profit() {
 		cout << profit;
+	}
+	string get_full_id() {
+		Node* node = get_back();
+		string cur_id = node->get_full_id();
+		int id;
+		get_id(id);
+		stringstream sid;
+		sid << id;
+		string this_id = sid.str();
+		cur_id += "." + this_id;
+		return cur_id;
 	}
 };
 
@@ -82,6 +94,17 @@ public:
 		}
 		return false;
 	}
+	string get_full_id() {
+		Node* node = get_back();
+		string cur_id = node->get_full_id();
+		int id;
+		get_id(id);
+		stringstream sid;
+		sid << id;
+		string this_id = sid.str();
+		cur_id += "." + this_id;
+		return cur_id;
+	}
 	void place(BetAtzis* Interface);
 };
 
@@ -106,6 +129,17 @@ public:
 	Node* get_next(int NEXT) {
 		return Markets[NEXT - 1];
 	};
+	string get_full_id() {
+		Node* node = get_back();
+		string cur_id = node->get_full_id();
+		int id;
+		get_id(id);
+		stringstream sid;
+		sid << id;
+		string this_id = sid.str();
+		cur_id += "." + this_id;
+		return cur_id;
+	}
 };
 
 class Subcategory : public Node {
@@ -119,6 +153,17 @@ public:
 	Node* get_next(int NEXT) {
 		return Events[NEXT - 1];
 	};
+	string get_full_id() {
+		Node* node = get_back();
+		string cur_id = node->get_full_id();
+		int id;
+		get_id(id);
+		stringstream sid;
+		sid << id;
+		string this_id = sid.str();
+		cur_id += "." + this_id;
+		return cur_id;
+	}
 };
 
 class Category : public Node {
@@ -132,6 +177,14 @@ public:
 	Node* get_next(int NEXT) {
 		return Subcategories[NEXT - 1];
 	};
+	string get_full_id() {
+		int id;
+		get_id(id);
+		stringstream sid;
+		sid << id;
+		string cur_id = sid.str();
+		return cur_id;
+	}
 };
 
 class Home : public Node {
