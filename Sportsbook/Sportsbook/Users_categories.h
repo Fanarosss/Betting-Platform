@@ -47,7 +47,7 @@ public:
 	virtual void Bets(){}
 	virtual void Print_Operations(){}
 	virtual string conversion() { return NULL; }
-	virtual void place(BetAtzis*){}
+	virtual void place(BetAtzis&){}
 };
 
 class Guest : public User{ 
@@ -103,7 +103,7 @@ public:
 	void set_status(string nstatus) { status = nstatus; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
 	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
-	void place(BetAtzis*);
+	void place(BetAtzis&);
 };
 
 class Trader : public User{

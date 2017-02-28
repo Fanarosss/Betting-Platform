@@ -82,11 +82,7 @@ public:
 		}
 		return false;
 	}
-
-	void place(BetAtzis* Interface) {
-		(Interface->get_user())->place(Interface);
-	}
-
+	void place(BetAtzis* Interface);
 };
 
 class Event : public Node {

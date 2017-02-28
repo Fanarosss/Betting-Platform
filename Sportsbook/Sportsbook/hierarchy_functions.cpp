@@ -206,3 +206,8 @@ void Market::print_options() {
 		cout << endl;
 	}
 }
+
+void Market::place(BetAtzis* Interface) {
+	User* user = Interface->get_user();
+	user->place(*Interface);
+}

@@ -309,18 +309,18 @@ bet::bet(int betid, int userid, string nodeid, double stk, string rslt, User * u
 	user = usr;
 }
 
-void Punter::place(BetAtzis* Interface) {
+void Punter::place(BetAtzis& Interface) {
 	string operation;
 	//User* user = Interface->get_user();
 	cout << "Balance: " << get_balance() << endl << "Select option to place the bet. " << endl;
 	cin >> operation;
-	bool validation = (Interface->get_node())->is_operation_valid(operation);
+	bool validation = (Interface.get_node())->is_operation_valid(operation);
 	if (validation == true) {
 		if (operation == "Cancel") {
 			return;
 		}
 		else {
-			cout << "betting on node: " << Interface->get_node() << "/" << operation << endl;
+			cout << "betting on node: " << Interface.get_node() << "/" << operation << endl;
 			string freebets;
 			freebets = get_free_bets();
 			vector<string> frbts;
@@ -358,7 +358,7 @@ void Punter::place(BetAtzis* Interface) {
 					//it recursively needs to go back to all nodes and get their id;
 					//node_id = (Interface->get_node())->get_id();
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
-					Interface->set_bet(node_id, bounty);
+					Interface.set_bet(node_id, bounty);
 				}
 			}
 			else {

@@ -65,7 +65,7 @@ public:
 	}
 
 	void place() {
-		user->place(this);
+		user->place(*this);
 	}
 
 	void set_bet(string node_id, double stake);
