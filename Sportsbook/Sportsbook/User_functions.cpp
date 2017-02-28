@@ -115,13 +115,13 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			cout << "Your new balance is: " << nbalance << endl;
 			//eisagw to upoloipo sto arxeio
 		}
-		else if ((leitourgia.compare("P") == 0) || (leitourgia.compare("Place") == 0) || (leitourgia.compare("p") == 0) || (leitourgia.compare("place") == 0)) {
-			(interface.get_node())->place(&interface);
-		}
 		else {
 			cout << "WRONG INPUT" << endl;
 		}
 		return 1;
+	}
+	else if ((leitourgia.compare("P") == 0) || (leitourgia.compare("Place") == 0) || (leitourgia.compare("p") == 0) || (leitourgia.compare("place") == 0)) {
+		(interface.get_node())->place(&interface);
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
@@ -328,16 +328,23 @@ void Punter::place(BetAtzis& Interface) {
 			size_t pos;
 			char c = 'a';
 			cout << "Your free bets: " << endl;
-			while (!freebets.empty()) {
-				temp = freebets;
-				pos = temp.find("|");
-				temp.erase(temp.begin() + pos, temp.end());
-				cout << c << ". " << temp << endl;
-				frbts.push_back(temp);
-				c++;
-				freebets = freebets.substr(pos + 1);
+			if (freebets != "-"){
+				while (!freebets.empty()) {
+					temp = freebets;
+					pos = temp.find(",");
+					if (pos != -1) {
+						temp.erase(temp.begin() + pos, temp.end());
+					}
+					cout << c << ". " << temp << endl;
+					frbts.push_back(temp);
+					c++;
+					freebets = freebets.substr(pos + 1);
+				}
 			}
-			cout << "Enter the amount, or choose the coupon you wish." << endl;
+			else {
+				cout << "No freebets available." << endl;
+			}
+			cout << "Enter the amount, or choose the coupon you wish(if there is available)." << endl;
 			string sbounty;
 			cin >> sbounty;
 			if (!(isdigit(sbounty[0]) == 0)) {
