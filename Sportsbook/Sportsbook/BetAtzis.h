@@ -69,6 +69,19 @@ public:
 		return home;
 	}
 
+	int get_type_of_profits() {
+		if (type_ofProfits == "Klasmatika") {
+			return 0;							//0 gia klasma
+		}
+		else {
+			return 1;							//1 gia dekadiko
+		}
+	}
+
+	void set_type_of_profits(string NEW) {
+		type_ofProfits = NEW;
+	}
+
 	void place() {
 		user->place(*this);
 	}

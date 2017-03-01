@@ -30,6 +30,78 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
+		Node* node = interface.get_home();
+		for (int a = 1; a <= node->get_vector_size(); a++) {
+			node = node->get_next(a);
+			for (int b = 1; b <= node->get_vector_size(); b++) {
+				node = node->get_next(b);
+				for (int c = 1; c <= node->get_vector_size(); c++) {
+					node = node->get_next(c);
+					for (int d = 1; d <= node->get_vector_size(); d++) {
+						node = node->get_next(d);
+						for (int e = 1; e <= node->get_vector_size(); e++) {
+							node = node->get_next(e);
+							string old_profit;
+							node->get_profit(old_profit);
+							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+								size_t klasma = old_profit.find("/");
+								string sdividend, sdivisor, snew_profit;
+								sdivisor = old_profit.substr(klasma + 1);
+								sdividend = old_profit.substr(0, klasma);
+								double dividend, divisor, new_profit;
+								dividend = atof(sdividend.c_str());
+								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								new_profit = (dividend / divisor) + 1;		
+								new_profit = round(new_profit * 100) / 100;
+								stringstream convert;
+								convert << new_profit;
+								snew_profit = convert.str();
+								node->set_profit(snew_profit);
+							}													//alliws apo decadiko se klasma
+							else {
+								double decimal = atof(old_profit.c_str());
+								decimal--;
+								decimal = decimal * 100;
+								double divisor = 100;
+								bool there_is_a_divisor = false;
+								do {
+									there_is_a_divisor = false;
+									for (int i = 2; i <= decimal; i++) {
+										if ((fmod(decimal,i)==0)&&(fmod(divisor,i)==0)) {
+											decimal = decimal / i;
+											divisor = divisor / i;
+											there_is_a_divisor = true;
+											break;
+										}
+									}
+								} while (there_is_a_divisor == true);
+								string sdividend, sdivisor, snew_profit;
+								stringstream con1, con2;
+								con1 << decimal;
+								sdividend = con1.str();
+								con2 << divisor;
+								sdivisor = con2.str();
+								snew_profit = sdividend + "/" + sdivisor;
+								node->set_profit(snew_profit);
+							}
+							node = node->get_back();
+						}
+						node = node->get_back();
+					}
+					node = node->get_back();
+				}
+				node = node->get_back();
+			}
+			node = node->get_back();
+		}
+		if (interface.get_type_of_profits() == 0) {
+			cout << "Conversion from fraction to decimal was successful." << endl;
+			interface.set_type_of_profits("Dekadika");
+		}
+		else {
+			cout << "Conversion from decimal to fraction was successful." << endl;
+			interface.set_type_of_profits("Klasmatika");
+		}
 		return 1;
 	}
 	else if ((leitourgia.compare("A") == 0) || (leitourgia.compare("Account") == 0) || (leitourgia.compare("a") == 0) || (leitourgia.compare("account") == 0)) {

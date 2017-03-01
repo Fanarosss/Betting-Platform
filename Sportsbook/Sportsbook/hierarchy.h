@@ -31,10 +31,11 @@ public:
 	virtual void set_date_time(string DATE_TIME) {}
 	virtual void get_date_time(string &DATE_TIME) {}
 	virtual void print_date_time() {}
-	virtual void set_profit(double PROFIT) {}
-	virtual void get_profit(double &PROFIT) {}
+	virtual void set_profit(string PROFIT) {}
+	virtual void get_profit(string &PROFIT) {}
 	virtual void print_profit() {}
 	virtual void print_options() {}
+	virtual int get_vector_size() { return 0; }
 	virtual bool is_operation_valid(string operation) { return false; }
 	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
 };
@@ -105,6 +106,9 @@ public:
 		cur_id += "." + this_id;
 		return cur_id;
 	}
+	int get_vector_size() {
+		return Selections.size();
+	}
 	void place(BetAtzis* Interface);
 };
 
@@ -140,6 +144,9 @@ public:
 		cur_id += "." + this_id;
 		return cur_id;
 	}
+	int get_vector_size() {
+		return Markets.size();
+	}
 };
 
 class Subcategory : public Node {
@@ -164,6 +171,9 @@ public:
 		cur_id += "." + this_id;
 		return cur_id;
 	}
+	int get_vector_size() {
+		return Events.size();
+	}
 };
 
 class Category : public Node {
@@ -185,6 +195,9 @@ public:
 		string cur_id = sid.str();
 		return cur_id;
 	}
+	int get_vector_size() {
+		return Subcategories.size();
+	}
 };
 
 class Home : public Node {
@@ -197,5 +210,8 @@ public:
 	void print_options();
 	Node* get_next(int NEXT) {
 		return Categories[NEXT - 1];
+	}
+	int get_vector_size() {
+		return Categories.size();
 	}
 };
