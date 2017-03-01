@@ -86,6 +86,8 @@ public:
 	string get_bet(int bet_id);
 
 	User * current_user(string usrnm);
+
+	void print_users();
 };
 
 //functions for vector initialization

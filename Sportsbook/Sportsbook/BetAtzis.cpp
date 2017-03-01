@@ -434,3 +434,10 @@ string BetAtzis::get_bet(int bet_id) {
 	//getting all of those putting them into bet and returning bet;
 	return bet;
 }
+
+void BetAtzis::print_users() {
+	cout << "user_id|username|fullname|password|type|status|balance|freebets|";
+	for (int i = 0; i < users.size(); i++) {
+		cout << endl << users[i]->conversion();
+	}
+}

@@ -131,6 +131,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}
+	return false;
 }
 	
 
@@ -152,13 +153,17 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
-		string user;
-		double amount;
-		cout << endl << "Enter the name of the user." << endl;
+		int user;
+		string amount;
+		interface.print_users();
+		cout << endl << "Enter the name of the user you want to give a freebet." << endl;
 		cin >> user;
+		User * userptr = interface.get_userptr(user);
 		cout << endl << "Enter the amount to be given." << endl;
 		cin >> amount;
+		userptr->set_freebets(amount);
 		//eisagw sto arxeio to freebet;
+		interface.save();
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
@@ -188,6 +193,17 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
+		int user;
+		string amount;
+		interface.print_users();
+		cout << endl << "Enter the name of the user you want to give a freebet." << endl;
+		cin >> user;
+		User * userptr = interface.get_userptr(user);
+		cout << endl << "Enter the amount to be given." << endl;
+		cin >> amount;
+		userptr->set_freebets(amount);
+		//eisagw sto arxeio to freebet;
+		interface.save();
 		return 1;
 	}
 	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("save") == 0)) {
