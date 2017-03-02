@@ -468,13 +468,14 @@ void Punter::place(BetAtzis& Interface) {
 			else {
 				//aferw ena kouponi
 				int coupon = c - '0';
-				coupon -= 48; // converting from ascii
-				frbts.erase(frbts.begin() + coupon);
-				freebets = "";
+				coupon -= 49; // converting from ascii -48 and then -1 because i started char c from a.
+				cout << coupon << endl;
+				frbts.erase(frbts.begin() + coupon - 1);
+				freebets.clear();
 				for (int i = 0; i < frbts.size(); i++) {
 					freebets += frbts[i] + "|";
 				}
-				set_freebets(freebets);
+				initialize_freebets(freebets);
 				Interface.save();
 				cout << "Bet placed." << endl;
 			}
