@@ -203,7 +203,6 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}
-	return false;
 }
 	
 
