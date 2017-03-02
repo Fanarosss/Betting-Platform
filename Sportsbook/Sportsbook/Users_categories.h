@@ -88,7 +88,7 @@ public:
 	Punter (int id,string username, string fullname, string password, double money): User(id,username, fullname, password, 1), balance(money) {
 		status = get_status(username);
 		freebets = get_freebets(username);
-		std::cout << "Welcome mr." << username << endl;
+		//std::cout << "Welcome mr." << fullname << endl;
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
@@ -102,14 +102,14 @@ public:
 	string get_free_bets() { return freebets; }
 	void set_status(string nstatus) { status = nstatus; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
-	void set_freebets(string freebet) { freebets.append(", "); freebets.append(freebet); }
+	void set_freebets(string freebet) { if (freebets!="-") freebets.append(", "); freebets.append(freebet); }
 	void place(BetAtzis&);
 };
 
 class Trader : public User{
 public:
 	Trader (int id,string username, string fullname, string password):User(id,username, fullname, password, 2){
-		std::cout << "Welcome back mr." << username << endl;
+		//std::cout << "Welcome back mr." << username << endl;
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();
@@ -120,7 +120,7 @@ public:
 class Director : public User{
 public:
 	Director (int id,string username, string fullname, string password):User(id,username, fullname, password, 3) {
-		std::cout << "Welcome back boss" << endl;
+		//std::cout << "Welcome back boss" << endl;
 	}
 	bool Operation(string, BetAtzis&);
 	void Bets();

@@ -214,7 +214,6 @@ double extract_balance(string appuser) {
 		converter << appuser;
 		converter >> balance;
 	}
-	cout << balance << endl;
 	return balance;
 }
 
@@ -417,15 +416,15 @@ User * BetAtzis::current_user(string usrnm) {
 
 void BetAtzis::set_bet(string node_id, double stake) {
 	int bet_id, user_id = 0;
-	bet_id = bets.size();
+	bet_id = bets.size()+1;
 	for (int i = 0; i < users.size(); i++) {
 		if (user = users[i]) {
 			user_id = i;
 			break;
 		}
-		string result = "-";
-		bets.push_back(new bet(bet_id, user_id, node_id, stake, result, user));
 	}
+		string result = "-";
+		bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user));
 }
 
 string BetAtzis::get_bet(int bet_id) {

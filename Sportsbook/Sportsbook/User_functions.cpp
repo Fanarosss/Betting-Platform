@@ -365,28 +365,26 @@ string Punter::conversion() {
 	sid = converter.str();
 	stringstream converter2;
 	converter2 << this->get_balance();
-	sbalance = converter.str();
+	sbalance = converter2.str();
 	if (sbalance.empty()) sbalance = "-";
 	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|1|" + this->get_Status() + "|" + sbalance + "|" + this->get_free_bets() + "|";
 	return appuser;
 }
 
 string Trader::conversion() {
-	string sid, sbalance, appuser;
+	string sid,appuser;
 	stringstream converter;
 	converter << this->get_id();
-	stringstream converter2(this->get_balance());
-	converter2 >> sbalance;
+	sid = converter.str();
 	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|2| | | |";
 	return appuser;
 }
 
 string Director::conversion() {
-	string sid, sbalance, appuser;
+	string sid, appuser;
 	stringstream converter;
 	converter << this->get_id();
-	stringstream converter2(this->get_balance());
-	converter2 >> sbalance;
+	sid = converter.str();
 	appuser = sid + "|" + this->get_username() + "|" + this->get_fullname() + "|" + this->get_password() + "|3| | | |";
 	return appuser;
 }
@@ -425,11 +423,18 @@ void Punter::place(BetAtzis& Interface) {
 					pos = temp.find(",");
 					if (pos != -1) {
 						temp.erase(temp.begin() + pos, temp.end());
+						cout << c << ". " << temp << endl;
+						frbts.push_back(temp);
+						c++;
+						freebets = freebets.substr(pos + 1);
 					}
-					cout << c << ". " << temp << endl;
-					frbts.push_back(temp);
-					c++;
-					freebets = freebets.substr(pos + 1);
+					else {
+						cout << c << ". " << temp << endl;
+						frbts.push_back(temp);
+						c++;
+						freebets.clear();
+					}
+					
 				}
 			}
 			else {
@@ -451,12 +456,14 @@ void Punter::place(BetAtzis& Interface) {
 					//flag smth
 				}
 				else {
-					set_balance(get_balance() - bounty);
+					set_balance(-bounty);
 					string node_id;
 					//it recursively needs to go back to all nodes and get their id;
 					node_id = (Interface.get_node())->get_full_id();
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
 					Interface.set_bet(node_id, bounty);
+					Interface.save();
+					cout << "Bet placed. "<< bounty << " credits were removed from your wallet." << endl;
 				}
 			}
 			else {
@@ -469,6 +476,8 @@ void Punter::place(BetAtzis& Interface) {
 					freebets += frbts[i] + "|";
 				}
 				set_freebets(freebets);
+				Interface.save();
+				cout << "Bet placed." << endl;
 			}
 		}
 	}
@@ -482,10 +491,11 @@ string bet::conversion() {
 	sid = converter.str();
 	stringstream converter2;
 	converter2 << this->get_stake();
-	sstake = converter.str();
+	sstake = converter2.str();
 	stringstream converter3;
 	converter3 << this->get_bet_id();
 	sbetid = converter3.str();
 	bet = sbetid + "|" + sid + "|" + this->get_nodeid() + "|" + sstake + "|" + this->get_result() + "|";
+	cout << "bet";
 	return bet;
 }

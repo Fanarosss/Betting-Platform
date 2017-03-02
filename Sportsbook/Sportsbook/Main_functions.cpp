@@ -39,7 +39,7 @@ double get_balance(string username) {
 		}
 	} while (!file.eof() && !appuser.empty());
 	size_t pos;
-	for (int i = 1; i<=6; i++) {
+	for (int i = 1; i<7; i++) {
 		pos = appuser.find("|");
 		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
 	} //krataei olo to string deksia apo auto pou psaxnw
@@ -126,7 +126,7 @@ string get_freebets(string username) {
 		}
 	} while (!file.eof() && !appuser.empty());
 	size_t pos;
-	for (int i = 1; i<7; i++) {
+	for (int i = 1; i<8; i++) {
 		pos = appuser.find("|");
 		appuser = appuser.substr(pos + 1); //gia na aferesei kai tin pavla mazi
 	} //krataei olo to string deksia apo auto pou psaxnw

@@ -57,7 +57,7 @@ public:
 	}
 	string get_full_id() {
 		Node* node = get_back();
-		string cur_id = node->get_full_id();
+		string cur_id = node->get_full_id(); //mipos thelei += ???to arxikopoieis se mia timi to auksaneis, kai meta ksana to arxikopoieis
 		int id;
 		get_id(id);
 		stringstream sid;
