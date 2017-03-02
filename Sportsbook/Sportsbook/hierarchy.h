@@ -86,7 +86,7 @@ public:
 		if ((operation == "Cancel") || (operation == "cancel")) {
 			return true;
 		}
-		for (i = 0; i < Selections.size(); i++) {
+		for (i = 1; i <=Selections.size(); i++) {
 			stringstream converter(operation);
 			converter >> oprtion;
 			if (oprtion == i) {

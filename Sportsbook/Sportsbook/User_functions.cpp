@@ -495,6 +495,5 @@ string bet::conversion() {
 	converter3 << this->get_bet_id();
 	sbetid = converter3.str();
 	bet = sbetid + "|" + sid + "|" + this->get_nodeid() + "|" + sstake + "|" + this->get_result() + "|";
-	cout << "bet";
 	return bet;
 }

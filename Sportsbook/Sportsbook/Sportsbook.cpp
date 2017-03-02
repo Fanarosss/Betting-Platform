@@ -152,11 +152,11 @@ int main(int argc, char *argv[])
 		Interface->print_operations(Interface); //ektupwnei tis leitourgies tou xrhsth
 		cin >> operation;
 		if ((isdigit(operation[0]) == 0)) {
-			cout << "Input is character" << endl;
+			//cout << "Input is character" << endl;
 			flag = Interface->operation(operation, Interface);
 		}
 		else {
-			cout << "Input is number" << endl;
+			//cout << "Input is number" << endl;
 			int choice;
 			if (!(istringstream(operation) >> choice)) choice = 0;
 			Interface->set_level(choice);
