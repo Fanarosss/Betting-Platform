@@ -408,7 +408,7 @@ void Punter::place(BetAtzis& Interface) {
 			return;
 		}
 		else {
-			cout << "betting on node: " << Interface.get_node() << "/" << operation << endl;
+			cout << "betting on node: " << (Interface.get_node())->get_full_id() << "." << operation << endl;
 			string freebets;
 			freebets = get_free_bets();
 			vector<string> frbts;

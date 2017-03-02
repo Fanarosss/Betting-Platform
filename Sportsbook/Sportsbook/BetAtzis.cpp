@@ -119,16 +119,16 @@ BetAtzis::BetAtzis() {
 	Users.close();
 	ifstream Bets("bets.csv");
 	if (Bets.is_open()) {
-		string sbet;
+		string sbet,sbet2;
+		getline(Bets, sbet2);
 		getline(Bets, sbet);
-		getline(Bets, sbet);
-		while (!sbet.empty()) {
-			bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet),this->get_userptr(extract_userid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
-			if (!Bets.eof()) {
+		if (!(sbet == sbet2)) {
+			while ((!Bets.eof() && !sbet.empty())) {
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
 				getline(Bets, sbet);
 			}
-			else {
-				sbet.clear();
+			if (!sbet.empty()) {
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet))));
 			}
 		}
 	}
