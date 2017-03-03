@@ -42,6 +42,7 @@ public:
 
 class Selection : public Node {
 	string profit;
+	string result; //outcome of selection.
 public:
 	Selection(int ID, string NAME, string profit);
 	~Selection();
@@ -55,6 +56,10 @@ public:
 	void print_profit() {
 		cout << profit;
 	}
+	void set_result(string rslt) { result = rslt; }
+
+	string get_result() { return result; }
+
 	string get_full_id() {
 		Node* node = get_back();
 		string cur_id = node->get_full_id(); //mipos thelei += ???to arxikopoieis se mia timi to auksaneis, kai meta ksana to arxikopoieis

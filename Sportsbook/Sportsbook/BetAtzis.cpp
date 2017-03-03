@@ -445,3 +445,12 @@ void BetAtzis::print_users() {
 		cout << endl << users[i]->conversion();
 	}
 }
+
+void BetAtzis::set_results(string node_id, string result) { //for betatzis
+	for (int i = 0; i < bets.size(); i++) {
+		if (bets[i]->get_nodeid() == node_id) {
+			bets[i]->set_result(result);
+		}
+	}
+	this->save();
+}
