@@ -36,12 +36,15 @@ public:
 	virtual void print_profit() {}
 	virtual void print_options() {}
 	virtual int get_vector_size() { return 0; }
+	virtual bool get_voided() { return 0; }  //mono gia selection
+	virtual void set_voided(){}	 //mono gia selection
 	virtual bool is_operation_valid(string operation) { return false; }
 	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
 };
 
 class Selection : public Node {
 	string profit;
+	bool voided;
 	string result; //outcome of selection.
 public:
 	Selection(int ID, string NAME, string profit);
@@ -57,9 +60,9 @@ public:
 		cout << profit;
 	}
 	void set_result(string rslt) { result = rslt; }
-
 	string get_result() { return result; }
-
+	void set_voided() { voided = 1; }
+	bool get_voided() { return voided; }
 	string get_full_id() {
 		Node* node = get_back();
 		string cur_id = node->get_full_id(); //mipos thelei += ???to arxikopoieis se mia timi to auksaneis, kai meta ksana to arxikopoieis
@@ -87,15 +90,21 @@ public:
 	}
 
 	bool is_operation_valid(string operation) {
-		int oprtion = 0, i = 0;
+		int option = 0, i = 0;
 		if ((operation == "Cancel") || (operation == "cancel")) {
 			return true;
 		}
-		for (i = 1; i <=Selections.size(); i++) {
+		for (i = 1; i <= Selections.size(); i++) {
 			stringstream converter(operation);
-			converter >> oprtion;
-			if (oprtion == i) {
-				return true;
+			converter >> option;
+			if (option == i) {
+				if (Selections[i]->get_voided() == 0) {			//elegxos an h epilogh exei akurw8ei
+					return true;
+				}
+				else {
+					cout << "You cannot place a bet in a voided selection." << endl;
+					return false;
+				}
 			}
 		}
 		return false;

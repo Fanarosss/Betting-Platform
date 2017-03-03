@@ -47,7 +47,7 @@ public:
 	virtual void Bets(){}
 	virtual void Print_Operations(BetAtzis&){}
 	virtual string conversion() { return NULL; }
-	virtual void place(BetAtzis&){}
+	virtual void place(BetAtzis&){}  //mono ston punter
 };
 
 class Guest : public User{ 
@@ -58,7 +58,6 @@ public:
 	bool Operation(string, BetAtzis&);
 	void Bets() {}
 	void Print_Operations(BetAtzis&);
-
 };
 
 class Wallet {

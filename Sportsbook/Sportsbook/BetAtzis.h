@@ -86,6 +86,8 @@ public:
 		user->place(*this);
 	}
 
+	void voided(string full_id);  //epistrefei ta xrhmata stous users pou pontarane sthn epilogh pou akurw8hke;
+
 	void set_bet(string node_id, double stake);
 
 //	void set_results(string node_id);

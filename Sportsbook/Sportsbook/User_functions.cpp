@@ -214,7 +214,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
 		return 1;
 	}
-	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || leitourgia.compare("b") || (leitourgia.compare("bets") == 0)) {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
 		//print_lastbets();
 		cout << "20 last bets" << endl;
 		cout << "bet_id|user_id|node_id|stake|result|" << endl;
@@ -236,6 +236,36 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		//eisagw sto arxeio to freebet;
 		interface.save();
 		return 1;
+	}
+	else if ((leitourgia.compare("V") == 0) || (leitourgia.compare("Void") == 0) || (leitourgia.compare("v") == 0) || (leitourgia.compare("void") == 0)) {
+		if (interface.get_current_level() == 4) {
+			cout << "Select the option you want to cancel:" << endl;
+			int option;
+			cin >> option;
+			Node* node = interface.get_node();
+			if (node->get_vector_size() >= option) {
+				node = node->get_next(option);
+				if (node->get_voided() == 0) {
+					node->set_voided();
+					cout << "Option No" << option << " was cancelled succesfully." << endl;	//mhpws 8elei apo8hkeush sto arxeio hierarchy.dat;;
+					string full_id = node->get_full_id();
+					interface.voided(full_id);
+					interface.save();
+				}
+				else {
+					cout << "Option No" << option << " is already voided." << endl;
+				}
+			}
+			else {
+				cout << "The option you chose does not exist." << endl;
+				return 1;
+			}
+			return 1;
+		}
+		else {
+			cout << "Error. In order to cancel a selection you should be in a market." << endl;
+			return 0;
+		}
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
@@ -314,6 +344,10 @@ void Trader::Print_Operations(BetAtzis& interface) {
 	cout << "T(Toggle), to toggle prices." << endl;
 	cout << "B(Bets), to see the last 20 bets." << endl;
 	cout << "F(Freebets), to give coupon to punter." << endl;
+	if (interface.get_current_level() == 4) {
+		cout << "V(Void), to cancel a selection." << endl;
+		cout << "S(Settle), to settle the market." << endl;
+	}
 	cout << "X(Exit), to exit." << endl;
 }
 
@@ -458,7 +492,10 @@ void Punter::place(BetAtzis& Interface) {
 					set_balance(-bounty);
 					string node_id;
 					//it recursively needs to go back to all nodes and get their id;
-					node_id = (Interface.get_node())->get_full_id();
+					int selection;
+					stringstream converter2(operation);
+					converter2 >> selection;
+					node_id = (Interface.get_node())->get_next(selection)->get_full_id();
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
 					Interface.set_bet(node_id, bounty);
 					Interface.save();

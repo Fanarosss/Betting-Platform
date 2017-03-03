@@ -143,6 +143,21 @@ bool BetAtzis::operation(string op, BetAtzis* interface) {
 	return OP;
 }
 
+void BetAtzis::voided(string full_id) {				//epistrofh xrhmatwn
+	int user_id;
+	double stake;
+	for (int i = 0; i < bets.size(); i++) {
+		stake = 0;
+		user_id = 0;
+		if (bets[i]->get_nodeid() == full_id) {
+			user_id = bets[i]->get_user_id();
+			stake = bets[i]->get_stake();
+			users[user_id - 1]->set_balance(stake);
+			delete bets[i];
+		}
+	}
+}
+
 BetAtzis::~BetAtzis() {
 	//cout << "System destroyed" << endl;
 }
@@ -398,7 +413,9 @@ bool BetAtzis::save() {
 	if (Bets.is_open()) {
 		Bets << "bet_id|user_id|node_id|stake|result|";
 		for (int i = 0; i < bets.size(); i++) {
-			Bets << endl << bets[i]->conversion();
+			if (bets[i] != NULL) {
+				Bets << endl << bets[i]->conversion();
+			}
 		}
 	}
 	else {
@@ -423,8 +440,8 @@ void BetAtzis::set_bet(string node_id, double stake) {
 	int bet_id, user_id = 0;
 	bet_id = bets.size()+1;
 	for (int i = 0; i < users.size(); i++) {
-		if (user = users[i]) {
-			user_id = i;
+		if (user == users[i]) {
+			user_id = i+1;
 			break;
 		}
 	}

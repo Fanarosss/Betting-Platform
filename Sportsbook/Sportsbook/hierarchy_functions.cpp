@@ -35,6 +35,8 @@ Market::Market(int ID, string NAME) :Node(ID, NAME) {
 
 Selection::Selection(int ID, string NAME, string PROFIT) :Node(ID, NAME) {
 	profit = PROFIT;
+	result = "-";
+	voided = 0;
 	//cout<<"A Selection has been constructed."<<endl;
 }
 
@@ -202,7 +204,10 @@ void Market::print_options() {
 		cout << ". ";
 		Selections[i]->print_name();
 		cout << " #";
-		Selections[i]->print_profit();
+		Selections[i]->print_profit();					//se periptwsh pou exei akyrw8ei h epilogh
+		if (Selections[i]->get_voided() == 1) {
+			cout << " (VOIDED)";
+		}
 		cout << endl;
 	}
 }
