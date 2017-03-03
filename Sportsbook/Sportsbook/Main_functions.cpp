@@ -234,3 +234,38 @@ int get_betid(string bet) {
 	converter >> id;
 	return id;
 }
+
+bool write_log(string origin, string user, string outcome) {
+	fstream logs("audit.log", std::fstream::in | std::fstream::app);
+	if (logs.is_open()){
+		string line;
+		getline(logs, line);
+		string myline;
+		size_t pos;
+		if (!line.empty()) {
+			pos = line.find("|");
+			line.erase(line.begin() + pos, line.end());
+		}
+		else {
+			line = "1";
+		}
+		stringstream converter(line);
+		int iline;
+		converter >> iline;
+		iline++;
+		converter.clear();
+		converter << iline;
+		converter >> line;
+		//tora to line auksithike kata ena.
+		string log_id = line;
+		myline.empty();
+		myline = log_id + "|" + origin + "|" + user + "|" + outcome + "|";
+		logs << endl << log_id << myline;
+		logs.close();
+		return true;
+	}
+	else {
+		cout << "Error, cannot open log file." << endl;
+		logs.close();
+	}
+}
