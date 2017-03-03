@@ -88,7 +88,7 @@ public:
 
 	void set_bet(string node_id, double stake);
 
-	void set_results(string node_id, string result);
+//	void set_results(string node_id);
 //functions for vector changes
 	void set_new_username(string OLD, string NEW);
 	void set_new_password(string name, string NEW);

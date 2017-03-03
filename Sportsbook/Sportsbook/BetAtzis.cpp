@@ -446,11 +446,12 @@ void BetAtzis::print_users() {
 	}
 }
 
-void BetAtzis::set_results(string node_id, string result) { //for betatzis
+/*void BetAtzis::set_results(string node_id) { //for betatzis
 	for (int i = 0; i < bets.size(); i++) {
 		if (bets[i]->get_nodeid() == node_id) {
-			bets[i]->set_result(result);
+			bets[i]->set_result("Winning");
 		}
 	}
 	this->save();
 }
+*/
