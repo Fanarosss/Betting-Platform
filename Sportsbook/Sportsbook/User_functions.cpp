@@ -267,6 +267,53 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 			return 0;
 		}
 	}
+	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Settle") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("settle") == 0)) {
+		if (interface.get_current_level() == 4) {
+			cout << "Choose the winning option:" << endl;
+			int option;
+			cin >> option;
+			Node* node = interface.get_node();
+			if (node->get_vector_size() >= option) {
+				node = node->get_next(option);
+				if (node->get_voided() == 1) {
+					cout << "A voided option cannot win!" << endl;
+					return 1;
+				}
+				string full_id = node->get_full_id();
+				interface.settle(full_id, option);		//8etw W kai L stis epiloges
+				string sprofit;
+				node->get_profit(sprofit);
+				double profit;
+				if (interface.get_type_of_profits() == 0) {
+					size_t klasma = sprofit.find("/");
+					string sdividend, sdivisor, snew_profit;
+					sdivisor = sprofit.substr(klasma + 1);
+					sdividend = sprofit.substr(0, klasma);
+					double dividend, divisor, new_profit;
+					dividend = atof(sdividend.c_str());
+					divisor = atof(sdivisor.c_str());
+					new_profit = (dividend / divisor);
+					profit = new_profit;
+				}
+				else {
+					stringstream converter(sprofit);
+					converter >> profit;
+				}
+				interface.pay(full_id, profit);				//plhrwnw tous nikhtes
+				interface.save();
+				cout << "Option No" << option << " was settled succesfully." << endl;
+			}
+			else {
+				cout << "The option you chose does not exist." << endl;
+				return 1;
+			}
+			return 1;
+		}
+		else {
+			cout << "Error. In order to cancel a selection you should be in a market." << endl;
+			return 0;
+		}
+	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima

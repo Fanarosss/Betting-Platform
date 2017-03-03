@@ -18,6 +18,8 @@ BetAtzis::BetAtzis() {
 	home = new Home();
 	node = home;
 	Current_lvl = 0;
+	profits = 0;
+	promitheia = 0.05;
 	do{
 		NodeCounter = 0;
 		getline(hierarchy, HierLine);
@@ -154,6 +156,43 @@ void BetAtzis::voided(string full_id) {				//epistrofh xrhmatwn
 			stake = bets[i]->get_stake();
 			users[user_id - 1]->set_balance(stake);
 			delete bets[i];
+		}
+	}
+}
+
+void BetAtzis::settle(string full_id, int option) {
+	for (int i = 0; i < bets.size(); i++) {
+		int id;
+		if (id == option) {
+			Bets[i]->set_result("W");
+		}
+		else {
+			if (node->get_voided() == 0) {
+				node->set_result("L");
+			}
+		}
+	}
+}
+
+void BetAtzis::pay(string full_id, double profit) {
+	int user_id;
+	double earnings, stake, commission;
+	for (int i = 0; i < bets.size(); i++) {
+		user_id = 0;
+		earnings = 0;
+		stake = 0;
+		profit = 0;
+		commission = 0;
+		if (bets[i]->get_nodeid() == full_id) {
+			user_id = bets[i]->get_user_id();
+			stake = bets[i]->get_stake();
+			earnings = profit*stake;
+			commission = promitheia*earnings;
+			earnings = earnings - commission;
+			users[user_id - 1]->set_balance(earnings);
+			cout << earnings << endl;
+			profits += commission;
+			cout<<profits<<endl;
 		}
 	}
 }
@@ -424,6 +463,7 @@ bool BetAtzis::save() {
 		return false;
 	}
 	Bets.close();
+	//hierarchy save
 	return true;
 }
 

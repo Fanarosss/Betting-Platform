@@ -31,6 +31,22 @@ public:
 		user->Print_Operations(*interface);
 	}
 
+	void set_profits(double commission) {
+		profits += commission;
+	}
+
+	long double get_profits() {
+		return profits;
+	}
+
+	void set_commission(double commission) {
+		promitheia = commission;
+	}
+
+	double get_commission() {
+		return promitheia;
+	}
+
 	void set_user(User *usr) {
 		user = usr;
 	}
@@ -86,7 +102,9 @@ public:
 		user->place(*this);
 	}
 
-	void voided(string full_id);  //epistrefei ta xrhmata stous users pou pontarane sthn epilogh pou akurw8hke;
+	void voided(string full_id);  //epistrefei ta xrhmata stous users pou pontarane sthn epilogh pou akurw8hke
+	void settle(string full_id,int option);	  //ka8orizei thn nikhthria epilogh
+	void pay(string full_id, double profit);		  //plhrwnei tous nikhtes
 
 	void set_bet(string node_id, double stake);
 

@@ -45,7 +45,6 @@ public:
 class Selection : public Node {
 	string profit;
 	bool voided;
-	string result; //outcome of selection.
 public:
 	Selection(int ID, string NAME, string profit);
 	~Selection();
@@ -59,8 +58,6 @@ public:
 	void print_profit() {
 		cout << profit;
 	}
-	void set_result(string rslt) { result = rslt; }
-	string get_result() { return result; }
 	void set_voided() { voided = 1; }
 	bool get_voided() { return voided; }
 	string get_full_id() {
