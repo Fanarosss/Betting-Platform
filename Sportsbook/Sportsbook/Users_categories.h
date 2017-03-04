@@ -132,11 +132,12 @@ class bet {
 private:
 	int bet_id;
 	int user_id;
-	User* user;
-	Node* node; //selection //dependency on selection
 	string node_id;
 	double stake;
 	string result;
+	bool voided;
+	User* user;
+	Node* node; //selection //dependency on selection
 public:
 	bet(int betid, int userid, string nodeid, double stk, string rslt, User * USER, Node* NODE);
 	~bet() {}
@@ -165,6 +166,12 @@ public:
 	}
 	double get_stake() {
 		return stake;
+	}
+	void set_voided() {
+		voided = node->get_voided();
+	}
+	bool get_voided() {
+		return node->get_voided();
 	}
 	void set_result() {
 		string rslt = node->get_result();

@@ -174,7 +174,9 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			}
 		}
 		else if ((option == "B") || (option == "Bets")) {
-			
+			cout << "BETTING HISTORY:" << endl;
+			cout << "node_id|stake|result|" << endl;
+			interface.print_user_bets();
 		}
 		else if ((option == "D") || (option == "Deposit")) {
 			string name = user->get_username();

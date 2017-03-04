@@ -145,6 +145,28 @@ bool BetAtzis::operation(string op, BetAtzis* interface) {
 	return OP;
 }
 
+void BetAtzis::print_user_bets() {
+	for (int i = 0; i < bets.size(); i++) {
+		if (bets[i]->get_user_id() == user->get_id()) {
+			cout << bets[i]->get_nodeid() << "|" << bets[i]->get_stake() << "|";
+			if (bets[i]->get_voided() == 0) {
+				if (bets[i]->get_result() == "-") {
+					cout << "Pending|" << endl;
+				}
+				else if(bets[i]->get_result() == "W") {
+					cout << "Won|" << endl;
+				}
+				else {
+					cout << "Lost|" << endl;
+				}
+			}
+			else {
+				cout << "Voided|" << endl;
+			}
+		}
+	}
+}
+
 void BetAtzis::voided(string full_id) {				//epistrofh xrhmatwn
 	int user_id;
 	double stake;

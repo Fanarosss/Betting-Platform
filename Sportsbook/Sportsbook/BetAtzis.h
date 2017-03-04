@@ -102,6 +102,7 @@ public:
 		user->place(*this);
 	}
 
+	void print_user_bets(); //ektupwnei ta stoixhmata tou xrhsth
 	void voided(string full_id);  //epistrefei ta xrhmata stous users pou pontarane sthn epilogh pou akurw8hke
 	void settle(string full_id,int option);	  //ka8orizei thn nikhthria epilogh
 	void pay(string full_id, double profit);		  //plhrwnei tous nikhtes
