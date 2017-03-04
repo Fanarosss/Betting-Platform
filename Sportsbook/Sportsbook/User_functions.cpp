@@ -24,6 +24,7 @@ bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 	}
 }
 
+
 bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();

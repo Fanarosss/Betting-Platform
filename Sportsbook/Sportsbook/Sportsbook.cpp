@@ -98,8 +98,9 @@ int main(int argc, char *argv[])
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
 	User * uptr = NULL;
 	cout << "Username: ";
-	cin >> username;
-	if (username != "guest") {
+	getline(cin, username);
+	bool guest = false;
+	if ((username != "guest")&&(!username.empty())) {
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof() || appuser.empty()) {
@@ -139,9 +140,12 @@ int main(int argc, char *argv[])
 	else {
 		cout << "Logged in as guest" << endl;
 		uptr = new Guest;
+		guest = true;
 	}
 	BetAtzis* Interface = new BetAtzis;
-	uptr = Interface->current_user(username);
+	if (guest == false) {
+		uptr = Interface->current_user(username);
+	}
 	Interface->set_user(uptr);
 	bool flag = true;
 	string operation;
