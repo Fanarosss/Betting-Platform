@@ -80,7 +80,7 @@ BetAtzis::BetAtzis() {
 			case 5: {string profit = name;
 					pos = profit.find("#");
 					profit = profit.substr(pos + 1);
-					pos = profit.find("/");
+					pos = profit.find("(");
 					if (pos != std::string::npos) {
 						voided = 1;
 						profit.erase(profit.begin() + pos, profit.end());
@@ -88,6 +88,7 @@ BetAtzis::BetAtzis() {
 					else {
 						voided = 0;
 					}
+					cout << voided << endl;
 					size_t length = profit.length();
 					pos = name.find("#");
 					name.erase((name.begin() + pos), name.end());

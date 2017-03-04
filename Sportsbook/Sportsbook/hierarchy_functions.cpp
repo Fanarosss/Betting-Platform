@@ -313,7 +313,7 @@ string Selection::conversion() {
 	string name = Node::get_name();
 	string node_selection = id + " " + name + "#" + profit ;
 	if (voided) {
-		node_selection += "/VOIDED";
+		node_selection += "(VOIDED)";
 	}
 	return node_selection;
 }
