@@ -174,8 +174,13 @@ public:
 		return node->get_voided();
 	}
 	void set_result() {
-		string rslt = node->get_result();
-		result = rslt;
+		if (node->get_voided() == 0) {
+			string rslt = node->get_result();
+			result = rslt;
+		}
+		else {
+			result = "V";
+		}
 	}
 	string get_result() {
 		return result;

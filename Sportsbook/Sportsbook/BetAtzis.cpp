@@ -192,7 +192,8 @@ void BetAtzis::voided(string full_id) {				//epistrofh xrhmatwn
 			user_id = bets[i]->get_user_id();
 			stake = bets[i]->get_stake();
 			users[user_id - 1]->set_balance(stake);
-			delete bets[i];
+			bets[i]->set_result();
+			//delete bets[i];
 		}
 	}
 }
