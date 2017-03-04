@@ -106,7 +106,7 @@ public:
 	void settle(string full_id,int option);	  //ka8orizei thn nikhthria epilogh
 	void pay(string full_id, double profit);		  //plhrwnei tous nikhtes
 
-	void set_bet(string node_id, double stake);
+	void set_bet(string node_id, double stake,int selection_id);
 
 //	void set_results(string node_id);
 //functions for vector changes

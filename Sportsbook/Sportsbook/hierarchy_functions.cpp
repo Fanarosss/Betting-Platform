@@ -215,3 +215,65 @@ void Market::place(BetAtzis* Interface) {
 	User* user = Interface->get_user();
 	user->place(*Interface);
 }
+
+Node * Home::get_node_byid(string id)
+{ 
+	string node_id = id;
+	size_t pos, pos2;
+	Node * ptr;
+	int digit_node_id;
+
+	node_id = id;
+	pos = node_id.find(".");
+	node_id.erase(node_id.begin() + pos, node_id.end());
+	stringstream converter(node_id);
+	converter >> digit_node_id;
+	ptr = get_next(digit_node_id);
+	converter.clear();
+
+	node_id = id;
+	for (int i = 0; i<2; i++)
+		pos = node_id.find(".");
+	node_id.erase(node_id.begin() + pos, node_id.end());
+	for (int j = 0; j < 1; j++)
+		pos2 = node_id.find(".");
+	node_id = node_id.substr(pos2 + 1);
+	stringstream converter(node_id);
+	converter >> digit_node_id;
+	ptr = get_next(digit_node_id);
+	converter.clear();
+
+	node_id = id;
+	for (int i = 0; i<3; i++)
+		pos = node_id.find(".");
+	node_id.erase(node_id.begin() + pos, node_id.end());
+	for (int j = 0; j < 2; j++)
+		pos2 = node_id.find(".");
+	node_id = node_id.substr(pos2 + 1);
+	stringstream converter(node_id);
+	converter >> digit_node_id;
+	ptr = get_next(digit_node_id);
+	converter.clear();
+
+	node_id = id;
+	for (int i = 0; i<4; i++)
+		pos = node_id.find(".");
+	node_id.erase(node_id.begin() + pos, node_id.end());
+	for (int i = 0; i<3; i++)
+		pos2 = node_id.find(".");
+	node_id = node_id.substr(pos2 + 1);
+	stringstream converter(node_id);
+	converter >> digit_node_id;
+	ptr = get_next(digit_node_id);
+	converter.clear();
+
+	node_id = id;
+	for (int i = 0; i<4; i++)
+		pos2 = node_id.find(".");
+	node_id = node_id.substr(pos2);
+	stringstream converter(node_id);
+	converter >> digit_node_id;
+	ptr = get_next(digit_node_id);
+	converter.clear();
+	return ptr;
+}

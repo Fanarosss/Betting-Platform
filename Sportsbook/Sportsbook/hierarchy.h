@@ -40,6 +40,8 @@ public:
 	virtual void set_voided(){}	 //mono gia selection
 	virtual bool is_operation_valid(string operation) { return false; }
 	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
+	virtual Node* get_selection_ptr(int selection_id) { return NULL; }
+	virtual Node * get_node_byid(string id) { return NULL; }
 };
 
 class Selection : public Node {
@@ -121,6 +123,8 @@ public:
 		return Selections.size();
 	}
 	void place(BetAtzis* Interface);
+
+	Node* get_selection_ptr(int selection_id) { return Selections[selection_id - 1]; }
 };
 
 class Event : public Node {
@@ -225,4 +229,5 @@ public:
 	int get_vector_size() {
 		return Categories.size();
 	}
+	Node * get_node_byid(string id);
 };

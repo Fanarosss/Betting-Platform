@@ -469,13 +469,14 @@ string Director::conversion() {
 	return appuser;
 }
 
-bet::bet(int betid, int userid, string nodeid, double stk, string rslt, User * usr) {
+bet::bet(int betid, int userid, string nodeid, double stk, string rslt, User * USER, Node* NODE) {
 	bet_id = betid;
 	user_id = userid;
 	node_id = nodeid;
 	stake = stk;
 	result = rslt;
-	user = usr;
+	user = USER;
+	node = NODE;
 }
 
 void Punter::place(BetAtzis& Interface) {
@@ -544,7 +545,7 @@ void Punter::place(BetAtzis& Interface) {
 					converter2 >> selection;
 					node_id = (Interface.get_node())->get_next(selection)->get_full_id();
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
-					Interface.set_bet(node_id, bounty);
+					Interface.set_bet(node_id, bounty, selection);
 					Interface.save();
 					cout << "Bet placed. "<< bounty << " credits were removed from your wallet." << endl;
 				}
@@ -554,6 +555,15 @@ void Punter::place(BetAtzis& Interface) {
 				int coupon = c - '0';
 				coupon -= 49; // converting from ascii -48 and then -1 because i started char c from a.
 				cout << coupon << endl;
+				int selection;
+				stringstream converter(operation);
+				converter >> selection;
+				converter.clear();
+				stringstream converter(frbts[coupon]);
+				int bounty;
+				converter >> bounty;
+				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
+				Interface.set_bet(node_id, bounty, selection);
 				frbts.erase(frbts.begin() + coupon - 1);
 				freebets.clear();
 				for (int i = 0; i < frbts.size(); i++) {

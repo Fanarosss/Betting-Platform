@@ -133,11 +133,12 @@ private:
 	int bet_id;
 	int user_id;
 	User* user;
+	Node* node; //selection //dependency on selection
 	string node_id;
 	double stake;
 	string result;
 public:
-	bet(int betid, int userid, string nodeid, double stk, string rslt, User * user);
+	bet(int betid, int userid, string nodeid, double stk, string rslt, User * USER, Node* NODE);
 	~bet() {}
 	string conversion();
 	void set_user(User *usr) {

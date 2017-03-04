@@ -235,7 +235,7 @@ int get_betid(string bet) {
 	return id;
 }
 
-bool write_log(string origin, string user, string outcome) {
+bool write_log(string origin, string user, string outcome = "SUCCESS") {
 	fstream logs("audit.log", std::fstream::in | std::fstream::app);
 	if (logs.is_open()){
 		string line;
@@ -245,22 +245,23 @@ bool write_log(string origin, string user, string outcome) {
 		if (!line.empty()) {
 			pos = line.find("|");
 			line.erase(line.begin() + pos, line.end());
+			stringstream converter(line);
+			int iline;
+			converter >> iline;
+			iline++;
+			converter.clear();
+			converter << iline;
+			converter >> line;
+			//tora to line auksithike kata ena.
 		}
 		else {
 			line = "1";
 		}
-		stringstream converter(line);
-		int iline;
-		converter >> iline;
-		iline++;
-		converter.clear();
-		converter << iline;
-		converter >> line;
-		//tora to line auksithike kata ena.
 		string log_id = line;
-		myline.empty();
+		myline.clear();
+		logs.clear(); //katharizw to output stream
 		myline = log_id + "|" + origin + "|" + user + "|" + outcome + "|";
-		logs << endl << log_id << myline;
+		logs << endl << myline;
 		logs.close();
 		return true;
 	}

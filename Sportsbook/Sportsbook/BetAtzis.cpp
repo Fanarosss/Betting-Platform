@@ -126,11 +126,11 @@ BetAtzis::BetAtzis() {
 		getline(Bets, sbet);
 		if (!(sbet == sbet2)) {
 			while ((!Bets.eof() && !sbet.empty())) {
-				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->get_node())->get_node_byid(extract_nodeid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
 				getline(Bets, sbet);
 			}
 			if (!sbet.empty()) {
-				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet))));
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->get_node())->get_node_byid(extract_nodeid(sbet))));
 			}
 		}
 	}
@@ -164,7 +164,7 @@ void BetAtzis::settle(string full_id, int option) {
 	for (int i = 0; i < bets.size(); i++) {
 		int id;
 		if (id == option) {
-			Bets[i]->set_result("W");
+			bets[i]->set_result("W");
 		}
 		else {
 			if (node->get_voided() == 0) {
@@ -476,7 +476,7 @@ User * BetAtzis::current_user(string usrnm) {
 	}
 }
 
-void BetAtzis::set_bet(string node_id, double stake) {
+void BetAtzis::set_bet(string node_id, double stake,int selection_id) {
 	int bet_id, user_id = 0;
 	bet_id = bets.size()+1;
 	for (int i = 0; i < users.size(); i++) {
@@ -486,7 +486,8 @@ void BetAtzis::set_bet(string node_id, double stake) {
 		}
 	}
 		string result = "-";
-		bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user));
+		Node * s_node = node->get_selection_ptr(selection_id);
+		bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user, s_node));
 }
 
 string BetAtzis::get_bet(int bet_id) {
