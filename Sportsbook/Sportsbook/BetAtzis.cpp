@@ -126,11 +126,11 @@ BetAtzis::BetAtzis() {
 		getline(Bets, sbet);
 		if (!(sbet == sbet2)) {
 			while ((!Bets.eof() && !sbet.empty())) {
-				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->get_node())->get_node_byid(extract_nodeid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->home)->get_node_byid(extract_nodeid(sbet)))); //den kserw epidi eimaste mesa ston consturctor tou interface an mporo na to kanw auto
 				getline(Bets, sbet);
 			}
 			if (!sbet.empty()) {
-				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->get_node())->get_node_byid(extract_nodeid(sbet))));
+				bets.push_back(new bet(extract_betid(sbet), extract_userid(sbet), extract_nodeid(sbet), extract_stake(sbet), extract_result(sbet), this->get_userptr(extract_userid(sbet)), (this->home)->get_node_byid(extract_nodeid(sbet))));
 			}
 		}
 	}
@@ -492,6 +492,13 @@ bool BetAtzis::save() {
 	}
 	Bets.close();
 	//hierarchy save
+	fstream hierarchy("hierarchy.dat", std::fstream::out);
+	if (hierarchy.is_open()) {
+		for (int i = 0; i < nodes.size(); i++) {
+			hierarchy << endl << nodes[i]->conversion;
+		}
+		hierarchy.close();
+	}
 	return true;
 }
 

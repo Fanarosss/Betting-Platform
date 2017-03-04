@@ -686,6 +686,10 @@ void Punter::place(BetAtzis& Interface) {
 				int bounty;
 				stringstream converter(sbounty);
 				converter >> bounty;
+				if (bounty < 0) {
+					cout << "You can't place a negative bounty" << endl;
+					return;
+				}
 				if (get_balance() == 0) {
 					cout << "Your balance is 0. Please fill your wallet from the the main menu. " << endl;
 					return;
@@ -720,8 +724,17 @@ void Punter::place(BetAtzis& Interface) {
 				Interface.set_bet(node_id, bounty, selection);
 				frbts.erase(frbts.begin() + coupon - 1);
 				freebets.clear();
-				for (int i = 0; i < frbts.size(); i++) {
-					freebets += frbts[i] + "|";
+				if (frbts.size > 1) {
+					for (int i = 0; i < frbts.size() - 1; i++) {
+						freebets += frbts[i] + ",";
+					}
+					freebets += frbts[frbts.size()];
+				}
+				else if(frbts.size()>0){
+					freebets = frbts[frbts.size()];
+				}
+				else {
+					freebets.clear();
 				}
 				initialize_freebets(freebets);
 				Interface.save();

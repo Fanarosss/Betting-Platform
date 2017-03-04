@@ -60,7 +60,7 @@ public:
 	}
 
 	User* get_userptr(int user_id) {
-		return users[user_id];
+		return users[user_id-1];
 	}
 
 	void set_level(int lvl) {
