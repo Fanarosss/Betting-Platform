@@ -106,6 +106,9 @@ public:
 	void set_freebets(string freebet) { if (freebets!="-") freebets.append(", "); freebets.append(freebet); }
 	void place(BetAtzis&);
 	void initialize_freebets(string freebet) { freebets.clear(); freebets.append(freebet); }
+	string get_username() {
+		return User::get_username();
+	}
 };
 
 class Trader : public User{

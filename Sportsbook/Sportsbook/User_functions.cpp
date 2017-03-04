@@ -9,16 +9,20 @@ using namespace std;
 bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
+		interface.write_log("Return Home", "Guest", " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
+		interface.write_log("Toggle", "Guest", " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
+		interface.write_log("Exit", "Guest", "Exiting the program ", "SUCCESS");
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
 	else {
+		interface.write_log("Operation", "Guest", "WRONG INPUT", "ERROR");
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}
@@ -28,6 +32,7 @@ bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
+		interface.write_log("Return Home", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
@@ -97,10 +102,12 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		}
 		if (interface.get_type_of_profits() == 0) {
 			cout << "Conversion from fraction to decimal was successful." << endl;
+			interface.write_log("Toggle", get_username(), "Dekadika ", "SUCCESS");
 			interface.set_type_of_profits("Dekadika");
 		}
 		else {
 			cout << "Conversion from decimal to fraction was successful." << endl;
+			interface.write_log("Toggle", get_username(), "Klasmatika ", "SUCCESS");
 			interface.set_type_of_profits("Klasmatika");
 		}
 		return 1;
@@ -120,6 +127,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "(D)Deposit, to change your account balance." << endl;
 		string option;
 		cin >> option;
+		interface.write_log("Account", get_username(), " ", "SUCCESS");
 		if ((option == "R") || (option == "Rename")) {
 			cout << endl << "Please enter your new username:" << endl;
 			string nusername;	//new username
@@ -151,6 +159,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 						interface.set_new_username(ousername, nusername);
 						interface.save();
 						cout << "Your username has changed successfully!" << endl;
+						interface.write_log("Rename", get_username(), " ", "SUCCESS");
 					}
 				}
 			} while (flag == false);
@@ -167,9 +176,11 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 				interface.set_new_password(name, pw1);
 				interface.save();
 				cout << "Your password has changed successfully!" << endl;
+				interface.write_log("Password", get_username(), "Changed ", "SUCCESS");
 				//eisagw ton kainoyrgio kwdiko sto arxeio
 			}
 			else {
+				interface.write_log("Password", get_username(), "no match ", "FAILED");
 				cout << "Your passwords don't match!" << endl;
 			}
 		}
@@ -177,6 +188,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			cout << "BETTING HISTORY:" << endl;
 			cout << "node_id|stake|result|" << endl;
 			interface.print_user_bets();
+			interface.write_log("Bets", get_username(), "Betting history ", "SUCCESS");
 		}
 		else if ((option == "D") || (option == "Deposit")) {
 			string name = user->get_username();
@@ -188,9 +200,11 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			cout << "Your balance has changed successfully!" << endl;
 			double nbalance = user->get_balance();
 			cout << "Your new balance is: " << nbalance << endl;
+			interface.write_log("Deposit", get_username(), "Changed ", "SUCCESS");
 			//eisagw to upoloipo sto arxeio
 		}
 		else {
+			interface.write_log("Deposit", get_username(), "WRONG INPUT ", "ERROR");
 			cout << "WRONG INPUT" << endl;
 		}
 		return 1;
