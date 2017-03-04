@@ -16,9 +16,18 @@ private:
 	vector <User*> users;
 	vector <Node*> nodes;
 	vector <bet*> bets;
+	int num_of_logs;
 public:
 	BetAtzis();
 	~BetAtzis();
+	void set_num_of_logs(int num) {
+		num_of_logs = num;
+	}
+
+	int get_num_of_logs() {
+		return num_of_logs;
+	}
+
 	void print_location() {
 		node->print_location();
 	}
@@ -117,6 +126,8 @@ public:
 	bool operation(string, BetAtzis*);
 //vector save
 	bool save();
+
+	bool write_log(string, string, string, string);
 
 	string get_bet(int bet_id);
 

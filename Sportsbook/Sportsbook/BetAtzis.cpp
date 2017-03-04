@@ -153,6 +153,28 @@ BetAtzis::BetAtzis() {
 		cout << "Error opening bets" << endl;
 	}
 	Bets.close();
+	fstream logs("audit.log", std::fstream::in);
+	if (logs.is_open()) {
+		string line, myline;
+		int log_id;
+		getline(logs, line);
+		while (!logs.eof()) {
+			getline(logs, line);
+		}
+		if (isdigit(line[1]) == 0) {
+			set_num_of_logs(0);
+		}
+		else {
+			log_id = extract_id(line);
+			set_num_of_logs(log_id);
+		}
+		logs.close();
+	}
+	else {
+		logs.close();
+		cout << "Error opening audit.log" << endl;
+	}
+
 }
 
 bool BetAtzis::operation(string op, BetAtzis* interface) {
@@ -614,6 +636,28 @@ void BetAtzis::lock_user(string user) {
 		cout << "The user does not exist." << endl;
 	}
 }
+
+bool BetAtzis::write_log(string origin, string user, string action, string outcome = "SUCCESS") {
+	int log_id = get_num_of_logs();
+	set_num_of_logs(++log_id);
+	fstream logs("audit.log", std::fstream::in | std::fstream::app);
+	if (logs.is_open()) {
+		string log, myline;
+		stringstream converter;
+		converter << log_id;
+		converter >> log;
+		myline = log + "|" + origin + "|" + user + "|" + outcome + "|" + action + "|";
+		logs << endl << myline;
+		logs.close();
+		return true;
+	}
+	else {
+		logs.close();
+		cout << "Error, cannot open log file." << endl;
+		return false;
+	}
+}
+
 /*void BetAtzis::set_results(string node_id) { //for betatzis
 	for (int i = 0; i < bets.size(); i++) {
 		if (bets[i]->get_nodeid() == node_id) {
