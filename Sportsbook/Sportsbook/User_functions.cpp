@@ -559,9 +559,9 @@ void Punter::place(BetAtzis& Interface) {
 				stringstream converter(operation);
 				converter >> selection;
 				converter.clear();
-				stringstream converter(frbts[coupon]);
+				stringstream converter2(frbts[coupon]);
 				int bounty;
-				converter >> bounty;
+				converter2 >> bounty;
 				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
 				Interface.set_bet(node_id, bounty, selection);
 				frbts.erase(frbts.begin() + coupon - 1);

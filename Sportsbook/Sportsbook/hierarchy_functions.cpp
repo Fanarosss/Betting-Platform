@@ -238,8 +238,8 @@ Node * Home::get_node_byid(string id)
 	for (int j = 0; j < 1; j++)
 		pos2 = node_id.find(".");
 	node_id = node_id.substr(pos2 + 1);
-	stringstream converter(node_id);
-	converter >> digit_node_id;
+	stringstream converter2(node_id);
+	converter2 >> digit_node_id;
 	ptr = get_next(digit_node_id);
 	converter.clear();
 
@@ -250,8 +250,8 @@ Node * Home::get_node_byid(string id)
 	for (int j = 0; j < 2; j++)
 		pos2 = node_id.find(".");
 	node_id = node_id.substr(pos2 + 1);
-	stringstream converter(node_id);
-	converter >> digit_node_id;
+	stringstream converter3(node_id);
+	converter3 >> digit_node_id;
 	ptr = get_next(digit_node_id);
 	converter.clear();
 
@@ -262,8 +262,8 @@ Node * Home::get_node_byid(string id)
 	for (int i = 0; i<3; i++)
 		pos2 = node_id.find(".");
 	node_id = node_id.substr(pos2 + 1);
-	stringstream converter(node_id);
-	converter >> digit_node_id;
+	stringstream converter4(node_id);
+	converter4 >> digit_node_id;
 	ptr = get_next(digit_node_id);
 	converter.clear();
 
@@ -271,8 +271,8 @@ Node * Home::get_node_byid(string id)
 	for (int i = 0; i<4; i++)
 		pos2 = node_id.find(".");
 	node_id = node_id.substr(pos2);
-	stringstream converter(node_id);
-	converter >> digit_node_id;
+	stringstream converter5(node_id);
+	converter5 >> digit_node_id;
 	ptr = get_next(digit_node_id);
 	converter.clear();
 	return ptr;
