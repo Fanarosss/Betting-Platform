@@ -299,6 +299,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 					stringstream converter(sprofit);
 					converter >> profit;
 				}
+				cout << "edw" << endl;
 				interface.pay(full_id, profit);				//plhrwnw tous nikhtes
 				interface.save();
 				cout << "Option No" << option << " was settled succesfully." << endl;
@@ -524,6 +525,11 @@ void Punter::place(BetAtzis& Interface) {
 			cout << "Enter the amount, or choose the coupon you wish(if there is available)." << endl;
 			string sbounty;
 			cin >> sbounty;
+			int selection;
+			stringstream converter2(operation);
+			converter2 >> selection;
+			Node* node = Interface.get_node();
+			node = node->get_next(selection);
 			if (!(isdigit(sbounty[0]) == 0)) {
 				int bounty;
 				stringstream converter(sbounty);
@@ -540,12 +546,10 @@ void Punter::place(BetAtzis& Interface) {
 					set_balance(-bounty);
 					string node_id;
 					//it recursively needs to go back to all nodes and get their id;
-					int selection;
-					stringstream converter2(operation);
-					converter2 >> selection;
 					node_id = (Interface.get_node())->get_next(selection)->get_full_id();
+					cout << node_id << endl;
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
-					Interface.set_bet(node_id, bounty, selection);
+					Interface.set_bet(node_id, bounty, selection, node);
 					Interface.save();
 					cout << "Bet placed. "<< bounty << " credits were removed from your wallet." << endl;
 				}
@@ -563,7 +567,7 @@ void Punter::place(BetAtzis& Interface) {
 				int bounty;
 				converter2 >> bounty;
 				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
-				Interface.set_bet(node_id, bounty, selection);
+				Interface.set_bet(node_id, bounty, selection, node);
 				frbts.erase(frbts.begin() + coupon - 1);
 				freebets.clear();
 				for (int i = 0; i < frbts.size(); i++) {

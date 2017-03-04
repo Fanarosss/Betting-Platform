@@ -36,6 +36,7 @@ Market::Market(int ID, string NAME) :Node(ID, NAME) {
 Selection::Selection(int ID, string NAME, string PROFIT) :Node(ID, NAME) {
 	profit = PROFIT;
 	voided = 0;
+	result = "-";
 	//cout<<"A Selection has been constructed."<<endl;
 }
 

@@ -166,8 +166,11 @@ public:
 	double get_stake() {
 		return stake;
 	}
-	void set_result(string outcome) {
-		result = outcome;
+	void set_result() {
+		cout << "IM here." << endl;
+		cout << node->get_full_id() << endl;
+		string rslt = node->get_result();
+		result = rslt;
 	}
 	string get_result() {
 		return result;

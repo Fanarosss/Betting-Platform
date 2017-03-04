@@ -36,6 +36,8 @@ public:
 	virtual void print_profit() {}
 	virtual void print_options() {}
 	virtual int get_vector_size() { return 0; }
+	virtual void set_result(string rslt){}
+	virtual string get_result() { return NULL; }
 	virtual bool get_voided() { return 0; }  //mono gia selection
 	virtual void set_voided(){}	 //mono gia selection
 	virtual bool is_operation_valid(string operation) { return false; }
@@ -47,6 +49,7 @@ public:
 class Selection : public Node {
 	string profit;
 	bool voided;
+	string result;
 public:
 	Selection(int ID, string NAME, string profit);
 	~Selection();
@@ -59,6 +62,12 @@ public:
 	}
 	void print_profit() {
 		cout << profit;
+	}
+	void set_result(string rslt) {
+		result = rslt;
+	}
+	string get_result() {
+		return result;
 	}
 	void set_voided() { voided = 1; }
 	bool get_voided() { return voided; }
