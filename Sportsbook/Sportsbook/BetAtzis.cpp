@@ -38,7 +38,7 @@ BetAtzis::BetAtzis() {
 				}
 		}
 		name = HierLine;
-		bool voided;
+		bool voided=0;
 		size_t position = name.find(" ");
 		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {

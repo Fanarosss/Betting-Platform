@@ -712,12 +712,11 @@ void Punter::place(BetAtzis& Interface) {
 			else {
 				int coupon = sbounty[0] - '0';
 				coupon -= 48; // converting from ascii -48 .
-				cout << coupon << endl;
 				int selection;
 				stringstream converter(operation);
 				converter >> selection;
 				converter.clear();
-				stringstream converter2(frbts[coupon]);
+				stringstream converter2(frbts[coupon-1]);
 				int bounty;
 				converter2 >> bounty;
 				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
@@ -731,7 +730,7 @@ void Punter::place(BetAtzis& Interface) {
 					freebets += frbts[frbts.size()];
 				}
 				else if(frbts.size()>0){
-					freebets = frbts[frbts.size()];
+					freebets = frbts[frbts.size()-1];
 				}
 				else {
 					freebets.clear();
