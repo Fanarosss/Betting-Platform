@@ -575,16 +575,52 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("R") == 0) || (leitourgia.compare("Rename") == 0) || (leitourgia.compare("r") == 0) || (leitourgia.compare("rename") == 0)) {
 		cout << "Type the ID of the node you want to rename:" << endl;
 		interface.print_options();
-		int option;
-		cin >> option;
+		cout << "Cancel/Abort, to exit." << endl;
+		string soption;
+		cin >> soption;
+		if ((soption == "Cancel") || (soption == "cancel") || (soption == "C") || (soption == "c") || (soption == "Abort") || (soption == "abort") || (soption == "A") || (soption == "a")) return 1;
 		cout << "Type the new name of the node:" << endl;
+		cout << "Cancel/Abort, to exit." << endl;
 		string name;
 		cin >> name;
+		if ((name == "Cancel") || (name == "cancel") || (name == "C") || (name == "c") || (name == "Abort") || (name == "abort") || (name == "A") || (name == "a")) return 1;
+		if ((name == "Rename") || (name == "New") || (name == "Copy") || (name == "Delete")) {
+			cout << "This cannot be used as a node's name." << endl;
+			return 1;
+		}
+		int option;
+		stringstream converter(soption);
+		converter >> option;
 		Node* node = interface.get_node();
 		node = node->get_next(option);
 		node->set_name(name);
 		interface.save();
 		cout << "Node name has changed successfully." << endl;
+		return 1;
+	}
+	else if ((leitourgia.compare("N") == 0) || (leitourgia.compare("New") == 0) || (leitourgia.compare("n") == 0) || (leitourgia.compare("new") == 0)) {
+		string name;
+		Node* node = interface.get_node();
+		if (interface.get_current_level() == 0) {
+			cout << "Type the name of the category:" << endl;
+			cin >> name;
+		}
+		else if (interface.get_current_level() == 1) {
+			cout << "Type the name of the subcategory:" << endl;
+			cin >> name;
+		}
+		else if (interface.get_current_level() == 2) {
+			cout << "Type the name of the event:" << endl;
+			cin >> name;
+		}
+		else if (interface.get_current_level() == 3) {
+			cout << "Type the name of the market:" << endl;
+			cin >> name;
+		}
+		else if (interface.get_current_level() == 4) {
+			cout << "Type the name of the selection:" << endl;
+			cin >> name;
+		}
 		return 1;
 	}
 	else {
