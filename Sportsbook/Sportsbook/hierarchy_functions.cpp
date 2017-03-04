@@ -158,7 +158,7 @@ Selection* Market::set_selection(string NAME,string profit, bool voided) {
 	Selection * sl_ptr;
 	sl_ptr = new Selection(Selections.size()+1, NAME, profit); //vector.size = ID
 	Selections.push_back(sl_ptr);
-	if (voided) set_voided();
+	if (voided) sl_ptr->set_voided();
 	return sl_ptr;
 }
 
@@ -283,7 +283,7 @@ Node * Home::get_node_byid(string id)
 string Category::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_cat = id + " " + name;
+	string node_cat = id + "." + " " + name;
 	return node_cat;
 }
 
@@ -313,7 +313,7 @@ string Selection::conversion() {
 	string name = Node::get_name();
 	string node_selection = id + " " + name + "#" + profit ;
 	if (voided) {
-		node_selection + "/" + "VOIDED";
+		node_selection += "/VOIDED";
 	}
 	return node_selection;
 }

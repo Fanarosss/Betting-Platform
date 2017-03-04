@@ -509,7 +509,8 @@ bool BetAtzis::save() {
 	//hierarchy save
 	fstream hierarchy("hierarchy.dat", std::fstream::out);
 	if (hierarchy.is_open()) {
-		for (int i = 0; i < nodes.size(); i++) {
+		hierarchy << nodes[0]->conversion();
+		for (int i = 1; i < nodes.size(); i++) {
 			hierarchy << endl << nodes[i]->conversion();
 		}
 		hierarchy.close();
