@@ -565,6 +565,28 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		}
 		return 1;
 	}
+	else if ((leitourgia.compare("V") == 0) || (leitourgia.compare("Visibility") == 0) || (leitourgia.compare("v") == 0) || (leitourgia.compare("visibility") == 0)) {
+		cout << "Select the node you want to change its visibility:" << endl;
+		int option;
+		cin >> option;
+		//8elei douleia
+		return 1;
+	}
+	else if ((leitourgia.compare("R") == 0) || (leitourgia.compare("Rename") == 0) || (leitourgia.compare("r") == 0) || (leitourgia.compare("rename") == 0)) {
+		cout << "Type the ID of the node you want to rename:" << endl;
+		interface.print_options();
+		int option;
+		cin >> option;
+		cout << "Type the new name of the node:" << endl;
+		string name;
+		cin >> name;
+		Node* node = interface.get_node();
+		node = node->get_next(option);
+		node->set_name(name);
+		interface.save();
+		cout << "Node name has changed successfully." << endl;
+		return 1;
+	}
 	else {
 		cout << "WRONG INPUT" << endl;
 		return 1;
