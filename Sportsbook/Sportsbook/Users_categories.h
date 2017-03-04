@@ -31,9 +31,11 @@ public:
 	string get_username() { return username; }
 	string get_fullname() { return fullname; }
 	string get_password() { return password; }
+	int get_type() { return type; }
 	void set_username(string nusername) { username = nusername; }
 	void set_fullname(string nfullname) { fullname = nfullname; }
 	void set_password(string npassword) { password = npassword; }
+	void set_type(int ntype) { type = ntype; }
 	virtual void print_status(){}
 	virtual void print_balance(){}
 	virtual void print_freebets(){}

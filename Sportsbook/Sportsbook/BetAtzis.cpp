@@ -88,7 +88,6 @@ BetAtzis::BetAtzis() {
 					else {
 						voided = 0;
 					}
-					cout << voided << endl;
 					size_t length = profit.length();
 					pos = name.find("#");
 					name.erase((name.begin() + pos), name.end());
@@ -479,45 +478,45 @@ void BetAtzis::set_new_balance(string name, double ADD) {
 
 bool BetAtzis::save() {
 	//users save
-	fstream newfile("users.csv", std::fstream::out);
-	if (newfile.is_open()) {
-		newfile << "user_id|username|fullname|password|type|status|balance|freebets|";
-		for (int i = 0; i < users.size(); i++) {
-			newfile << endl << users[i]->conversion();
-		}
+fstream newfile("users.csv", std::fstream::out);
+if (newfile.is_open()) {
+	newfile << "user_id|username|fullname|password|type|status|balance|freebets|";
+	for (int i = 0; i < users.size(); i++) {
+		newfile << endl << users[i]->conversion();
 	}
-	else {
-		cout << "can't open file." << endl;
-		newfile.close();
-		return false;
-	}
+}
+else {
+	cout << "can't open file." << endl;
 	newfile.close();
-	//bets save
-	fstream Bets("bets.csv", std::fstream::out);
-	if (Bets.is_open()) {
-		Bets << "bet_id|user_id|node_id|stake|result|";
-		for (int i = 0; i < bets.size(); i++) {
-			if (bets[i] != NULL) {
-				Bets << endl << bets[i]->conversion();
-			}
+	return false;
+}
+newfile.close();
+//bets save
+fstream Bets("bets.csv", std::fstream::out);
+if (Bets.is_open()) {
+	Bets << "bet_id|user_id|node_id|stake|result|";
+	for (int i = 0; i < bets.size(); i++) {
+		if (bets[i] != NULL) {
+			Bets << endl << bets[i]->conversion();
 		}
 	}
-	else {
-		cout << "can't open file." << endl;
-		Bets.close();
-		return false;
-	}
+}
+else {
+	cout << "can't open file." << endl;
 	Bets.close();
-	//hierarchy save
-	fstream hierarchy("hierarchy.dat", std::fstream::out);
-	if (hierarchy.is_open()) {
-		hierarchy << nodes[0]->conversion();
-		for (int i = 1; i < nodes.size(); i++) {
-			hierarchy << endl << nodes[i]->conversion();
-		}
-		hierarchy.close();
+	return false;
+}
+Bets.close();
+//hierarchy save
+fstream hierarchy("hierarchy.dat", std::fstream::out);
+if (hierarchy.is_open()) {
+	hierarchy << nodes[0]->conversion();
+	for (int i = 1; i < nodes.size(); i++) {
+		hierarchy << endl << nodes[i]->conversion();
 	}
-	return true;
+	hierarchy.close();
+}
+return true;
 }
 
 User * BetAtzis::current_user(string usrnm) {
@@ -529,26 +528,28 @@ User * BetAtzis::current_user(string usrnm) {
 	}
 }
 
-void BetAtzis::set_bet(string node_id, double stake,int selection_id) {
+void BetAtzis::set_bet(string node_id, double stake, int selection_id) {
 	int bet_id, user_id = 0;
-	bet_id = bets.size()+1;
+	bet_id = bets.size() + 1;
 	for (int i = 0; i < users.size(); i++) {
 		if (user == users[i]) {
-			user_id = i+1;
+			user_id = i + 1;
 			break;
 		}
 	}
 	string result = "-";
 	Node * s_node = node->get_selection_ptr(selection_id);
-	bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user, s_node));
+	bets.insert(bets.begin(), new bet(bet_id, user_id, node_id, stake, result, user, s_node));
 }
 
 string BetAtzis::get_bet(int bet_id) {
-	string bet= "-";
+	string bet = "-";
 	string sbetid, userid, stake, node_id, result;
 	//getting all of those putting them into bet and returning bet;
 	return bet;
 }
+
+//management
 
 void BetAtzis::print_users() {
 	cout << "user_id|username|fullname|password|type|status|balance|freebets|";
@@ -557,6 +558,62 @@ void BetAtzis::print_users() {
 	}
 }
 
+void BetAtzis::search_user(string user) {
+	int found = 0;
+	string username;
+	for (int i = 0; i < users.size(); i++) {
+		username = users[i]->get_username();
+		if (username.find(user) != string::npos) {
+			found++;
+			if (found == 1) {
+				cout << "user_id|username|fullname|password|type|status|balance|freebets|";
+			}
+			cout << endl << users[i]->conversion();
+		}
+	}
+	if (found == 0) {
+		cout << "The user does not exist." << endl;
+	}
+}
+
+void BetAtzis::lock_user(string user) {
+	string status, comment, full;
+	bool found = false;
+	for (int i = 0; i < users.size(); i++) {
+		if (users[i]->get_username() == user){
+			found = true;
+			if (users[i]->get_type() == 3) {
+				cout << "You cannot lock a director." << endl;
+				return;
+			}
+			else {
+				if (users[i]->get_Status().empty()) {
+					status = "L";
+					cout << "Please explain why you exclude this user:"<<endl;
+					cin.get();
+					getline(cin, comment);
+					if (comment.empty()) {
+						comment = "N/A";
+					}
+					full = status + ", " + comment;
+					users[i]->set_status(full);
+				}
+				else {
+					cout << "Please explain why you include this user again:"<<endl;
+					cin.get();
+					getline(cin, comment);
+					if (comment.empty()) {
+						comment = "-";
+					}
+					users[i]->set_status(comment);
+				}
+			}
+		}
+	}
+	if (found == false) {
+		cout << "The user does not exist." << endl;
+	}
+}
 /*void BetAtzis::set_results(string node_id) { //for betatzis
 	for (int i = 0; i < bets.size(); i++) {
 		if (bets[i]->get_nodeid() == node_id) {

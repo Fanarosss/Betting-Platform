@@ -123,6 +123,8 @@ public:
 	User * current_user(string usrnm);
 
 	void print_users();
+	void search_user(string user);
+	void lock_user(string user);
 };
 
 //functions for vector initialization

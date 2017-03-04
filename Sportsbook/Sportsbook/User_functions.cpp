@@ -516,6 +516,41 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "Exiting the program..." << endl;
 		return 0; //eksodos apo to sistima
 	}
+	else if ((leitourgia.compare("L") == 0) || (leitourgia.compare("Logs") == 0) || (leitourgia.compare("l") == 0) || (leitourgia.compare("logs") == 0)) {
+		//fanh diko sou!!
+		return 1;
+	}
+	else if ((leitourgia.compare("U") == 0) || (leitourgia.compare("Users") == 0) || (leitourgia.compare("u") == 0) || (leitourgia.compare("users") == 0)) {
+		cout << "Select a choice:" << endl;
+		cout << "V(View), to view users info." << endl;
+		cout << "S(Search), to search a user." << endl;
+		cout << "L(Lock), to change the exclusion state of a user." << endl;
+		string option;
+		cin >> option;
+		if ((option == "V") || (option == "View")) {
+			interface.print_users();
+			cout << endl;
+		}
+		else if ((option == "S") || (option == "Search")) {
+			cout << "Type the username:" << endl;
+			string username;
+			cin >> username;
+			interface.search_user(username);
+			cout << endl;
+		}
+		else if ((option == "L") || (option == "Lock")) {
+			cout << "Type the username:" << endl;
+			string username;
+			cin >> username;
+			interface.lock_user(username);
+			cout << endl;
+			interface.save();
+		}
+		else {
+			cout << "WRONG INPUT" << endl;;
+		}
+		return 1;
+	}
 	else {
 		cout << "WRONG INPUT" << endl;
 		return 1;
@@ -561,6 +596,14 @@ void Director::Print_Operations(BetAtzis& interface) {
 	cout << "F(Freebets), to give coupon to punter." << endl;
 	cout << "S(Save), to save current state and synchronize system files." << endl;
 	cout << "X(Exit), to exit." << endl;
+	cout << endl << "MANAGEMENT:" << endl;
+	cout << "L(Logs), to see the last 25 logs." << endl;
+	cout << "U(Users), to manage users." << endl;
+	cout << "V(Visibility), to change the visibility of a node." << endl;
+	cout << "R(Rename), to rename a node." << endl;
+	cout << "N(New), to create a new node." << endl;
+	cout << "C(Copy), to copy a node(hidden)." << endl;
+	cout << "D(Delete), to delete a node." << endl;
 }
 
 void Trader::Bets() {
