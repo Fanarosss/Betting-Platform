@@ -213,6 +213,78 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
+		Node* node = interface.get_home();
+		for (int a = 1; a <= node->get_vector_size(); a++) {
+			node = node->get_next(a);
+			for (int b = 1; b <= node->get_vector_size(); b++) {
+				node = node->get_next(b);
+				for (int c = 1; c <= node->get_vector_size(); c++) {
+					node = node->get_next(c);
+					for (int d = 1; d <= node->get_vector_size(); d++) {
+						node = node->get_next(d);
+						for (int e = 1; e <= node->get_vector_size(); e++) {
+							node = node->get_next(e);
+							string old_profit;
+							node->get_profit(old_profit);
+							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+								size_t klasma = old_profit.find("/");
+								string sdividend, sdivisor, snew_profit;
+								sdivisor = old_profit.substr(klasma + 1);
+								sdividend = old_profit.substr(0, klasma);
+								double dividend, divisor, new_profit;
+								dividend = atof(sdividend.c_str());
+								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								new_profit = (dividend / divisor) + 1;
+								new_profit = round(new_profit * 100) / 100;
+								stringstream convert;
+								convert << new_profit;
+								snew_profit = convert.str();
+								node->set_profit(snew_profit);
+							}													//alliws apo decadiko se klasma
+							else {
+								double decimal = atof(old_profit.c_str());
+								decimal--;
+								decimal = decimal * 100;
+								double divisor = 100;
+								bool there_is_a_divisor = false;
+								do {
+									there_is_a_divisor = false;
+									for (int i = 2; i <= decimal; i++) {
+										if ((fmod(decimal, i) == 0) && (fmod(divisor, i) == 0)) {
+											decimal = decimal / i;
+											divisor = divisor / i;
+											there_is_a_divisor = true;
+											break;
+										}
+									}
+								} while (there_is_a_divisor == true);
+								string sdividend, sdivisor, snew_profit;
+								stringstream con1, con2;
+								con1 << decimal;
+								sdividend = con1.str();
+								con2 << divisor;
+								sdivisor = con2.str();
+								snew_profit = sdividend + "/" + sdivisor;
+								node->set_profit(snew_profit);
+							}
+							node = node->get_back();
+						}
+						node = node->get_back();
+					}
+					node = node->get_back();
+				}
+				node = node->get_back();
+			}
+			node = node->get_back();
+		}
+		if (interface.get_type_of_profits() == 0) {
+			cout << "Conversion from fraction to decimal was successful." << endl;
+			interface.set_type_of_profits("Dekadika");
+		}
+		else {
+			cout << "Conversion from decimal to fraction was successful." << endl;
+			interface.set_type_of_profits("Klasmatika");
+		}
 		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
@@ -300,7 +372,6 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 					stringstream converter(sprofit);
 					converter >> profit;
 				}
-				cout << "edw" << endl;
 				interface.pay(full_id, profit);				//plhrwnw tous nikhtes
 				interface.save();
 				cout << "Option No" << option << " was settled succesfully." << endl;
@@ -332,9 +403,81 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
+		Node* node = interface.get_home();
+		for (int a = 1; a <= node->get_vector_size(); a++) {
+			node = node->get_next(a);
+			for (int b = 1; b <= node->get_vector_size(); b++) {
+				node = node->get_next(b);
+				for (int c = 1; c <= node->get_vector_size(); c++) {
+					node = node->get_next(c);
+					for (int d = 1; d <= node->get_vector_size(); d++) {
+						node = node->get_next(d);
+						for (int e = 1; e <= node->get_vector_size(); e++) {
+							node = node->get_next(e);
+							string old_profit;
+							node->get_profit(old_profit);
+							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+								size_t klasma = old_profit.find("/");
+								string sdividend, sdivisor, snew_profit;
+								sdivisor = old_profit.substr(klasma + 1);
+								sdividend = old_profit.substr(0, klasma);
+								double dividend, divisor, new_profit;
+								dividend = atof(sdividend.c_str());
+								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								new_profit = (dividend / divisor) + 1;
+								new_profit = round(new_profit * 100) / 100;
+								stringstream convert;
+								convert << new_profit;
+								snew_profit = convert.str();
+								node->set_profit(snew_profit);
+							}													//alliws apo decadiko se klasma
+							else {
+								double decimal = atof(old_profit.c_str());
+								decimal--;
+								decimal = decimal * 100;
+								double divisor = 100;
+								bool there_is_a_divisor = false;
+								do {
+									there_is_a_divisor = false;
+									for (int i = 2; i <= decimal; i++) {
+										if ((fmod(decimal, i) == 0) && (fmod(divisor, i) == 0)) {
+											decimal = decimal / i;
+											divisor = divisor / i;
+											there_is_a_divisor = true;
+											break;
+										}
+									}
+								} while (there_is_a_divisor == true);
+								string sdividend, sdivisor, snew_profit;
+								stringstream con1, con2;
+								con1 << decimal;
+								sdividend = con1.str();
+								con2 << divisor;
+								sdivisor = con2.str();
+								snew_profit = sdividend + "/" + sdivisor;
+								node->set_profit(snew_profit);
+							}
+							node = node->get_back();
+						}
+						node = node->get_back();
+					}
+					node = node->get_back();
+				}
+				node = node->get_back();
+			}
+			node = node->get_back();
+		}
+		if (interface.get_type_of_profits() == 0) {
+			cout << "Conversion from fraction to decimal was successful." << endl;
+			interface.set_type_of_profits("Dekadika");
+		}
+		else {
+			cout << "Conversion from decimal to fraction was successful." << endl;
+			interface.set_type_of_profits("Klasmatika");
+		}
 		return 1;
 	}
-	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || leitourgia.compare("b") || (leitourgia.compare("bets") == 0)) {
+	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
 		cout << "20 last bets" << endl;
 		cout << "bet_id|user_id|node_id|stake|result|" << endl;
 		for (int i = 0; i < 20; i++) {
@@ -357,6 +500,14 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("save") == 0)) {
+		bool save = true;
+		save = interface.save();
+		if (save == true) {
+			cout << "Files update successful!" << endl;
+		}
+		else {
+			cout << "An error occured! Current state could not be saved." << endl;
+		}
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
@@ -529,8 +680,6 @@ void Punter::place(BetAtzis& Interface) {
 			int selection;
 			stringstream converter2(operation);
 			converter2 >> selection;
-			Node* node = Interface.get_node();
-			node = node->get_next(selection);
 			if (!(isdigit(sbounty[0]) == 0)) {
 				int bounty;
 				stringstream converter(sbounty);
@@ -548,17 +697,15 @@ void Punter::place(BetAtzis& Interface) {
 					string node_id;
 					//it recursively needs to go back to all nodes and get their id;
 					node_id = (Interface.get_node())->get_next(selection)->get_full_id();
-					cout << node_id << endl;
 					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
-					Interface.set_bet(node_id, bounty, selection, node);
+					Interface.set_bet(node_id, bounty, selection);
 					Interface.save();
 					cout << "Bet placed. "<< bounty << " credits were removed from your wallet." << endl;
 				}
 			}
 			else {
-				//aferw ena kouponi
-				int coupon = c - '0';
-				coupon -= 49; // converting from ascii -48 and then -1 because i started char c from a.
+				int coupon = sbounty[0] - '0';
+				coupon -= 48; // converting from ascii -48 .
 				cout << coupon << endl;
 				int selection;
 				stringstream converter(operation);
@@ -568,7 +715,7 @@ void Punter::place(BetAtzis& Interface) {
 				int bounty;
 				converter2 >> bounty;
 				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
-				Interface.set_bet(node_id, bounty, selection, node);
+				Interface.set_bet(node_id, bounty, selection);
 				frbts.erase(frbts.begin() + coupon - 1);
 				freebets.clear();
 				for (int i = 0; i < frbts.size(); i++) {

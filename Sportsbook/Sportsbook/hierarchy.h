@@ -102,10 +102,10 @@ public:
 		if ((operation == "Cancel") || (operation == "cancel")) {
 			return true;
 		}
-		for (i = 1; i <= Selections.size(); i++) {
+		for (i = 0; i < Selections.size(); i++) {
 			stringstream converter(operation);
 			converter >> option;
-			if (option == i) {
+			if (option == (i + 1)) {
 				if (Selections[i]->get_voided() == 0) {			//elegxos an h epilogh exei akurw8ei
 					return true;
 				}

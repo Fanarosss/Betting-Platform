@@ -167,8 +167,6 @@ public:
 		return stake;
 	}
 	void set_result() {
-		cout << "IM here." << endl;
-		cout << node->get_full_id() << endl;
 		string rslt = node->get_result();
 		result = rslt;
 	}

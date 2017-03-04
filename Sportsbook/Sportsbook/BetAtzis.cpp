@@ -168,24 +168,18 @@ void BetAtzis::settle(string full_id, int option) {
 		if (id == option) {
 			node->set_result("W");
 			string s1 = node->get_result();
-			cout << s1 << endl;
 		}
 		else {
 			if (node->get_voided() == 0) {
 				node->set_result("L");
 				string s2 = node->get_result();
-				cout << s2 << endl;
 			}
 		}
 		node = node->get_back();
 	}
-	cout << endl << endl << endl;
-	cout << bets.size() << endl;
 	for (int j = 0; j < bets.size(); j++) {
 		bets[j]->set_result();
-		cout << "!!!!!!" << endl;
 		string s3 = bets[j]->get_result();
-		cout << s3 << endl;
 	}
 }
 
@@ -196,9 +190,7 @@ void BetAtzis::pay(string full_id, double profit) {
 		user_id = 0;
 		earnings = 0;
 		stake = 0;
-		profit = 0;
 		commission = 0;
-		cout << "HERE" << endl;
 		if (bets[i]->get_nodeid() == full_id) {
 			user_id = bets[i]->get_user_id();
 			stake = bets[i]->get_stake();
@@ -206,9 +198,7 @@ void BetAtzis::pay(string full_id, double profit) {
 			commission = promitheia*earnings;
 			earnings = earnings - commission;
 			users[user_id - 1]->set_balance(earnings);
-			cout << earnings << endl;
 			profits += commission;
-			cout<<profits<<endl;
 		}
 	}
 }
@@ -492,7 +482,7 @@ User * BetAtzis::current_user(string usrnm) {
 	}
 }
 
-void BetAtzis::set_bet(string node_id, double stake,int selection_id, Node* node) {
+void BetAtzis::set_bet(string node_id, double stake,int selection_id) {
 	int bet_id, user_id = 0;
 	bet_id = bets.size()+1;
 	for (int i = 0; i < users.size(); i++) {
@@ -502,7 +492,8 @@ void BetAtzis::set_bet(string node_id, double stake,int selection_id, Node* node
 		}
 	}
 	string result = "-";
-	bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user, node));
+	Node * s_node = node->get_selection_ptr(selection_id);
+	bets.insert(bets.begin(),new bet(bet_id, user_id, node_id, stake, result, user, s_node));
 }
 
 string BetAtzis::get_bet(int bet_id) {

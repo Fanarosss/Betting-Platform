@@ -218,13 +218,12 @@ void Market::place(BetAtzis* Interface) {
 }
 
 Node * Home::get_node_byid(string id)
-{ 
-	string node_id = id;
+{
+	string node_id = id, node_id2 = id, node_id3 = id, node_id4 = id, node_id5 = id;
 	size_t pos, pos2;
-	Node * ptr;
 	int digit_node_id;
+	Node * ptr;
 
-	node_id = id;
 	pos = node_id.find(".");
 	node_id.erase(node_id.begin() + pos, node_id.end());
 	stringstream converter(node_id);
@@ -232,49 +231,50 @@ Node * Home::get_node_byid(string id)
 	ptr = get_next(digit_node_id);
 	converter.clear();
 
-	node_id = id;
-	for (int i = 0; i<2; i++)
-		pos = node_id.find(".");
-	node_id.erase(node_id.begin() + pos, node_id.end());
-	for (int j = 0; j < 1; j++)
-		pos2 = node_id.find(".");
-	node_id = node_id.substr(pos2 + 1);
-	stringstream converter2(node_id);
+	for (int j = 0; j < 1; j++) {
+		pos2 = node_id2.find(".");
+		node_id2 = node_id2.substr(pos2 + 1);
+	}
+	pos = node_id2.find(".");
+	node_id2.erase(node_id2.begin() + pos, node_id2.end());
+	stringstream converter2;
+	converter2 << node_id2;
 	converter2 >> digit_node_id;
-	ptr = get_next(digit_node_id);
-	converter.clear();
+	ptr = ptr->get_next(digit_node_id);
+	converter2.clear();
 
-	node_id = id;
-	for (int i = 0; i<3; i++)
-		pos = node_id.find(".");
-	node_id.erase(node_id.begin() + pos, node_id.end());
-	for (int j = 0; j < 2; j++)
-		pos2 = node_id.find(".");
-	node_id = node_id.substr(pos2 + 1);
-	stringstream converter3(node_id);
+
+	for (int j = 0; j < 2; j++) {
+		pos2 = node_id3.find(".");
+		node_id3 = node_id3.substr(pos2 + 1);
+	}
+	pos = node_id3.find(".");
+	node_id3.erase(node_id3.begin() + pos, node_id3.end());
+	stringstream converter3(node_id3);
 	converter3 >> digit_node_id;
-	ptr = get_next(digit_node_id);
-	converter.clear();
+	ptr = ptr->get_next(digit_node_id);
+	converter3.clear();
 
-	node_id = id;
-	for (int i = 0; i<4; i++)
-		pos = node_id.find(".");
-	node_id.erase(node_id.begin() + pos, node_id.end());
-	for (int i = 0; i<3; i++)
-		pos2 = node_id.find(".");
-	node_id = node_id.substr(pos2 + 1);
-	stringstream converter4(node_id);
+
+	for (int i = 0; i<3; i++) {
+		pos2 = node_id4.find(".");
+		node_id4 = node_id4.substr(pos2 + 1);
+	}
+	pos = node_id4.find(".");
+	node_id4.erase(node_id4.begin() + pos, node_id4.end());
+	stringstream converter4(node_id4);
 	converter4 >> digit_node_id;
-	ptr = get_next(digit_node_id);
-	converter.clear();
+	ptr = ptr->get_next(digit_node_id);
+	converter4.clear();
 
-	node_id = id;
-	for (int i = 0; i<4; i++)
-		pos2 = node_id.find(".");
-	node_id = node_id.substr(pos2);
-	stringstream converter5(node_id);
+
+	for (int i = 0; i<4; i++) {
+		pos2 = node_id5.find(".");
+		node_id5 = node_id5.substr(pos2 + 1);
+	}
+	stringstream converter5(node_id5);
 	converter5 >> digit_node_id;
-	ptr = get_next(digit_node_id);
-	converter.clear();
+	ptr = ptr->get_next(digit_node_id);
+	converter5.clear();
 	return ptr;
 }
