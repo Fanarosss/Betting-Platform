@@ -154,10 +154,11 @@ Market* Event::set_market(string NAME) {
 	return mrk_ptr;
 }
 
-Selection* Market::set_selection(string NAME,string profit) {
+Selection* Market::set_selection(string NAME,string profit, bool voided) {
 	Selection * sl_ptr;
 	sl_ptr = new Selection(Selections.size()+1, NAME, profit); //vector.size = ID
 	Selections.push_back(sl_ptr);
+	if (voided) set_voided();
 	return sl_ptr;
 }
 
@@ -277,4 +278,42 @@ Node * Home::get_node_byid(string id)
 	ptr = ptr->get_next(digit_node_id);
 	converter5.clear();
 	return ptr;
+}
+
+string Category::conversion() {
+	string id = get_full_id();
+	string name = Node::get_name();
+	string node_cat = id + " " + name;
+	return node_cat;
+}
+
+string Subcategory::conversion() {
+	string id = get_full_id();
+	string name = Node::get_name();
+	string node_subcat = id + " " + name;
+	return node_subcat;
+}
+
+string Event::conversion() {
+	string id = get_full_id();
+	string name = Node::get_name();
+	string node_event = id + " " + name + " " + date_time;
+	return node_event;
+}
+
+string Market::conversion() {
+	string id = get_full_id();
+	string name = Node::get_name();
+	string node_market = id + " " + name;
+	return node_market;
+}
+
+string Selection::conversion() {
+	string id = get_full_id();
+	string name = Node::get_name();
+	string node_selection = id + " " + name + "#" + profit ;
+	if (voided) {
+		node_selection + "/" + "VOIDED";
+	}
+	return node_selection;
 }

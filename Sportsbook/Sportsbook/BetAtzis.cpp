@@ -38,6 +38,7 @@ BetAtzis::BetAtzis() {
 				}
 		}
 		name = HierLine;
+		bool voided;
 		size_t position = name.find(" ");
 		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
@@ -45,11 +46,13 @@ BetAtzis::BetAtzis() {
 					cptr->set_back(home);
 					cptr->set_location("");
 					Cptr = cptr;
+					nodes.push_back(cptr);
 					break; }
 			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);
 					scptr->set_back(Cptr);
 					scptr->set_location("");
 					SCptr = scptr;
+					nodes.push_back(scptr);
 					break; }
 			case 3: {size_t pos;
 					time = name;
@@ -66,21 +69,33 @@ BetAtzis::BetAtzis() {
 					eptr->set_back(SCptr);
 					eptr->set_location("");
 					Eptr = eptr;
+					nodes.push_back(eptr);
 					break; }
 			case 4: {Market* mptr = Eptr->set_market(name);
 					mptr->set_back(Eptr);
 					mptr->set_location("");
 					Mptr = mptr;
+					nodes.push_back(mptr);
 					break; }
 			case 5: {string profit = name;
 					pos = profit.find("#");
 					profit = profit.substr(pos + 1);
+					pos = profit.find("/");
+					if (pos != std::string::npos) {
+						voided = 1;
+						profit.erase(profit.begin() + pos, profit.end());
+					}
+					else {
+						voided = 0;
+					}
 					size_t length = profit.length();
-					name.erase((name.begin() + (name.length() - length - 1)), name.end());
-					Selection* sptr = Mptr->set_selection(name, profit);
+					pos = name.find("#");
+					name.erase((name.begin() + pos), name.end());
+					Selection* sptr = Mptr->set_selection(name, profit, voided);
 					sptr->set_back(Mptr);
 					sptr->set_location("");
 					Sptr = sptr;
+					nodes.push_back(sptr);
 					break; }
 			}
 	} while (!HierLine.empty() && !hierarchy.eof());
@@ -495,7 +510,7 @@ bool BetAtzis::save() {
 	fstream hierarchy("hierarchy.dat", std::fstream::out);
 	if (hierarchy.is_open()) {
 		for (int i = 0; i < nodes.size(); i++) {
-			hierarchy << endl << nodes[i]->conversion;
+			hierarchy << endl << nodes[i]->conversion();
 		}
 		hierarchy.close();
 	}

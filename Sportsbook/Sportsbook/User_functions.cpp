@@ -724,7 +724,7 @@ void Punter::place(BetAtzis& Interface) {
 				Interface.set_bet(node_id, bounty, selection);
 				frbts.erase(frbts.begin() + coupon - 1);
 				freebets.clear();
-				if (frbts.size > 1) {
+				if (frbts.size() > 1) {
 					for (int i = 0; i < frbts.size() - 1; i++) {
 						freebets += frbts[i] + ",";
 					}

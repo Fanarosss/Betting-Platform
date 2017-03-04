@@ -44,6 +44,8 @@ public:
 	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
 	virtual Node* get_selection_ptr(int selection_id) { return NULL; }
 	virtual Node * get_node_byid(string id) { return NULL; }
+	virtual string conversion() { return NULL; }
+	string get_name() { return name; }
 };
 
 class Selection : public Node {
@@ -82,6 +84,7 @@ public:
 		cur_id += "." + this_id;
 		return cur_id;
 	}
+	string conversion();
 };
 
 class Market : public Node {
@@ -90,8 +93,9 @@ public:
 	Market(int ID, string NAME);
 	~Market();
 	void set_location(string LOCATION);
-	Selection* set_selection(string, string);
+	Selection* set_selection(string, string,bool);
 	void print_options();
+	string conversion();
 
 	Node* get_next(int NEXT) {
 		return Selections[NEXT - 1];
@@ -144,6 +148,7 @@ public:
 	~Event();
 	void set_location(string LOCATION);
 	Market* set_market(string);
+	string conversion();
 	void set_date_time(string DATE_TIME) {
 		date_time = DATE_TIME;
 	};
@@ -180,6 +185,7 @@ public:
 	~Subcategory();
 	void set_location(string LOCATION);
 	Event* set_event(string, string);
+	string conversion();
 	void print_options();
 	Node* get_next(int NEXT) {
 		return Events[NEXT - 1];
@@ -207,6 +213,7 @@ public:
 	~Category();
 	void set_location(string LOCATION);
 	Subcategory* set_subcategory(string);
+	string conversion();
 	void print_options();
 	Node* get_next(int NEXT) {
 		return Subcategories[NEXT - 1];
