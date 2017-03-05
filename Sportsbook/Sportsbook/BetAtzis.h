@@ -115,8 +115,13 @@ public:
 		return nodes[option]->get_full_id();
 	}
 
-	void delete_node(int option) {
-		nodes.erase(nodes.begin() + option);
+	void delete_node(string full_id) {
+		for (int i = 0; i < nodes.size(); i++) {
+			if (nodes[i]->get_full_id() == full_id) {
+				nodes.erase(nodes.begin() + i);
+				break;
+			}
+		}
 	}
 
 	void place() {

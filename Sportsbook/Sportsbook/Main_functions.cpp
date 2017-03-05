@@ -111,7 +111,6 @@ string get_status(string username) {
 																	   //svistike kai to deksia
 	status = appuser;
 	file.close();
-	cout << "status" << endl;
 	return status;
 }
 

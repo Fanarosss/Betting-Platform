@@ -96,6 +96,7 @@ int main(int argc, char *argv[])
 
 	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
 	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
+	string status; //elegxw an o xrhsths einai locked h oxi
 	User * uptr = NULL;
 	cout << "Username: ";
 	getline(cin, username);
@@ -113,11 +114,20 @@ int main(int argc, char *argv[])
 				appuser = appuser.erase(pos2);
 				if (appuser.compare(username) == 0) {
 					registration_flag = true;
+					status = get_status(username);
+					pos1 = status.find(",");
+					if (pos1!=std::string::npos) {
+						status.erase(status.begin() + pos1, status.end());
+					}
 					break;
 				}
 			}
 			if (registration_flag == false) {
 				cout << "There is no register with that username. Please try again! " << endl;
+				return 0;
+			}
+			if (status == "L") {
+				cout << "You cannot sign in. This user is locked." << endl;
 				return 0;
 			}
 			cout << "Password: ";

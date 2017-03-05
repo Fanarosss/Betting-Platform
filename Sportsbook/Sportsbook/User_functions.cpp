@@ -646,16 +646,10 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			Node* node = interface.get_node();
 			node = node->get_next(option);
 			string full_id = node->get_full_id();
-			;
-			for (int i = 0; i < interface.get_nodes_size(); i++) {
-				if (interface.get_node_full_id(i) == full_id) {
-					cout << full_id << "==" << interface.get_node_full_id(i) << endl;
-					interface.delete_node(i);
-					interface.save();
-					cout << "Node deleted successfully." << endl;
-					break;
-				}
-			}
+			interface.delete_node(full_id);
+			interface.save();
+			cout << "Node deleted successfully." << endl;
+			return 1;
 		}
 		else if (answer == "N") {
 			return 1;
