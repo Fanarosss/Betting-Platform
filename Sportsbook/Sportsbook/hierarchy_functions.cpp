@@ -302,29 +302,30 @@ void Market::place(BetAtzis* Interface) {
 //find a node from its id
 
 Node * Home::get_node_byid(string id)								//find every single number and finally the node itself
-{
+{ //following the same block 5 times. Decided not to work in a big for loop since the nodes are just 5.
+	//also decided to work with 5 converters (stringstreams) and not just one(because of .clear())
 	string node_id = id, node_id2 = id, node_id3 = id, node_id4 = id, node_id5 = id;
 	size_t pos, pos2;
-	int digit_node_id;
+	int digit_node_id; //extracting one by one the numbers from full id
 	Node * ptr;
 
 	pos = node_id.find(".");										//first dot
-	node_id.erase(node_id.begin() + pos, node_id.end());
-	stringstream converter(node_id);
+	node_id.erase(node_id.begin() + pos, node_id.end()); //deleting all content from the node i want to end.
+	stringstream converter(node_id); //converting node id frorm string to int digit node id
 	converter >> digit_node_id;
-	ptr = get_next(digit_node_id);
+	ptr = get_next(digit_node_id); //starting from home and going to digit_node_id category
 	converter.clear();
 
 	for (int j = 0; j < 1; j++) {
-		pos2 = node_id2.find(".");
-		node_id2 = node_id2.substr(pos2 + 1);
+		pos2 = node_id2.find("."); //extracting the second node id
+		node_id2 = node_id2.substr(pos2 + 1); //substracting the left part from the "." that was found
 	}
 	pos = node_id2.find(".");										//second dot
 	node_id2.erase(node_id2.begin() + pos, node_id2.end());
 	stringstream converter2;
 	converter2 << node_id2;
 	converter2 >> digit_node_id;
-	ptr = ptr->get_next(digit_node_id);
+	ptr = ptr->get_next(digit_node_id); //going from category to digit node id subcategory
 	converter2.clear();
 
 
@@ -336,7 +337,7 @@ Node * Home::get_node_byid(string id)								//find every single number and fina
 	node_id3.erase(node_id3.begin() + pos, node_id3.end());
 	stringstream converter3(node_id3);
 	converter3 >> digit_node_id;
-	ptr = ptr->get_next(digit_node_id);
+	ptr = ptr->get_next(digit_node_id); //from subcategory to event
 	converter3.clear();
 
 
@@ -348,7 +349,7 @@ Node * Home::get_node_byid(string id)								//find every single number and fina
 	node_id4.erase(node_id4.begin() + pos, node_id4.end());
 	stringstream converter4(node_id4);
 	converter4 >> digit_node_id;
-	ptr = ptr->get_next(digit_node_id);
+	ptr = ptr->get_next(digit_node_id); //from event to market
 	converter4.clear();
 
 
@@ -358,7 +359,7 @@ Node * Home::get_node_byid(string id)								//find every single number and fina
 	}
 	stringstream converter5(node_id5);
 	converter5 >> digit_node_id;
-	ptr = ptr->get_next(digit_node_id);
+	ptr = ptr->get_next(digit_node_id); // from market to selection
 	converter5.clear();
 	return ptr;
 }
@@ -366,21 +367,21 @@ Node * Home::get_node_byid(string id)								//find every single number and fina
 
 //CONVERSIONS
 
-string Category::conversion() {
-	string id = get_full_id();
-	string name = Node::get_name();
+string Category::conversion() { //use this function to take all the parts and combine them together to return the full string that has to be put in the file
+	string id = get_full_id(); //get full id of current node in a string
+	string name = Node::get_name(); //calling superclass function in order to get the name
 	string visibility;
-	if (get_visibility()==1) {
+	if (get_visibility()==1) { //if visibility = 1 the node is hidden. The visibility data is stored in Node.
 		visibility = "[HIDDEN]";
 	}
 	else {
 		visibility.clear();
 	}
-	string node_cat = visibility + id + "." + " " + name;
+	string node_cat = visibility + id + "." + " " + name; //if visibility is empty nothing changes in string node_cat;
 	return node_cat;
 }
 
-string Subcategory::conversion() {
+string Subcategory::conversion() { //same as above with all the other conversion
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;

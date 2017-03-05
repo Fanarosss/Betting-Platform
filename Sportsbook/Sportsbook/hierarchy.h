@@ -11,8 +11,8 @@ class Node {
 	int id;
 	string name;
 	string location;
-	Node* back;
-	bool visibility;
+	Node* back; //pointer to previous node
+	bool visibility; // 0 if not hidden and 1 for hidden
 public:
 	Node(int ID, string NAME);
 	virtual ~Node();
@@ -22,9 +22,9 @@ public:
 	inline void set_name(string NAME) { name = NAME; }
 	inline void get_name(string &NAME) { NAME = name; }
 	inline void print_name() { cout << name; }
-	inline void set_back(Node* NODE) { back = NODE; } 
+	inline void set_back(Node* NODE) { back = NODE; }
 	inline Node* get_back() { return back; }
-	virtual Node* get_next(int NEXT) { return NULL; } 
+	virtual Node* get_next(int NEXT) { return NULL; }
 	virtual string get_full_id() { return NULL; }
 	virtual void set_location(string LOCATION) { location = LOCATION; }
 	virtual void get_location(string &LOCATION) { LOCATION = location; }
@@ -37,10 +37,10 @@ public:
 	virtual void print_profit() {}
 	virtual void print_options(int type) {}
 	virtual int get_vector_size() { return 0; }
-	virtual void set_result(string rslt){}
+	virtual void set_result(string rslt) {}
 	virtual string get_result() { return NULL; }
-	virtual bool get_voided() { return 0; }  //mono gia selection
-	virtual void set_voided(){}	 //mono gia selection
+	virtual bool get_voided() { return 0; }  //only for selections
+	virtual void set_voided() {}	 //only for selecgions
 	virtual bool is_operation_valid(string operation) { return false; }
 	virtual void place(BetAtzis* Interface) { cout << "Cannot place bet in this node. You have to go the market" << endl; }
 	virtual Node* get_selection_ptr(int selection_id) { return NULL; }
@@ -48,7 +48,7 @@ public:
 	virtual string conversion() { return NULL; }
 	string get_name() { return name; }
 	void set_visibility(bool hidden) { visibility = hidden; }
-	void set_visibility() { visibility = !visibility;  } //overloaded function for set_visibility of betatzis
+	void set_visibility() { visibility = !visibility; } //overloaded function for set_visibility of betatzis
 	bool get_visibility() { return visibility; }
 };
 
@@ -77,9 +77,9 @@ public:
 	}
 	void set_voided() { voided = 1; }
 	bool get_voided() { return voided; }
-	string get_full_id() {
+	string get_full_id() { //recursive function going till the begining (home) and adding the node_id to the string of full id
 		Node* node = get_back();
-		string cur_id = node->get_full_id(); //mipos thelei += ???to arxikopoieis se mia timi to auksaneis, kai meta ksana to arxikopoieis
+		string cur_id = node->get_full_id();
 		int id;
 		get_id(id);
 		stringstream sid;
@@ -92,12 +92,12 @@ public:
 };
 
 class Market : public Node {
-	vector<Selection*> Selections;
+	vector<Selection*> Selections; //vector containing all of the selections of market
 public:
 	Market(int ID, string NAME);
 	~Market();
 	void set_location(string LOCATION);
-	Selection* set_selection(string, string,bool);
+	Selection* set_selection(string, string, bool);
 	void print_options(int type);
 	string conversion();
 
@@ -125,7 +125,7 @@ public:
 		}
 		return false;
 	}
-	string get_full_id() {
+	string get_full_id() { //recursive function going till the begining (home) and adding the node_id to the string of full id
 		Node* node = get_back();
 		string cur_id = node->get_full_id();
 		int id;
@@ -146,7 +146,7 @@ public:
 
 class Event : public Node {
 	string date_time;
-	vector<Market*> Markets;
+	vector<Market*> Markets; //vector containig all markets of event
 public:
 	Event(int ID, string NAME, string DATE_TIME);
 	~Event();
@@ -183,7 +183,7 @@ public:
 };
 
 class Subcategory : public Node {
-	vector<Event*> Events;
+	vector<Event*> Events; //vector containing all of the events of subcategory
 public:
 	Subcategory(int ID, string NAME);
 	~Subcategory();
@@ -236,7 +236,7 @@ public:
 };
 
 class Home : public Node {
-	vector<Category*> Categories;
+	vector<Category*> Categories; //vector containing all categories
 public:
 	Home();
 	~Home();
