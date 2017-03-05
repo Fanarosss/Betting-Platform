@@ -693,6 +693,26 @@ void BetAtzis::set_visibility(int option) {
 bool BetAtzis::get_visibility(int option) {
 	return (node->get_next(option))->get_visibility();
 }
+
+void BetAtzis::delete_node(string full_id) {
+	bool first_found = false;
+	int i = 0;
+	while (i<nodes.size()) {
+		string id = nodes[i]->get_full_id();
+		size_t find = id.find(full_id);
+		if (find != std::string::npos) {
+			nodes.erase(nodes.begin() + i);
+			first_found = true;
+		}
+		else {
+			i++;
+			if (first_found == true) {
+				break;
+			}
+		}
+	}
+}
+
 /*void BetAtzis::set_results(string node_id) { //for betatzis
 	for (int i = 0; i < bets.size(); i++) {
 		if (bets[i]->get_nodeid() == node_id) {
