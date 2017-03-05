@@ -74,8 +74,13 @@ public:
 	}
 
 	void set_level(int lvl) {
-		Current_lvl++;
-		node = node->get_next(lvl);
+		if (Current_lvl == 4) {
+			cout << "You cannot enter the selections. You can only place your bets." << endl;
+		}
+		else {
+			Current_lvl++;
+			node = node->get_next(lvl);
+		}
 	}
 
 	void return_home() {
