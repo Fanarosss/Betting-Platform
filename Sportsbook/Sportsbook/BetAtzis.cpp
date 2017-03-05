@@ -564,11 +564,8 @@ void BetAtzis::set_bet(string node_id, double stake, int selection_id) {
 	bets.insert(bets.begin(), new bet(bet_id, user_id, node_id, stake, result, user, s_node));
 }
 
-string BetAtzis::get_bet(int bet_id) {
-	string bet = "-";
-	string sbetid, userid, stake, node_id, result;
-	//getting all of those putting them into bet and returning bet;
-	return bet;
+bet * BetAtzis::get_bet(int bet_id) {
+	return bets[bet_id];
 }
 
 //management

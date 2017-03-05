@@ -176,6 +176,5 @@ int main(int argc, char *argv[])
 			Interface->set_level(choice);
 		}
 	} while (flag == true);
-	system("pause");
 	return 0;
 }

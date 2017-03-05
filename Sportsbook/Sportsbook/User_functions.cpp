@@ -212,6 +212,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("P") == 0) || (leitourgia.compare("Place") == 0) || (leitourgia.compare("p") == 0) || (leitourgia.compare("place") == 0)) {
 		(interface.get_node())->place(&interface);
 		interface.write_log("Place", get_username(), " ", "SUCCESS");
+		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
@@ -311,10 +312,19 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
 		//print_lastbets();
-		cout << "20 last bets" << endl;
+		cout << "------------------------------------" << endl;
+		cout << "|           20 last bets           |" << endl;
+		cout << "------------------------------------" << endl;
 		cout << "bet_id|user_id|node_id|stake|result|" << endl;
-		for (int i = 0; i < 20; i++) {
-			cout << interface.get_bet(i);
+		if (interface.get_bets_size() >= 20) {
+			for (int i = 0; i < 20; i++) {
+				cout << (interface.get_bet(i))->conversion() << endl;
+			}
+		}
+		else {
+			for (int i = 0; i < interface.get_bets_size(); i++) {
+				cout << (interface.get_bet(i))->conversion() << endl;
+			}
 		}
 		interface.write_log("Bets", get_username(), "print 20 last bets ", "SUCCESS");
 		return 1;
@@ -513,10 +523,19 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
-		cout << "20 last bets" << endl;
+		cout << "------------------------------------" << endl;
+		cout << "|           20 last bets           |" << endl;
+		cout << "------------------------------------" << endl;
 		cout << "bet_id|user_id|node_id|stake|result|" << endl;
-		for (int i = 0; i < 20; i++) {
-			cout << interface.get_bet(i);
+		if (interface.get_bets_size() >= 20) {
+			for (int i = 0; i < 20; i++) {
+				cout << (interface.get_bet(i))->conversion() << endl;
+			}
+		}
+		else {
+			for (int i = 0; i < interface.get_bets_size(); i++) {
+				cout << (interface.get_bet(i))->conversion() << endl;
+			}
 		}
 		interface.write_log("Bets", get_username(), "print 20 last bets ", "SUCCESS");
 		return 1;
@@ -525,7 +544,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		int user;
 		string amount;
 		interface.print_users();
-		cout << endl << "Enter the name of the user you want to give a freebet." << endl;
+		cout << endl << "Enter the id of the user you want to give a freebet." << endl;
 		cin >> user;
 		User * userptr = interface.get_userptr(user);
 		cout << endl << "Enter the amount to be given." << endl;
@@ -777,6 +796,14 @@ void Director::Bets() {
 	else {
 		cout << "Error while loading file. ";
 	}
+}
+
+void Punter::set_freebets(string freebet) {
+	if (freebets != "-") {
+		freebets.append(", ");
+		freebets.clear();
+	}
+	freebets.append(freebet); 
 }
 
 //saving vector to file//

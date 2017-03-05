@@ -103,7 +103,7 @@ public:
 	string get_free_bets() { return freebets; }
 	void set_status(string nstatus) { status = nstatus; }
 	void set_balance(double namount) { balance.set_wallet(namount); }
-	void set_freebets(string freebet) { if (freebets!="-") freebets.append(", "); freebets.append(freebet); }
+	void set_freebets(string freebet);
 	void place(BetAtzis&);
 	void initialize_freebets(string freebet) { freebets.clear(); freebets.append(freebet); }
 	string get_username() {

@@ -148,9 +148,13 @@ public:
 
 	bool write_log(string, string, string, string);
 
-	string get_bet(int bet_id);
+	bet * get_bet(int bet_id);
 
 	User * current_user(string usrnm);
+
+	int get_bets_size() {
+		return bets.size();
+	}
 
 	void print_users();
 	void search_user(string user);
