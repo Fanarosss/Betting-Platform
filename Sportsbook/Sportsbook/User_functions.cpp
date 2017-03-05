@@ -55,8 +55,10 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 								sdivisor = old_profit.substr(klasma + 1);
 								sdividend = old_profit.substr(0, klasma);
 								double dividend, divisor, new_profit;
-								dividend = atof(sdividend.c_str());
-								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								stringstream converter1(sdividend);
+								converter1 >> dividend;
+								stringstream converter2(sdivisor);
+								converter2 >> divisor;
 								new_profit = (dividend / divisor) + 1;		
 								new_profit = round(new_profit * 100) / 100;
 								stringstream convert;
@@ -253,8 +255,10 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 								sdivisor = old_profit.substr(klasma + 1);
 								sdividend = old_profit.substr(0, klasma);
 								double dividend, divisor, new_profit;
-								dividend = atof(sdividend.c_str());
-								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								stringstream converter1(sdividend);
+								converter1 >> dividend;
+								stringstream converter2(sdivisor);
+								converter2 >> divisor;
 								new_profit = (dividend / divisor) + 1;
 								new_profit = round(new_profit * 100) / 100;
 								stringstream convert;
@@ -401,8 +405,10 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 					sdivisor = sprofit.substr(klasma + 1);
 					sdividend = sprofit.substr(0, klasma);
 					double dividend, divisor, new_profit;
-					dividend = atof(sdividend.c_str());
-					divisor = atof(sdivisor.c_str());
+					stringstream converter1(sdividend);
+					converter1 >> dividend;
+					stringstream converter2(sdivisor);
+					converter2 >> divisor;
 					new_profit = (dividend / divisor);
 					profit = new_profit;
 				}
@@ -465,8 +471,10 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 								sdivisor = old_profit.substr(klasma + 1);
 								sdividend = old_profit.substr(0, klasma);
 								double dividend, divisor, new_profit;
-								dividend = atof(sdividend.c_str());
-								divisor = atof(sdivisor.c_str());		//den eimai sigouros oti douleuei se c++98
+								stringstream converter1(sdividend);
+								converter1 >> dividend;
+								stringstream converter2(sdivisor);
+								converter2 >> divisor;
 								new_profit = (dividend / divisor) + 1;
 								new_profit = round(new_profit * 100) / 100;
 								stringstream convert;
