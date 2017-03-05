@@ -646,7 +646,7 @@ void BetAtzis::lock_user(string user) {
 bool BetAtzis::write_log(string origin, string user, string action, string outcome = "SUCCESS") {
 	int log_id = get_num_of_logs();
 	set_num_of_logs(++log_id);
-	fstream logs("audit.log", std::fstream::in | std::fstream::app);
+	fstream logs("audit.log", std::fstream::out | std::fstream::app);
 	if (logs.is_open()) {
 		string log, myline;
 		stringstream converter;
