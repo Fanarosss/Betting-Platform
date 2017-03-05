@@ -6,28 +6,20 @@
 
 class BetAtzis {
 private:
-	long double profits;
-	double promitheia;
-	string type_ofProfits;
-	int Current_lvl;
-	User* user; // deikths ston current user
-	Home* home; // to home den einai node opote to vazw edw ksexorista gia na exw panta prosvasi xoris pollapla back//
-	Node* node;
-	vector <User*> users;
-	vector <Node*> nodes;
-	vector <bet*> bets;
-	int num_of_logs;
+	long double profits;		// total profits from bets
+	double promitheia;			// commission is 0.05
+	string type_ofProfits;		// "Klasmatika" or "Dekadika"
+	int Current_lvl;			// lvl=0->home, lvl=1->category, lvl=2->subcategory, etc.
+	User* user;					// pointer to current user
+	Home* home;					// pointer to home page
+	Node* node;					// pointer to current node
+	vector <User*> users;		// vector for registered users
+	vector <Node*> nodes;		// vector for available nodes
+	vector <bet*> bets;			// vector for placed bets
+	int num_of_logs;			// number of logs
 public:
 	BetAtzis();
 	~BetAtzis();
-	void set_num_of_logs(int num) {
-		num_of_logs = num;
-	}
-
-	int get_num_of_logs() {
-		return num_of_logs;
-	}
-
 	void print_location() {
 		node->print_location();
 	}
@@ -55,6 +47,14 @@ public:
 
 	double get_commission() {
 		return promitheia;
+	}
+
+	void set_num_of_logs(int num) {
+		num_of_logs = num;
+	}
+
+	int get_num_of_logs() {
+		return num_of_logs;
 	}
 
 	void set_user(User *usr) {
@@ -102,10 +102,10 @@ public:
 
 	int get_type_of_profits() {
 		if (type_ofProfits == "Klasmatika") {
-			return 0;							//0 gia klasma
+			return 0;							//0 for fraction
 		}
 		else {
-			return 1;							//1 gia dekadiko
+			return 1;							//1 for decimal
 		}
 	}
 
@@ -127,14 +127,12 @@ public:
 		user->place(*this);
 	}
 
-	void print_user_bets(); //ektupwnei ta stoixhmata tou xrhsth
-	void voided(string full_id);  //epistrefei ta xrhmata stous users pou pontarane sthn epilogh pou akurw8hke
-	void settle(string full_id,int option);	  //ka8orizei thn nikhthria epilogh
-	void pay(string full_id, double profit);		  //plhrwnei tous nikhtes
+	void print_user_bets();												//prints user's bets
+	void voided(string full_id);										//returns stake to users
+	void settle(string full_id,int option);								//defines the winning option
+	void pay(string full_id, double profit);							//returns profit to users
 
-	void set_bet(string node_id, double stake,int selection_id);
-
-//	void set_results(string node_id);
+	
 //functions for vector changes
 	void set_new_username(string OLD, string NEW);
 	void set_new_password(string name, string NEW);
@@ -142,25 +140,19 @@ public:
 	bool operation(string, BetAtzis*);
 //vector save
 	bool save();
-
 	void Logs();
-
+//management
 	bool write_log(string, string, string, string);
-
 	bet * get_bet(int bet_id);
-
-	User * current_user(string usrnm);
-
+	void set_bet(string node_id, double stake, int selection_id);
 	int get_bets_size() {
 		return bets.size();
 	}
-
+	User * current_user(string usrnm);
 	void print_users();
 	void search_user(string user);
 	void lock_user(string user);
-
 	void set_visibility(int option);
-
 	bool get_visibility(int option);
 };
 

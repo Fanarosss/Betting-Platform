@@ -2,7 +2,10 @@
 #include "hierarchy.h"
 #include "BetAtzis.h"
 
-using namespace std; //
+using namespace std;
+
+
+//CONSTRUCTORS
 
 Node::Node(int ID, string NAME) {
 	id = ID;
@@ -10,7 +13,7 @@ Node::Node(int ID, string NAME) {
 	//cout<<"A Node has been constructed."<<endl;
 }
 
-Home::Home() :Node(0,"Home"){//auti einai i mia prosgisi opou to home einai kai auto ksexoristi klasi paidi tou node, i alli prosegisi einai to home na einai to betatzis
+Home::Home() :Node(0,"Home"){
 	set_location("/BetAtzis");
 	set_back(NULL);
 	//cout << "Home has been constructed" << endl;
@@ -40,6 +43,9 @@ Selection::Selection(int ID, string NAME, string PROFIT) :Node(ID, NAME) {
 	//cout<<"A Selection has been constructed."<<endl;
 }
 
+
+//DESTRUCTORS
+
 Node::~Node() {
 	//cout<<"A Node will be destroyed."<<endl;
 }
@@ -68,18 +74,21 @@ Selection::~Selection() {
 	//cout<<"A Selection will be destroyed."<<endl;
 }
 
+
+//SET_LOCATION
+
 void Home::set_location(string LOCATION) {
 	Node::set_location(LOCATION);
 }
 
 void Category::set_location(string LOCATION) {
 	string location, name;
-	Node* temp = get_back();
-	temp->get_location(location);
+	Node* temp = get_back();					//pointer to previous node
+	temp->get_location(location);				//take the location until the previous node
 	location.append("/");
 	get_name(name);
-	location.append(name);
-	Node::set_location(location);
+	location.append(name);						//add to the location the name of the current location
+	Node::set_location(location);				//set the new current location
 }
 
 void Subcategory::set_location(string LOCATION) {
@@ -123,48 +132,52 @@ void Selection::set_location(string LOCATION) {
 }
 
 
+//INITIALIZATION OF VECTORS INSIDE NODES
 
 Category* Home::set_category(string NAME) {
 	Category * ctg_ptr;
-	ctg_ptr = new Category(Categories.size()+1,NAME); //Categories.size = ID
-	Categories.push_back(ctg_ptr);
+	ctg_ptr = new Category(Categories.size()+1,NAME);	//Categories.size + 1 = ID
+	Categories.push_back(ctg_ptr);						//add the new category to home's vector
 	return ctg_ptr;
 }
 
 Subcategory* Category::set_subcategory(string NAME) {
 	Subcategory * sctg_ptr;
-	sctg_ptr = new Subcategory(Subcategories.size()+1, NAME); //vector.size = ID
+	sctg_ptr = new Subcategory(Subcategories.size()+1, NAME); 
 	Subcategories.push_back(sctg_ptr);
 	return sctg_ptr;
 }
 
 Event* Subcategory::set_event(string NAME,string DATE_TIME) {
 	Event * event_ptr;
-	event_ptr = new Event(Events.size()+1, NAME, DATE_TIME); //vector.size = ID
+	event_ptr = new Event(Events.size()+1, NAME, DATE_TIME); 
 	Events.push_back(event_ptr);
 	return event_ptr;
 }
 
 Market* Event::set_market(string NAME) {
 	Market * mrk_ptr;
-	mrk_ptr = new Market(Markets.size()+1, NAME); //vector.size = ID
+	mrk_ptr = new Market(Markets.size()+1, NAME); 
 	Markets.push_back(mrk_ptr);
 	return mrk_ptr;
 }
 
 Selection* Market::set_selection(string NAME,string profit, bool voided) {
 	Selection * sl_ptr;
-	sl_ptr = new Selection(Selections.size()+1, NAME, profit); //vector.size = ID
+	sl_ptr = new Selection(Selections.size()+1, NAME, profit);
 	Selections.push_back(sl_ptr);
 	if (voided) sl_ptr->set_voided();
 	return sl_ptr;
 }
 
+
+//PRINT_OPTIONS
+
 void Home::print_options(int type) {
 	for (int i = 0; i < Categories.size(); i++) { 
-		bool hidden = Categories[i]->get_visibility();
-		if (hidden == 1) {
-			if (type != 1) {
+		bool hidden = Categories[i]->get_visibility();			//flag to see if the node is hidden
+		if (hidden == 1) {										//if it is then don't show this option to punter
+			if (type != 1) {									//trader and director can see it as hidden
 				cout << "[Hidden]";
 				Categories[i]->print_id();
 				cout << ". ";
@@ -172,7 +185,7 @@ void Home::print_options(int type) {
 				cout << endl;
 			}
 		}
-		else {
+		else {													//if it is not show to everyone
 			Categories[i]->print_id();
 			cout << ". ";
 			Categories[i]->print_name();
@@ -256,8 +269,8 @@ void Market::print_options(int type) {
 				cout << ". ";
 				Selections[i]->print_name();
 				cout << " #";
-				Selections[i]->print_profit();					//se periptwsh pou exei akyrw8ei h epilogh
-				if (Selections[i]->get_voided() == 1) {
+				Selections[i]->print_profit();					
+				if (Selections[i]->get_voided() == 1) {			//if selection is voided print it
 					cout << " (VOIDED)";
 				}
 				cout << endl;
@@ -277,19 +290,25 @@ void Market::print_options(int type) {
 	}
 }
 
+
+//PLACE (function for punters to place bets)
+
 void Market::place(BetAtzis* Interface) {
 	User* user = Interface->get_user();
 	user->place(*Interface);
 }
 
-Node * Home::get_node_byid(string id)
+
+//find a node from its id
+
+Node * Home::get_node_byid(string id)								//find every single number and finally the node itself
 {
 	string node_id = id, node_id2 = id, node_id3 = id, node_id4 = id, node_id5 = id;
 	size_t pos, pos2;
 	int digit_node_id;
 	Node * ptr;
 
-	pos = node_id.find(".");
+	pos = node_id.find(".");										//first dot
 	node_id.erase(node_id.begin() + pos, node_id.end());
 	stringstream converter(node_id);
 	converter >> digit_node_id;
@@ -300,7 +319,7 @@ Node * Home::get_node_byid(string id)
 		pos2 = node_id2.find(".");
 		node_id2 = node_id2.substr(pos2 + 1);
 	}
-	pos = node_id2.find(".");
+	pos = node_id2.find(".");										//second dot
 	node_id2.erase(node_id2.begin() + pos, node_id2.end());
 	stringstream converter2;
 	converter2 << node_id2;
@@ -313,7 +332,7 @@ Node * Home::get_node_byid(string id)
 		pos2 = node_id3.find(".");
 		node_id3 = node_id3.substr(pos2 + 1);
 	}
-	pos = node_id3.find(".");
+	pos = node_id3.find(".");										//third dot
 	node_id3.erase(node_id3.begin() + pos, node_id3.end());
 	stringstream converter3(node_id3);
 	converter3 >> digit_node_id;
@@ -325,7 +344,7 @@ Node * Home::get_node_byid(string id)
 		pos2 = node_id4.find(".");
 		node_id4 = node_id4.substr(pos2 + 1);
 	}
-	pos = node_id4.find(".");
+	pos = node_id4.find(".");										//fourth dot
 	node_id4.erase(node_id4.begin() + pos, node_id4.end());
 	stringstream converter4(node_id4);
 	converter4 >> digit_node_id;
@@ -343,6 +362,9 @@ Node * Home::get_node_byid(string id)
 	converter5.clear();
 	return ptr;
 }
+
+
+//CONVERSIONS
 
 string Category::conversion() {
 	string id = get_full_id();
