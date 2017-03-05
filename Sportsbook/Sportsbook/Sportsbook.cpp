@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 			cin >> fullname;
 			cout << endl;
 			cout << "Registration succesfull" << endl;
+			cin.get();
 			string last_appuser;
 			//get last line
 			file.open("users.csv", std::fstream::in);

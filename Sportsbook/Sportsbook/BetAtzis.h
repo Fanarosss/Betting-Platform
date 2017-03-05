@@ -121,23 +121,7 @@ public:
 		return nodes[option]->get_full_id();
 	}
 
-	void delete_node(string full_id) {
-		bool first_found = false;
-		int i = 0;
-		while (i<nodes.size()){
-			string id = nodes[i]->get_full_id();
-			size_t find = id.find(full_id);
-			if (find != std::string::npos) {
-				nodes.erase(nodes.begin() + i);
-				first_found = true;
-			}else{
-				i++;
-				if (first_found == true) {
-					break;
-				}
-			}
-		}
-	}
+	void delete_node(string full_id);
 
 	void place() {
 		user->place(*this);
