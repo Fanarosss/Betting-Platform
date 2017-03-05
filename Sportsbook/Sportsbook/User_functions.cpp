@@ -6,6 +6,12 @@
 
 using namespace std;
 
+
+//OPERATIONS//
+
+
+//GUEST OPERATIONS//
+
 bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H")==0)||(leitourgia.compare("Home")==0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
@@ -19,7 +25,7 @@ bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		interface.write_log("Exit", "Guest", "Exiting the program ", "SUCCESS");
 		cout << "Exiting the program..." << endl;
-		return 0; //eksodos apo to sistima
+		return 0; 
 	}
 	else {
 		interface.write_log("Operation", "Guest", "WRONG INPUT", "ERROR");
@@ -29,6 +35,10 @@ bool Guest::Operation(string leitourgia, BetAtzis& interface) {
 }
 
 
+
+//PUNTER OPERATIONS//
+
+
 bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
@@ -36,7 +46,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
-		Node* node = interface.get_home();
+		Node* node = interface.get_home();										//start from home and go to every selection
 		for (int a = 1; a <= node->get_vector_size(); a++) {
 			node = node->get_next(a);
 			for (int b = 1; b <= node->get_vector_size(); b++) {
@@ -49,34 +59,34 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 							node = node->get_next(e);
 							string old_profit;
 							node->get_profit(old_profit);
-							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+							if (interface.get_type_of_profits() == 0) {			//if profits are fractions, toggle them to decimal
 								size_t klasma = old_profit.find("/");
-								string sdividend, sdivisor, snew_profit;
+								string sdividend, sdivisor, snew_profit;		//find dividend and divisor
 								sdivisor = old_profit.substr(klasma + 1);
 								sdividend = old_profit.substr(0, klasma);
-								double dividend, divisor, new_profit;
+								double dividend, divisor, new_profit;			//make them double
 								stringstream converter1(sdividend);
 								converter1 >> dividend;
 								stringstream converter2(sdivisor);
 								converter2 >> divisor;
-								new_profit = (dividend / divisor) + 1;		
-								new_profit = round(new_profit * 100) / 100;
-								stringstream convert;
+								new_profit = (dividend / divisor) + 1;			//divide them and add one
+								new_profit = round(new_profit * 100) / 100;		//get only 2 decimal digits
+								stringstream convert;							//make them back to string
 								convert << new_profit;
 								snew_profit = convert.str();
-								node->set_profit(snew_profit);
-							}													//alliws apo decadiko se klasma
-							else {
+								node->set_profit(snew_profit);					//set new profit
+							}													
+							else {												//if profits are decimals, toggle them to fractions
 								double decimal;
-								stringstream converter(old_profit.c_str());
+								stringstream converter(old_profit.c_str());		//make them double
 								converter >> decimal;
-								decimal--;
-								decimal = decimal * 100;
-								double divisor = 100;
+								decimal--;										//substract one
+								decimal = decimal * 100;						//myltiply by 100 to get the 2 decimal digits up front
+								double divisor = 100;							//divide by 100
 								bool there_is_a_divisor = false;
 								do {
 									there_is_a_divisor = false;
-									for (int i = 2; i <= decimal; i++) {
+									for (int i = 2; i <= decimal; i++) {		//try to simplify the fraction
 										if ((fmod(decimal,i)==0)&&(fmod(divisor,i)==0)) {
 											decimal = decimal / i;
 											divisor = divisor / i;
@@ -85,14 +95,14 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 										}
 									}
 								} while (there_is_a_divisor == true);
-								string sdividend, sdivisor, snew_profit;
+								string sdividend, sdivisor, snew_profit;		//make divisor and dividend back to strings
 								stringstream con1, con2;
 								con1 << decimal;
 								sdividend = con1.str();
 								con2 << divisor;
 								sdivisor = con2.str();
 								snew_profit = sdividend + "/" + sdivisor;
-								node->set_profit(snew_profit);
+								node->set_profit(snew_profit);					//set new profit
 							}
 							node = node->get_back();
 						}
@@ -134,7 +144,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		interface.write_log("Account", get_username(), " ", "SUCCESS");
 		if ((option == "R") || (option == "Rename")) {
 			cout << endl << "Please enter your new username:" << endl;
-			string nusername;	//new username
+			string nusername;							//new username
 			string ousername = user->get_username();	//old username
 			string appuser;
 			bool flag;
@@ -143,14 +153,14 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 				flag = true;
 				fstream file("users.csv", std::fstream::in);
 				if ((file.is_open())&&(flag==true)) {
-					getline(file, appuser); //this takes the line and put it to string appuser
+					getline(file, appuser);							//this takes the line and put it to string appuser
 					while (!appuser.empty() && !file.eof()) {
 						size_t pos1, pos2;
 						pos1 = appuser.find("|");
 						appuser = appuser.substr(pos1 + 1);
 						pos2 = appuser.find("|");
 						appuser = appuser.erase(pos2);
-						if ((appuser.compare(nusername) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
+						if ((appuser.compare(nusername) == 0)) {	//this takes the line and check if there is a word in there mathcing to the given username
 							cout << "This username is already taken!" << endl;
 							flag = false;
 							file.close();
@@ -167,7 +177,6 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 					}
 				}
 			} while (flag == false);
-			//eisagw to kainourgio username sto arxeio
 		}
 		else if ((option == "P") || (option == "Password")) {
 			string name = user->get_username();
@@ -181,7 +190,6 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 				interface.save();
 				cout << "Your password has changed successfully!" << endl;
 				interface.write_log("Password", get_username(), "Changed ", "SUCCESS");
-				//eisagw ton kainoyrgio kwdiko sto arxeio
 			}
 			else {
 				interface.write_log("Password", get_username(), "no match ", "FAILED");
@@ -205,7 +213,6 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 			double nbalance = user->get_balance();
 			cout << "Your new balance is: " << nbalance << endl;
 			interface.write_log("Deposit", get_username(), "Changed ", "SUCCESS");
-			//eisagw to upoloipo sto arxeio
 		}
 		else {
 			interface.write_log("Deposit", get_username(), "WRONG INPUT ", "ERROR");
@@ -221,7 +228,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		interface.write_log("Exit", get_username(), "Exiting the program ", "SUCCESS");
-		return 0; //eksodos apo to sistima
+		return 0;
 	}
 	else {
 		interface.write_log("Operation", get_username(), "WRONG INPUT ", "FAILED");
@@ -229,6 +236,10 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 }
+
+
+
+//TRADER OPERATIONS//
 	
 
 bool Trader::Operation(string leitourgia, BetAtzis& interface) {
@@ -251,7 +262,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 							node = node->get_next(e);
 							string old_profit;
 							node->get_profit(old_profit);
-							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+							if (interface.get_type_of_profits() == 0) {			
 								size_t klasma = old_profit.find("/");
 								string sdividend, sdivisor, snew_profit;
 								sdivisor = old_profit.substr(klasma + 1);
@@ -267,7 +278,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 								convert << new_profit;
 								snew_profit = convert.str();
 								node->set_profit(snew_profit);
-							}													//alliws apo decadiko se klasma
+							}												
 							else {
 								double decimal;
 								stringstream converter(old_profit.c_str());
@@ -319,7 +330,6 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		return 1;
 	}
 	else if ((leitourgia.compare("B") == 0) || (leitourgia.compare("Bets") == 0) || (leitourgia.compare("b") == 0) || (leitourgia.compare("bets") == 0)) {
-		//print_lastbets();
 		cout << "------------------------------------" << endl;
 		cout << "|           20 last bets           |" << endl;
 		cout << "------------------------------------" << endl;
@@ -347,7 +357,6 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		cout << endl << "Enter the amount to be given." << endl;
 		cin >> amount;
 		userptr->set_freebets(amount);
-		//eisagw sto arxeio to freebet;
 		interface.write_log("Freebets", get_username(), " ", "SUCCESS");
 		interface.save();
 		return 1;
@@ -363,7 +372,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 				if (node->get_voided() == 0) {
 					node->set_voided();
 					interface.write_log("Void", get_username(), " ", "SUCCESS");
-					cout << "Option No" << option << " was cancelled succesfully." << endl;	//mhpws 8elei apo8hkeush sto arxeio hierarchy.dat;;
+					cout << "Option No" << option << " was cancelled succesfully." << endl;	
 					string full_id = node->get_full_id();
 					interface.voided(full_id);
 					interface.save();
@@ -399,7 +408,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 					return 1;
 				}
 				string full_id = node->get_full_id();
-				interface.settle(full_id, option);		//8etw W kai L stis epiloges
+				interface.settle(full_id, option);		//settle as winning the option and every other option losing
 				string sprofit;
 				node->get_profit(sprofit);
 				double profit;
@@ -420,7 +429,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 					stringstream converter(sprofit);
 					converter >> profit;
 				}
-				interface.pay(full_id, profit);				//plhrwnw tous nikhtes
+				interface.pay(full_id, profit);				//pay back the winers
 				interface.save();
 				interface.write_log("Settle", get_username(), "Settled ", "SUCCESS");
 				cout << "Option No" << option << " was settled succesfully." << endl;
@@ -441,13 +450,19 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		interface.write_log("Exit", get_username(), " ", "SUCCESS");
-		return 0; //eksodos apo to sistima
+		return 0;
 	}
 	else {
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}
 }
+
+
+
+
+//DIRECTOR OPERATIONS//
+
 
 bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
@@ -469,7 +484,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 							node = node->get_next(e);
 							string old_profit;
 							node->get_profit(old_profit);
-							if (interface.get_type_of_profits() == 0) {			//an einai klasma metatrepw se dekadiko
+							if (interface.get_type_of_profits() == 0) {			
 								size_t klasma = old_profit.find("/");
 								string sdividend, sdivisor, snew_profit;
 								sdivisor = old_profit.substr(klasma + 1);
@@ -485,7 +500,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 								convert << new_profit;
 								snew_profit = convert.str();
 								node->set_profit(snew_profit);
-							}													//alliws apo decadiko se klasma
+							}													
 							else {
 								double decimal;
 								stringstream converter(old_profit.c_str());
@@ -564,7 +579,6 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		cout << endl << "Enter the amount to be given." << endl;
 		cin >> amount;
 		userptr->set_freebets(amount);
-		//eisagw sto arxeio to freebet;
 		interface.save();
 		interface.write_log("Freebets", get_username(), " ", "SUCCESS");
 		return 1;
@@ -585,7 +599,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
 		interface.write_log("Exit", get_username(), "Exiting the program ", "SUCCESS");
-		return 0; //eksodos apo to sistima
+		return 0;
 	}
 	else if ((leitourgia.compare("L") == 0) || (leitourgia.compare("Logs") == 0) || (leitourgia.compare("l") == 0) || (leitourgia.compare("logs") == 0)) {
 		cout << "_______________________________" << endl;
@@ -736,6 +750,12 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	}
 }
 
+
+
+
+//PRINT OPERATIONS//
+
+
 void Guest::Print_Operations(BetAtzis& interface) {
 	cout << "Press the ID of the node you want to enter." << endl;
 	cout << "H(Home), to return to home screen." << endl;
@@ -785,33 +805,9 @@ void Director::Print_Operations(BetAtzis& interface) {
 	cout << "D(Delete), to delete a node." << endl;
 }
 
-void Trader::Bets() {
-	fstream myfile("bets.csv" ,std::fstream::app);
-	string bet;
-	if (myfile.is_open()) {
-		getline(myfile, bet);
-		while (!myfile.eof() && bet.empty()) {
-			//cout << ta 20 teleutaia bets
-		}
-	}
-	else {
-		cout << "Error while loading file. ";
-	}
-}
 
-void Director::Bets() {
-	fstream myfile("bets.csv", std::fstream::app);
-	string bet;
-	if (myfile.is_open()) {
-		getline(myfile, bet);
-		while (!myfile.eof() && bet.empty()) {
-			//cout << ta 20 teleutaia bets
-		}
-	}
-	else {
-		cout << "Error while loading file. ";
-	}
-}
+
+
 
 void Punter::set_freebets(string freebet) {
 	if ((freebets != "-") || (!freebets.empty())) {
@@ -823,7 +819,8 @@ void Punter::set_freebets(string freebet) {
 	freebets.append(freebet); 
 }
 
-//saving vector to file//
+
+//SAVING VECTOR TO FILE//
 
 string Punter::conversion() {
 	string sid, sbalance, appuser;
@@ -866,18 +863,17 @@ bet::bet(int betid, int userid, string nodeid, double stk, string rslt, User * U
 	node = NODE;
 }
 
-void Punter::place(BetAtzis& Interface) {
+void Punter::place(BetAtzis& Interface) {														//place a bet
 	string operation;
-	//User* user = Interface->get_user();
 	cout << "Balance: " << get_balance() << endl << "Select option to place the bet. " << endl;
 	cin >> operation;
 	bool validation = (Interface.get_node())->is_operation_valid(operation);
 	if (validation == true) {
-		if (operation == "Cancel") {
+		if (operation == "Cancel") {															//if cancel return
 			return;
 		}
 		else {
-			cout << "betting on node: " << (Interface.get_node())->get_full_id() << "." << operation << endl;
+			cout << "betting on node: " << (Interface.get_node())->get_full_id() << "." << operation << endl;			//show the node id
 			string freebets;
 			freebets = get_free_bets();
 			vector<string> frbts;
@@ -885,15 +881,15 @@ void Punter::place(BetAtzis& Interface) {
 			size_t pos;
 			char c = 'a';
 			cout << "Your free bets: " << endl;
-			if (freebets != "-"){
+			if (freebets != "-"){																//if freebets are not empty
 				while (!freebets.empty()) {
 					temp = freebets;
 					pos = temp.find(",");
 					if (pos != -1) {
 						temp.erase(temp.begin() + pos, temp.end());
-						cout << c << ". " << temp << endl;
-						frbts.push_back(temp);
-						c++;
+						cout << c << ". " << temp << endl;										//show letter for option and amount of freebet
+						frbts.push_back(temp);													//add to vector
+						c++;																	//go to the next letter
 						freebets = freebets.substr(pos + 1);
 					}
 					else {
@@ -905,7 +901,7 @@ void Punter::place(BetAtzis& Interface) {
 					
 				}
 			}
-			else {
+			else {																				//if freebets are empty
 				cout << "No freebets available." << endl;
 			}
 			cout << "Enter the amount, or choose the coupon you wish(if there is available)." << endl;
@@ -914,7 +910,7 @@ void Punter::place(BetAtzis& Interface) {
 			int selection;
 			stringstream converter2(operation);
 			converter2 >> selection;
-			if (!(isdigit(sbounty[0]) == 0)) {
+			if (!(isdigit(sbounty[0]) == 0)) {													//if you type a number go to balance
 				int bounty;
 				stringstream converter(sbounty);
 				converter >> bounty;
@@ -928,22 +924,19 @@ void Punter::place(BetAtzis& Interface) {
 				}
 				if (bounty > get_balance()) {
 					cout << "Please enter a smaller bet. Your balance is smaller than the bet you played. " << endl;
-					//flag smth
 				}
 				else {
 					set_balance(-bounty);
 					string node_id;
-					//it recursively needs to go back to all nodes and get their id;
 					node_id = (Interface.get_node())->get_next(selection)->get_full_id();
-					//des to mia re kosta giati exeis ftiaksei mia get_id sto node inline void pou den katalavenw giati litourgei etsi
 					Interface.set_bet(node_id, bounty, selection);
 					Interface.save();
 					cout << "Bet placed. "<< bounty << " credits were removed from your wallet." << endl;
 				}
 			}
-			else {
+			else {																				//if you type a letter
 				int coupon = sbounty[0] - '0';
-				coupon -= 48; // converting from ascii -48 .
+				coupon -= 48;																	// converting from ascii -48 .
 				int selection;
 				stringstream converter(operation);
 				converter >> selection;
@@ -952,8 +945,8 @@ void Punter::place(BetAtzis& Interface) {
 				int bounty;
 				converter2 >> bounty;
 				string node_id = (Interface.get_node())->get_next(selection)->get_full_id();
-				Interface.set_bet(node_id, bounty, selection);
-				frbts.erase(frbts.begin() + coupon - 1);
+				Interface.set_bet(node_id, bounty, selection);									//set bet to node
+				frbts.erase(frbts.begin() + coupon - 1);										//delete freebet
 				freebets.clear();
 				if (frbts.size() > 1) {
 					for (int i = 0; i < frbts.size() - 1; i++) {

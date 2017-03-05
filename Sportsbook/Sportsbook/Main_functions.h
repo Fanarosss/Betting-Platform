@@ -24,7 +24,7 @@ string get_fullname(string);
 
 string get_password(string);
 
-//reading from bets.csv//
+//reading from bets.csv
 
 void print_lastbets();
 

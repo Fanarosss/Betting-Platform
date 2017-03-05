@@ -14,7 +14,6 @@ class User {
 	string fullname;
 	string password;
 	int type;
-	//vector <bet*> bets;
 public:
 	User (int id = 0,string Username = "-", string Fullname = "-", string Password = "-" , int Type = 0) {
 		user_id = id;
@@ -27,7 +26,6 @@ public:
 	void print_fullname() { cout << fullname; }
 	void print_password() { cout << password; }
 	int get_id() { return user_id; }
-	//void set_bet(bet &bt) { bets.push_back(&bt); }
 	string get_username() { return username; }
 	string get_fullname() { return fullname; }
 	string get_password() { return password; }
@@ -49,7 +47,7 @@ public:
 	virtual void Bets(){}
 	virtual void Print_Operations(BetAtzis&){}
 	virtual string conversion() { return NULL; }
-	virtual void place(BetAtzis&){}  //mono ston punter
+	virtual void place(BetAtzis&){}
 };
 
 class Guest : public User{ 
@@ -58,7 +56,6 @@ public:
 		std::cout << "Welcome!" << endl;
 	}
 	bool Operation(string, BetAtzis&);
-	void Bets() {}
 	void Print_Operations(BetAtzis&);
 };
 
@@ -150,9 +147,6 @@ public:
 	void set_user(User *usr) {
 		user = usr;
 		user_id = usr->get_id();
-	}
-	void set_user_byid(int id) {
-		//search in vector
 	}
 	User * get_user() {
 		return user;
