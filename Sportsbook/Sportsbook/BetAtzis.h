@@ -33,7 +33,8 @@ public:
 	}
 
 	void print_options() {
-		node->print_options();
+		int type = user->get_type();
+		node->print_options(type);
 	}
 
 	void print_operations(BetAtzis* interface) {

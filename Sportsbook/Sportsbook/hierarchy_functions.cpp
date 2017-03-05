@@ -160,54 +160,120 @@ Selection* Market::set_selection(string NAME,string profit, bool voided) {
 	return sl_ptr;
 }
 
-void Home::print_options() {
-	for (int i = 0; i < Categories.size(); i++) { // kosta evgala to <= giati ama einai =0 tote tha mpei sto for eno den exei kanena stoixeio, an =1 tha mpei gia 2 ofres ena exei mono 1 stoixeio kai paei legontas
-		Categories[i]->print_id();
-		cout << ". ";
-		Categories[i]->print_name();
-		cout << endl;
-	}
-}
-
-void Category::print_options() {
-	for (int i = 0; i < Subcategories.size(); i++) {
-		Subcategories[i]->print_id();
-		cout << ". ";
-		Subcategories[i]->print_name();
-		cout << endl;
-	}
-}
-
-void Subcategory::print_options() {
-	for (int i = 0; i < Events.size(); i++) {
-		Events[i]->print_id();
-		cout << ". ";
-		Events[i]->print_name();
-		Events[i]->print_date_time();
-		cout << endl;
-	}
-}
-
-void Event::print_options() {
-	for (int i = 0; i < Markets.size(); i++) {
-		Markets[i]->print_id();
-		cout << ". ";
-		Markets[i]->print_name();
-		cout << endl;
-	}
-}
-
-void Market::print_options() {
-	for (int i = 0; i < Selections.size(); i++) {
-		Selections[i]->print_id();
-		cout << ". ";
-		Selections[i]->print_name();
-		cout << " #";
-		Selections[i]->print_profit();					//se periptwsh pou exei akyrw8ei h epilogh
-		if (Selections[i]->get_voided() == 1) {
-			cout << " (VOIDED)";
+void Home::print_options(int type) {
+	for (int i = 0; i < Categories.size(); i++) { 
+		bool hidden = Categories[i]->get_visibility();
+		if (hidden == 1) {
+			if (type != 1) {
+				cout << "[Hidden]";
+				Categories[i]->print_id();
+				cout << ". ";
+				Categories[i]->print_name();
+				cout << endl;
+			}
 		}
-		cout << endl;
+		else {
+			Categories[i]->print_id();
+			cout << ". ";
+			Categories[i]->print_name();
+			cout << endl;
+		}
+	}
+}
+
+void Category::print_options(int type) {
+	for (int i = 0; i < Subcategories.size(); i++) {
+		bool hidden = Subcategories[i]->get_visibility();
+		if (hidden == 1) {
+			if (type != 1) {
+				cout << "[Hidden]";
+				Subcategories[i]->print_id();
+				cout << ". ";
+				Subcategories[i]->print_name();
+				cout << endl;
+			}
+		}
+		else {
+			Subcategories[i]->print_id();
+			cout << ". ";
+			Subcategories[i]->print_name();
+			cout << endl;
+		}
+	}
+}
+
+void Subcategory::print_options(int type) {
+	for (int i = 0; i < Events.size(); i++) {
+		bool hidden = Events[i]->get_visibility();
+		if (hidden == 1) {
+			if (type != 1) {
+				cout << "[Hidden]";
+				Events[i]->print_id();
+				cout << ". ";
+				Events[i]->print_name();
+				Events[i]->print_date_time();
+				cout << endl;
+			}
+		}
+		else {
+			Events[i]->print_id();
+			cout << ". ";
+			Events[i]->print_name();
+			Events[i]->print_date_time();
+			cout << endl;
+		}
+	}
+}
+
+void Event::print_options(int type) {
+	for (int i = 0; i < Markets.size(); i++) {
+		bool hidden = Markets[i]->get_visibility();
+		if (hidden == 1) {
+			if (type != 1) {
+				cout << "[Hidden]";
+				Markets[i]->print_id();
+				cout << ". ";
+				Markets[i]->print_name();
+				cout << endl;
+			}
+		}
+		else {
+			Markets[i]->print_id();
+			cout << ". ";
+			Markets[i]->print_name();
+			cout << endl;
+		}
+	}
+}
+
+void Market::print_options(int type) {
+	for (int i = 0; i < Selections.size(); i++) {
+		bool hidden = Selections[i]->get_visibility();
+		if (hidden == 1) {
+			if (type != 1) {
+				cout << "[Hidden]";
+				Selections[i]->print_id();
+				cout << ". ";
+				Selections[i]->print_name();
+				cout << " #";
+				Selections[i]->print_profit();					//se periptwsh pou exei akyrw8ei h epilogh
+				if (Selections[i]->get_voided() == 1) {
+					cout << " (VOIDED)";
+				}
+				cout << endl;
+			}
+		}
+		else {
+			Selections[i]->print_id();
+			cout << ". ";
+			Selections[i]->print_name();
+			cout << " #";
+			Selections[i]->print_profit();
+			if (Selections[i]->get_voided() == 1) {
+				cout << " (VOIDED)";
+			}
+			cout << endl;
+		}
 	}
 }
 
@@ -282,7 +348,7 @@ string Category::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;
-	if (get_visibility()) {
+	if (get_visibility()==1) {
 		visibility = "[HIDDEN]";
 	}
 	else {
@@ -296,7 +362,7 @@ string Subcategory::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;
-	if (get_visibility()) {
+	if (get_visibility()==1) {
 		visibility = "[HIDDEN]";
 	}
 	else {
@@ -310,7 +376,7 @@ string Event::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;
-	if (get_visibility()) {
+	if (get_visibility()==1) {
 		visibility = "[HIDDEN]";
 	}
 	else {
@@ -324,7 +390,7 @@ string Market::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;
-	if (get_visibility()) {
+	if (get_visibility()==1) {
 		visibility = "[HIDDEN]";
 	}
 	else {
@@ -338,7 +404,7 @@ string Selection::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
 	string visibility;
-	if (get_visibility()) {
+	if (get_visibility()==1) {
 		visibility = "[HIDDEN]";
 	}
 	else {

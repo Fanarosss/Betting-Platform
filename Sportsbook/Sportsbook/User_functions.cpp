@@ -633,6 +633,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		int option;
 		cin >> option;
 		interface.set_visibility(option);
+		interface.save();
 		interface.write_log("Visibility", get_username(), " ", "SUCCESS");
 		return 1;
 	}

@@ -35,7 +35,7 @@ public:
 	virtual void set_profit(string PROFIT) {}
 	virtual void get_profit(string &PROFIT) {}
 	virtual void print_profit() {}
-	virtual void print_options() {}
+	virtual void print_options(int type) {}
 	virtual int get_vector_size() { return 0; }
 	virtual void set_result(string rslt){}
 	virtual string get_result() { return NULL; }
@@ -98,7 +98,7 @@ public:
 	~Market();
 	void set_location(string LOCATION);
 	Selection* set_selection(string, string,bool);
-	void print_options();
+	void print_options(int type);
 	string conversion();
 
 	Node* get_next(int NEXT) {
@@ -162,7 +162,7 @@ public:
 	void print_date_time() {
 		cout << date_time;
 	};
-	void print_options();
+	void print_options(int type);
 	Node* get_next(int NEXT) {
 		return Markets[NEXT - 1];
 	};
@@ -190,7 +190,7 @@ public:
 	void set_location(string LOCATION);
 	Event* set_event(string, string);
 	string conversion();
-	void print_options();
+	void print_options(int type);
 	Node* get_next(int NEXT) {
 		return Events[NEXT - 1];
 	};
@@ -218,7 +218,7 @@ public:
 	void set_location(string LOCATION);
 	Subcategory* set_subcategory(string);
 	string conversion();
-	void print_options();
+	void print_options(int type);
 	Node* get_next(int NEXT) {
 		return Subcategories[NEXT - 1];
 	};
@@ -242,7 +242,7 @@ public:
 	~Home();
 	void set_location(string LOCATION);
 	Category* set_category(string);
-	void print_options();
+	void print_options(int type);
 	Node* get_next(int NEXT) {
 		return Categories[NEXT - 1];
 	}
