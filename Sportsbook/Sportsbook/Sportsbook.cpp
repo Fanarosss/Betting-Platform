@@ -76,8 +76,16 @@ int main(int argc, char *argv[])
 			else {
 				id = 1;
 			}
-			string sid = to_string(id);
-			string stype = to_string(1);
+			stringstream converter;
+			converter.clear();
+			converter << id;
+			string sid;
+			converter >> sid;
+			string stype;
+			stringstream converter2;
+			converter2.clear();
+			converter2 << 1;
+			converter2 >> stype;
 			file.close();
 			file.open("users.csv", std::fstream::out | std::fstream::app);
 			string new_user;
