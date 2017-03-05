@@ -11,22 +11,20 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	//for starters we are not going to use the preprocessing #ifdef, but remain in a known environment of argv,argc
 	string username, password, appuser;
 	string parameter;
-	if (argv[1] != NULL) {
+	if (argv[1] != NULL) { //checking for -R
 		parameter = argv[1];
 	}
 	bool registration_flag = true;
-	// Eggrafi part
-	// #ifdef -R    // preproccesing compilation of registration part
+	// Registration part
 	if (parameter == "-R") {
 		cout << "<username> ";
 		cin >> username;
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
-			getline(file, appuser); //this takes the line and put it to string appuser
-			while (!appuser.empty() && !file.eof()) {
+			getline(file, appuser); 
+			while (!appuser.empty() && !file.eof()) { //searching for username in the file
 				size_t pos1, pos2;
 				pos1 = appuser.find("|");
 				appuser = appuser.substr(pos1 + 1);
@@ -35,7 +33,7 @@ int main(int argc, char *argv[])
 				if ((appuser.compare(username) == 0)) { //this takes the line and check if there is a word in there mathcing to the given username
 					cout << "There is already a register with that username!" << endl;
 					registration_flag = false;
-					file.close(); //to kleinw prin termatisei to programma
+					file.close();
 					return 0;
 				}
 				getline(file, appuser);
@@ -50,45 +48,44 @@ int main(int argc, char *argv[])
 			cout << "Registration succesfull" << endl;
 			cin.get();
 			string last_appuser;
-			//get last line
 			file.open("users.csv", std::fstream::in);
 			do {
 				last_appuser = appuser;
-				getline(file, appuser); //mexri na ftasei stin teleutaia grammi
+				getline(file, appuser); //until it reaches the last line
 			} while (!appuser.empty() && !file.eof());
 			string last_app;
 			if (appuser.empty()) {
-				last_app = last_appuser;
+				last_app = last_appuser; //in case that files has an extra /n with an empty string
 			}
 			else {
 				last_app = appuser;
 			}
 			int id;
-			last_app.erase((last_app.begin() + 1), last_app.end());
-			if (last_app.compare("u") || last_app.compare("U")) {
+			last_app.erase((last_app.begin() + 1), last_app.end()); 
+			if (last_app.compare("u") || last_app.compare("U")) { //if last line is the title user_id|... etc. means that there are no users -> so user_id =1;
 				if (appuser.empty()) {
 					id = get_id(last_appuser);
 				}
 				else {
 					id = get_id(appuser);
 				}
-				id++;
+				id++; //current user id
 			}
 			else {
 				id = 1;
 			}
-			stringstream converter;
+			stringstream converter; //using sstream for conversions from string to int,double and the opposite.
 			converter.clear();
 			converter << id;
 			string sid;
 			converter >> sid;
 			string stype;
-			stringstream converter2;
+			stringstream converter2; //same with above
 			converter2.clear();
 			converter2 << 1;
 			converter2 >> stype;
 			file.close();
-			file.open("users.csv", std::fstream::out | std::fstream::app);
+			file.open("users.csv", std::fstream::out | std::fstream::app); //using fstream::out to write and fstream::app in order to append in the end of file, and NOT to overwrite it.
 			string new_user;
 			new_user = sid + "|" + username + "|" + fullname + "|" + password + "|" + stype + "|" + "-" + "|" + "-" + "|" + "-" + "|";
 			file << endl << new_user;
@@ -100,35 +97,34 @@ int main(int argc, char *argv[])
 		}
 	}
 	// end of registration!
-	// #endif 
-	//Loading hierarchy
 
-	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest" << endl;
-	registration_flag = false; //esto oti o xristis den exei eggrafei akoma
-	string status; //elegxw an o xrhsths einai locked h oxi
+
+	cout << "Welcome to sportsbook" << endl << "Please enter your username and password for signing in. If you don't have an account please press enter, or type guest. " << endl;
+	registration_flag = false; //Considering that the user is not yet registered
+	string status; //checking for the user status
 	User * uptr = NULL;
 	cout << "Username: ";
-	getline(cin, username);
+	getline(cin, username); //using getline to read in case of hitting enter('/n'), and logging in as guest
 	bool guest = false;
 	if ((username != "guest")&&(!username.empty())) {
 		fstream file("users.csv", std::fstream::in);
 		if (file.is_open()) {
 			while (!file.eof() || appuser.empty()) {
 				getline(file, appuser);
-				//here will have to be a line where delete all the useless part of the line, and keeps only the username
-				size_t pos1, pos2;
-				pos1 = appuser.find("|");
-				appuser = appuser.substr(pos1 + 1);
-				pos2 = appuser.find("|");
+				//delete all the useless parts of the line, and keep only the username.
+				size_t pos1, pos2; 
+				pos1 = appuser.find("|"); //returns -1 if it doesn't find "|", find() starts searching from the begining of the string and stops at the first "|" where it returns it's position.
+				appuser = appuser.substr(pos1 + 1); //substract all the left part of the string. using + 1 to substract the "|" too.
+				pos2 = appuser.find("|"); //same;
 				appuser = appuser.erase(pos2);
-				if (appuser.compare(username) == 0) {
+				if (appuser.compare(username) == 0) { //if there is a registration with that username
 					registration_flag = true;
 					status = get_status(username);
 					pos1 = status.find(",");
-					if (pos1!=std::string::npos) {
-						status.erase(status.begin() + pos1, status.end());
+					if (pos1!=std::string::npos) { //npos is used to indicate failure, in our case failure of find. If we didnt use this, there would be a segmentation fault.(undefined behaviour)
+						status.erase(status.begin() + pos1, status.end()); //because here it will try to delete from status.begin() - 1.
 					}
-					break;
+					break; //break the loop as the username was found inside the file. Now the user will have to enter the password.
 				}
 			}
 			if (registration_flag == false) {
@@ -142,7 +138,7 @@ int main(int argc, char *argv[])
 			cout << "Password: ";
 			cin >> password;
 			cout << endl;
-			bool is_password_correct = check_for_password(username, password); //sinartisi pou psaxnei an to password einai to sosto gia to username pou exei dothei
+			bool is_password_correct = check_for_password(username, password); //function that looks if the password that is given is correct
 			if (is_password_correct == true) {
 				cout << "You have been logged in to the system succesfully" << endl;
 			}
@@ -150,12 +146,12 @@ int main(int argc, char *argv[])
 				cout << "Password incorrect. Please try again!" << endl;
 				return 0;
 			}
-		} //an den anoigei o fakelos!!!
+		} 
 		else {
 			cout << "User files are missing. End of program!";
 			return 0;
 		}
-	} //else -> an telika ekane type guest os username!!! --> xreiazetai enchancement na erxetai edo kai an apla pataei enter !!! <--
+	}
 	else {
 		cout << "Logged in as guest" << endl;
 		uptr = new Guest;
@@ -170,18 +166,16 @@ int main(int argc, char *argv[])
 	string operation;
 	do {
 		cout << endl << "Location: ";
-		Interface->print_location(); //ektupwnei thn trexon topo8esia
-		Interface->print_options(); //ektupwnei tous komvous stous opoious mporoume na metavoume
-		Interface->print_operations(Interface); //ektupwnei tis leitourgies tou xrhsth
+		Interface->print_location(); //prints the current location.
+		Interface->print_options(); //prints the node that we can access
+		Interface->print_operations(Interface); //prints the user operations
 		cin >> operation;
 		if ((isdigit(operation[0]) == 0)) {
-			//cout << "Input is character" << endl;
 			flag = Interface->operation(operation, Interface);
 		}
 		else {
-			//cout << "Input is number" << endl;
 			int choice;
-			if (!(istringstream(operation) >> choice)) choice = 0;
+			if (!(istringstream(operation) >> choice)) choice = 0; //converting operation from string to int in order to access the node
 			Interface->set_level(choice);
 		}
 	} while (flag == true);
