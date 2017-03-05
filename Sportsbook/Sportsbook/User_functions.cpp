@@ -211,12 +211,15 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 	}
 	else if ((leitourgia.compare("P") == 0) || (leitourgia.compare("Place") == 0) || (leitourgia.compare("p") == 0) || (leitourgia.compare("place") == 0)) {
 		(interface.get_node())->place(&interface);
+		interface.write_log("Place", get_username(), " ", "SUCCESS");
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
+		interface.write_log("Exit", get_username(), "Exiting the program ", "SUCCESS");
 		return 0; //eksodos apo to sistima
 	}
 	else {
+		interface.write_log("Operation", get_username(), "WRONG INPUT ", "FAILED");
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}
@@ -226,6 +229,7 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
+		interface.write_log("Return Home", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
@@ -296,10 +300,12 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		if (interface.get_type_of_profits() == 0) {
 			cout << "Conversion from fraction to decimal was successful." << endl;
 			interface.set_type_of_profits("Dekadika");
+			interface.write_log("Toggle", get_username(), "Dekadika ", "SUCCESS");
 		}
 		else {
 			cout << "Conversion from decimal to fraction was successful." << endl;
 			interface.set_type_of_profits("Klasmatika");
+			interface.write_log("Toggle", get_username(), "Klasmatika ", "SUCCESS");
 		}
 		return 1;
 	}
@@ -310,6 +316,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		for (int i = 0; i < 20; i++) {
 			cout << interface.get_bet(i);
 		}
+		interface.write_log("Bets", get_username(), "print 20 last bets ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
@@ -323,6 +330,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		cin >> amount;
 		userptr->set_freebets(amount);
 		//eisagw sto arxeio to freebet;
+		interface.write_log("Freebets", get_username(), " ", "SUCCESS");
 		interface.save();
 		return 1;
 	}
@@ -336,16 +344,19 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 				node = node->get_next(option);
 				if (node->get_voided() == 0) {
 					node->set_voided();
+					interface.write_log("Void", get_username(), " ", "SUCCESS");
 					cout << "Option No" << option << " was cancelled succesfully." << endl;	//mhpws 8elei apo8hkeush sto arxeio hierarchy.dat;;
 					string full_id = node->get_full_id();
 					interface.voided(full_id);
 					interface.save();
 				}
 				else {
+					interface.write_log("Void", get_username(), "Is already voided. ", "ERROR");
 					cout << "Option No" << option << " is already voided." << endl;
 				}
 			}
 			else {
+				interface.write_log("Void", get_username(), "The option you chose does not exist. ", "ERROR");
 				cout << "The option you chose does not exist." << endl;
 				return 1;
 			}
@@ -354,6 +365,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		else {
 			cout << "Error. In order to cancel a selection you should be in a market." << endl;
 			return 0;
+			interface.write_log("Void", get_username(), "In order to cancel a selection you should be in a market. ", "ERROR");
 		}
 	}
 	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Settle") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("settle") == 0)) {
@@ -390,21 +402,25 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 				}
 				interface.pay(full_id, profit);				//plhrwnw tous nikhtes
 				interface.save();
+				interface.write_log("Settle", get_username(), "Settled ", "SUCCESS");
 				cout << "Option No" << option << " was settled succesfully." << endl;
 			}
 			else {
+				interface.write_log("Settle", get_username(), "Error 404 ", "ERROR");
 				cout << "The option you chose does not exist." << endl;
 				return 1;
 			}
 			return 1;
 		}
 		else {
+			interface.write_log("Settle", get_username(), "WRONG NODE ", "ERROR");
 			cout << "Error. In order to cancel a selection you should be in a market." << endl;
 			return 0;
 		}
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
+		interface.write_log("Exit", get_username(), " ", "SUCCESS");
 		return 0; //eksodos apo to sistima
 	}
 	else {
@@ -416,6 +432,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 bool Director::Operation(string leitourgia, BetAtzis& interface) {
 	if ((leitourgia.compare("H") == 0) || (leitourgia.compare("Home") == 0) || (leitourgia.compare("h") == 0) || (leitourgia.compare("home") == 0)) {
 		interface.return_home();
+		interface.write_log("Return Home", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("T") == 0) || (leitourgia.compare("Toggle") == 0) || (leitourgia.compare("t") == 0) || (leitourgia.compare("toggle") == 0)) {
@@ -486,10 +503,12 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		if (interface.get_type_of_profits() == 0) {
 			cout << "Conversion from fraction to decimal was successful." << endl;
 			interface.set_type_of_profits("Dekadika");
+			interface.write_log("Toggle", get_username(), "Dekadika ", "SUCCESS");
 		}
 		else {
 			cout << "Conversion from decimal to fraction was successful." << endl;
 			interface.set_type_of_profits("Klasmatika");
+			interface.write_log("Toggle", get_username(), "Klasmatika ", "SUCCESS");
 		}
 		return 1;
 	}
@@ -499,6 +518,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		for (int i = 0; i < 20; i++) {
 			cout << interface.get_bet(i);
 		}
+		interface.write_log("Bets", get_username(), "print 20 last bets ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("F") == 0) || (leitourgia.compare("Freebets") == 0) || (leitourgia.compare("f") == 0) || (leitourgia.compare("freebets") == 0)) {
@@ -513,25 +533,33 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		userptr->set_freebets(amount);
 		//eisagw sto arxeio to freebet;
 		interface.save();
+		interface.write_log("Freebets", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("S") == 0) || (leitourgia.compare("Save") == 0) || (leitourgia.compare("s") == 0) || (leitourgia.compare("save") == 0)) {
 		bool save = true;
 		save = interface.save();
 		if (save == true) {
+			interface.write_log("Save", get_username(), " ", "SUCCESS");
 			cout << "Files update successful!" << endl;
 		}
 		else {
+			interface.write_log("Save", get_username(), " ", "FAILED");
 			cout << "An error occured! Current state could not be saved." << endl;
 		}
 		return 1;
 	}
 	else if ((leitourgia.compare("X") == 0) || (leitourgia.compare("Exit") == 0) || (leitourgia.compare("x") == 0) || (leitourgia.compare("exit") == 0)) {
 		cout << "Exiting the program..." << endl;
+		interface.write_log("Exit", get_username(), "Exiting the program ", "SUCCESS");
 		return 0; //eksodos apo to sistima
 	}
 	else if ((leitourgia.compare("L") == 0) || (leitourgia.compare("Logs") == 0) || (leitourgia.compare("l") == 0) || (leitourgia.compare("logs") == 0)) {
-		//fanh diko sou!!
+		cout << "_______________________________" << endl;
+		cout << "|        25 last logs          |" << endl;
+		cout << "-------------------------------" << endl;
+		interface.Logs();
+		interface.write_log("Logs", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("U") == 0) || (leitourgia.compare("Users") == 0) || (leitourgia.compare("u") == 0) || (leitourgia.compare("users") == 0)) {
@@ -561,8 +589,10 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			interface.save();
 		}
 		else {
+			interface.write_log("Users", get_username(), " ", "ERROR");
 			cout << "WRONG INPUT" << endl;;
 		}
+		interface.write_log("Users", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("V") == 0) || (leitourgia.compare("Visibility") == 0) || (leitourgia.compare("v") == 0) || (leitourgia.compare("visibility") == 0)) {
@@ -570,6 +600,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		int option;
 		cin >> option;
 		//8elei douleia
+		interface.write_log("Visibility", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("R") == 0) || (leitourgia.compare("Rename") == 0) || (leitourgia.compare("r") == 0) || (leitourgia.compare("rename") == 0)) {
@@ -595,6 +626,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		node = node->get_next(option);
 		node->set_name(name);
 		interface.save();
+		interface.write_log("Rename", get_username(), " ", "SUCCESS");
 		cout << "Node name has changed successfully." << endl;
 		return 1;
 	}
@@ -621,10 +653,11 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			cout << "Type the name of the selection:" << endl;
 			cin >> name;
 		}
+		interface.write_log("New", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("C") == 0) || (leitourgia.compare("Copy") == 0) || (leitourgia.compare("c") == 0) || (leitourgia.compare("copy") == 0)) {
-
+		interface.write_log("Copy", get_username(), " ", "SUCCESS");
 		return 1;
 	}
 	else if ((leitourgia.compare("D") == 0) || (leitourgia.compare("Delete") == 0) || (leitourgia.compare("d") == 0) || (leitourgia.compare("delete") == 0)) {
@@ -648,6 +681,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			string full_id = node->get_full_id();
 			interface.delete_node(full_id);
 			interface.save();
+			interface.write_log("Delete", get_username(), "Node deleted successfully. ", "SUCCESS");
 			cout << "Node deleted successfully." << endl;
 			return 1;
 		}
@@ -655,12 +689,14 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			return 1;
 		}
 		else {
+			interface.write_log("Delete", get_username(), "delete node ", "ERROR");
 			cout << "WRONG INPUT" << endl;
 			return 1;
 		}
 		return 1;
 	}
 	else {
+		interface.write_log("Delete", get_username(), "delete node ", "ERROR");
 		cout << "WRONG INPUT" << endl;
 		return 1;
 	}

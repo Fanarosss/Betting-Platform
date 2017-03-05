@@ -161,7 +161,7 @@ BetAtzis::BetAtzis() {
 		while (!logs.eof()) {
 			getline(logs, line);
 		}
-		if (isdigit(line[1]) == 0) {
+		if (isdigit(line[0]) == 0) {
 			set_num_of_logs(0);
 		}
 		else {
@@ -655,6 +655,28 @@ bool BetAtzis::write_log(string origin, string user, string action, string outco
 		logs.close();
 		cout << "Error, cannot open log file." << endl;
 		return false;
+	}
+}
+
+void BetAtzis::Logs() {
+	string line;
+	fstream logs("audit.log", std::fstream::in);
+	if (num_of_logs >= 25) {
+		getline(logs, line);
+		for (int i = 0; i < num_of_logs - 25; i++) {
+			getline(logs, line);
+		}
+		for (int i = 0; i < 20; i++) {
+			getline(logs, line);
+			cout << line << endl;
+		}
+	}
+	else {
+		getline(logs, line);
+		for (int i = 0; i < num_of_logs; i++) {
+			getline(logs, line);
+			cout << line << endl;
+		}
 	}
 }
 

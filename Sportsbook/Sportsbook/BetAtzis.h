@@ -144,6 +144,8 @@ public:
 //vector save
 	bool save();
 
+	void Logs();
+
 	bool write_log(string, string, string, string);
 
 	string get_bet(int bet_id);
