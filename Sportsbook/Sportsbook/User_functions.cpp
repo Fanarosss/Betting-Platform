@@ -623,6 +623,49 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		}
 		return 1;
 	}
+	else if ((leitourgia.compare("C") == 0) || (leitourgia.compare("Copy") == 0) || (leitourgia.compare("c") == 0) || (leitourgia.compare("copy") == 0)) {
+
+		return 1;
+	}
+	else if ((leitourgia.compare("D") == 0) || (leitourgia.compare("Delete") == 0) || (leitourgia.compare("d") == 0) || (leitourgia.compare("delete") == 0)) {
+		cout << "Type th ID of the node you want to delete:" << endl;
+		interface.print_options();
+		cout << "Cancel/Abort, to exit." << endl;
+		string soption;
+		cin >> soption;
+		if ((soption == "Cancel") || (soption == "cancel") || (soption == "C") || (soption == "c") || (soption == "Abort") || (soption == "abort") || (soption == "A") || (soption == "a")) return 1;
+		cout << "Are you sure you wante to delete this node?" << endl;
+		cout << "Cancel/Abort, to exit." << endl;
+		string answer;
+		cin >> answer;
+		if ((answer == "Cancel") || (answer == "cancel") || (answer == "C") || (answer == "c") || (answer == "Abort") || (answer == "abort") || (answer == "A") || (answer == "a")) return 1;
+		if (answer == "Y") {
+			int option;
+			stringstream converter(soption);
+			converter >> option;
+			Node* node = interface.get_node();
+			node = node->get_next(option);
+			string full_id = node->get_full_id();
+			;
+			for (int i = 0; i < interface.get_nodes_size(); i++) {
+				if (interface.get_node_full_id(i) == full_id) {
+					cout << full_id << "==" << interface.get_node_full_id(i) << endl;
+					interface.delete_node(i);
+					interface.save();
+					cout << "Node deleted successfully." << endl;
+					break;
+				}
+			}
+		}
+		else if (answer == "N") {
+			return 1;
+		}
+		else {
+			cout << "WRONG INPUT" << endl;
+			return 1;
+		}
+		return 1;
+	}
 	else {
 		cout << "WRONG INPUT" << endl;
 		return 1;

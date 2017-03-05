@@ -107,6 +107,18 @@ public:
 		type_ofProfits = NEW;
 	}
 
+	int get_nodes_size() {
+		return nodes.size();
+	}
+
+	string get_node_full_id(int option) {
+		return nodes[option]->get_full_id();
+	}
+
+	void delete_node(int option) {
+		nodes.erase(nodes.begin() + option);
+	}
+
 	void place() {
 		user->place(*this);
 	}
