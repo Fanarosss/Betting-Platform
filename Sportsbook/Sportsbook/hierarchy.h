@@ -12,6 +12,7 @@ class Node {
 	string name;
 	string location;
 	Node* back;
+	bool visibility;
 public:
 	Node(int ID, string NAME);
 	virtual ~Node();
@@ -46,6 +47,9 @@ public:
 	virtual Node * get_node_byid(string id) { return NULL; }
 	virtual string conversion() { return NULL; }
 	string get_name() { return name; }
+	void set_visibility(bool hidden) { visibility = hidden; }
+	void set_visibility() { visibility = !visibility;  } //overloaded function for set_visibility of betatzis
+	bool get_visibility() { return visibility; }
 };
 
 class Selection : public Node {

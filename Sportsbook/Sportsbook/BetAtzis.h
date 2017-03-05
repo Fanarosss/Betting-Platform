@@ -159,6 +159,10 @@ public:
 	void print_users();
 	void search_user(string user);
 	void lock_user(string user);
+
+	void set_visibility(int option);
+
+	bool get_visibility(int option);
 };
 
 //functions for vector initialization

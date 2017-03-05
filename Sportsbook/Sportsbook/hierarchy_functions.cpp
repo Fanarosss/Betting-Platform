@@ -123,8 +123,6 @@ void Selection::set_location(string LOCATION) {
 }
 
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//kosta poli pithanon auti i ylopoiisi na einai lathos, den tin allazw akoma, alla logika thelei to vector na einai sto node me vector < node * > Nodes kai oles oi sinartiseis virtual!
 
 Category* Home::set_category(string NAME) {
 	Category * ctg_ptr;
@@ -283,35 +281,70 @@ Node * Home::get_node_byid(string id)
 string Category::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_cat = id + "." + " " + name;
+	string visibility;
+	if (get_visibility()) {
+		visibility = "[HIDDEN]";
+	}
+	else {
+		visibility.clear();
+	}
+	string node_cat = visibility + id + "." + " " + name;
 	return node_cat;
 }
 
 string Subcategory::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_subcat = id + " " + name;
+	string visibility;
+	if (get_visibility()) {
+		visibility = "[HIDDEN]";
+	}
+	else {
+		visibility.clear();
+	}
+	string node_subcat = visibility + id + " " + name;
 	return node_subcat;
 }
 
 string Event::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_event = id + " " + name + " " + date_time;
+	string visibility;
+	if (get_visibility()) {
+		visibility = "[HIDDEN]";
+	}
+	else {
+		visibility.clear();
+	}
+	string node_event = visibility + id + " " + name + " " + date_time;
 	return node_event;
 }
 
 string Market::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_market = id + " " + name;
+	string visibility;
+	if (get_visibility()) {
+		visibility = "[HIDDEN]";
+	}
+	else {
+		visibility.clear();
+	}
+	string node_market = visibility + id + " " + name;
 	return node_market;
 }
 
 string Selection::conversion() {
 	string id = get_full_id();
 	string name = Node::get_name();
-	string node_selection = id + " " + name + "#" + profit ;
+	string visibility;
+	if (get_visibility()) {
+		visibility = "[HIDDEN]";
+	}
+	else {
+		visibility.clear();
+	}
+	string node_selection = visibility + id + " " + name + "#" + profit;
 	if (voided) {
 		node_selection += "(VOIDED)";
 	}

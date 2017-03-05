@@ -67,7 +67,9 @@ bool Punter::Operation(string leitourgia, BetAtzis& interface) {
 								node->set_profit(snew_profit);
 							}													//alliws apo decadiko se klasma
 							else {
-								double decimal = atof(old_profit.c_str());
+								double decimal;
+								stringstream converter(old_profit.c_str());
+								converter >> decimal;
 								decimal--;
 								decimal = decimal * 100;
 								double divisor = 100;
@@ -267,7 +269,9 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 								node->set_profit(snew_profit);
 							}													//alliws apo decadiko se klasma
 							else {
-								double decimal = atof(old_profit.c_str());
+								double decimal;
+								stringstream converter(old_profit.c_str());
+								converter >> decimal;
 								decimal--;
 								decimal = decimal * 100;
 								double divisor = 100;
@@ -483,7 +487,9 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 								node->set_profit(snew_profit);
 							}													//alliws apo decadiko se klasma
 							else {
-								double decimal = atof(old_profit.c_str());
+								double decimal;
+								stringstream converter(old_profit.c_str());
+								converter >> decimal;
 								decimal--;
 								decimal = decimal * 100;
 								double divisor = 100;
@@ -626,7 +632,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 		cout << "Select the node you want to change its visibility:" << endl;
 		int option;
 		cin >> option;
-		//8elei douleia
+		interface.set_visibility(option);
 		interface.write_log("Visibility", get_username(), " ", "SUCCESS");
 		return 1;
 	}
@@ -807,8 +813,10 @@ void Director::Bets() {
 }
 
 void Punter::set_freebets(string freebet) {
-	if (freebets != "-") {
+	if ((freebets != "-") || (!freebets.empty())) {
 		freebets.append(", ");
+	}
+	else {
 		freebets.clear();
 	}
 	freebets.append(freebet); 

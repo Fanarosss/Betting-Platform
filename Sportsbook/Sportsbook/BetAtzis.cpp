@@ -39,18 +39,24 @@ BetAtzis::BetAtzis() {
 		}
 		name = HierLine;
 		bool voided=0;
+		bool hidden = 0;
+		string visibility = HierLine;
+		size_t pos2 = visibility.find("[Hidden]");
+		if (pos2 != std::string::npos) hidden = 1;
 		size_t position = name.find(" ");
 		name = name.substr(position + 1); //svinei tous arithmous kai to space
 		switch (NodeCounter) {
 			case 1: {Category* cptr = home->set_category(name);
 					cptr->set_back(home);
 					cptr->set_location("");
+					cptr->set_visibility(hidden);
 					Cptr = cptr;
 					nodes.push_back(cptr);
 					break; }
 			case 2: {Subcategory* scptr = Cptr->set_subcategory(name);
 					scptr->set_back(Cptr);
 					scptr->set_location("");
+					scptr->set_visibility(hidden);
 					SCptr = scptr;
 					nodes.push_back(scptr);
 					break; }
@@ -68,12 +74,14 @@ BetAtzis::BetAtzis() {
 					Event* eptr = SCptr->set_event(name, time);
 					eptr->set_back(SCptr);
 					eptr->set_location("");
+					eptr->set_visibility(hidden);
 					Eptr = eptr;
 					nodes.push_back(eptr);
 					break; }
 			case 4: {Market* mptr = Eptr->set_market(name);
 					mptr->set_back(Eptr);
 					mptr->set_location("");
+					mptr->set_visibility(hidden);
 					Mptr = mptr;
 					nodes.push_back(mptr);
 					break; }
@@ -94,6 +102,7 @@ BetAtzis::BetAtzis() {
 					Selection* sptr = Mptr->set_selection(name, profit, voided);
 					sptr->set_back(Mptr);
 					sptr->set_location("");
+					sptr->set_visibility(hidden);
 					Sptr = sptr;
 					nodes.push_back(sptr);
 					break; }
@@ -677,6 +686,13 @@ void BetAtzis::Logs() {
 	}
 }
 
+void BetAtzis::set_visibility(int option) {
+	(node->get_next(option))->set_visibility();
+}
+
+bool BetAtzis::get_visibility(int option) {
+	return (node->get_next(option))->get_visibility();
+}
 /*void BetAtzis::set_results(string node_id) { //for betatzis
 	for (int i = 0; i < bets.size(); i++) {
 		if (bets[i]->get_nodeid() == node_id) {
