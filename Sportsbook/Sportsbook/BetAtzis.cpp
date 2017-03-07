@@ -730,7 +730,7 @@ void BetAtzis::delete_node(string full_id) {								//delete a node and all subn
 						(nodes[i]->get_back())->delete_node(myid); //only the pointers are getting deleted here, objects are needed for full id.
 						Recursion_flag = true;
 					}
-					nodes_to_be_deleted.push_back(nodes[i]); //I dont delete them here because i will get a sementation at get_fullid which works recursively
+					nodes_to_be_deleted.push_back(nodes[i]); //We dont delete them here because we will get a sementation at get_fullid which works recursively
 					nodes.erase(nodes.begin() + j);		//erase it
 				}
 				else break;
@@ -740,8 +740,8 @@ void BetAtzis::delete_node(string full_id) {								//delete a node and all subn
 			i++;					//go to the next one
 		}
 		if (first_found == true) {	//if you have found a node to erase, then break
-			while (!nodes_to_be_deleted.empty()) { //now I delete them that full id is not longer necesary.
-				delete nodes_to_be_deleted[0];
+			while (!nodes_to_be_deleted.empty()) { //now we delete them that full id is not longer necessary.
+				delete nodes_to_be_deleted[0]; // it is always 0 because vector::erase awlays changes the first and replace it with the second untill it is empty
 				nodes_to_be_deleted.erase(nodes_to_be_deleted.begin());
 			}
 			break;

@@ -351,7 +351,7 @@ bool Trader::Operation(string leitourgia, BetAtzis& interface) {
 		int user;
 		string amount;
 		interface.print_users();
-		cout << endl << "Enter the name of the user you want to give a freebet." << endl;
+		cout << endl << "Enter the id of the user you want to give a freebet." << endl;
 		cin >> user;
 		User * userptr = interface.get_userptr(user);
 		cout << endl << "Enter the amount to be given." << endl;
@@ -809,7 +809,7 @@ void Director::Print_Operations(BetAtzis& interface) {
 
 
 void Punter::set_freebets(string freebet) {
-	if ((freebets != "-") || (!freebets.empty())) {
+	if ((freebets != "-") && (!freebets.empty())) {
 		freebets.append(", ");
 	}
 	else {
