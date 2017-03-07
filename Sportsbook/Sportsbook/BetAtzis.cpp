@@ -272,6 +272,15 @@ void BetAtzis::pay(string full_id, double profit) {			//pay the users who won an
 }
 
 BetAtzis::~BetAtzis() {
+	for (int i = 0; i < nodes.size(); i++) {
+		delete nodes[i];
+	}
+	for (int i = 0; i < users.size(); i++) {
+		delete users[i];
+	}
+	for (int i = 0; i < bets.size(); i++) {
+		delete bets[i];
+	}
 	//cout << "System destroyed" << endl;
 }
 
@@ -704,6 +713,9 @@ bool BetAtzis::get_visibility(int option) {									//get the visibility of a no
 void BetAtzis::delete_node(string full_id) {								//delete a node and all subnodes
 	bool first_found = false;		//flag for first node to be deleted
 	int i = 0;
+	int myid;
+	bool Recursion_flag = false;
+	vector <Node*> nodes_to_be_deleted;
 	while (i<nodes.size()) {
 		string id = nodes[i]->get_full_id();
 		if(id==full_id){			//if you find the node with the exact same id
@@ -712,7 +724,13 @@ void BetAtzis::delete_node(string full_id) {								//delete a node and all subn
 			while (j < nodes.size()) {
 				string id = nodes[i]->get_full_id();
 				size_t find = id.find(full_id);			//search for every subnode of it
-				if (find != std::string::npos) {		//if you find a subnode
+				if (find != std::string::npos) {	//if you find a subnode
+					if (Recursion_flag == false) {
+						nodes[i]->get_id(myid);
+						(nodes[i]->get_back())->delete_node(myid); //only the pointers are getting deleted here, objects are needed for full id.
+						Recursion_flag = true;
+					}
+					nodes_to_be_deleted.push_back(nodes[i]); //I dont delete them here because i will get a sementation at get_fullid which works recursively
 					nodes.erase(nodes.begin() + j);		//erase it
 				}
 				else break;
@@ -721,7 +739,11 @@ void BetAtzis::delete_node(string full_id) {								//delete a node and all subn
 		else {						//if you don't find the node
 			i++;					//go to the next one
 		}
-		if (first_found == true) {	//if you have found a node to erase, then break	
+		if (first_found == true) {	//if you have found a node to erase, then break
+			while (!nodes_to_be_deleted.empty()) { //now I delete them that full id is not longer necesary.
+				delete nodes_to_be_deleted[0];
+				nodes_to_be_deleted.erase(nodes_to_be_deleted.begin());
+			}
 			break;
 		}
 	}

@@ -114,7 +114,6 @@ public:
 		//std::cout << "Welcome back mr." << username << endl;
 	}
 	bool Operation(string, BetAtzis&);
-	void Bets();
 	void Print_Operations(BetAtzis&);
 	string conversion();
 };
@@ -125,7 +124,6 @@ public:
 		//std::cout << "Welcome back boss" << endl;
 	}
 	bool Operation(string, BetAtzis&);
-	void Bets();
 	void Print_Operations(BetAtzis&);
 	string conversion();
 };

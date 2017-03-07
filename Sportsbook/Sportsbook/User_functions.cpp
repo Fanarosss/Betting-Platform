@@ -725,8 +725,7 @@ bool Director::Operation(string leitourgia, BetAtzis& interface) {
 			stringstream converter(soption);
 			converter >> option;
 			Node* node = interface.get_node();
-			node = node->get_next(option);
-			string full_id = node->get_full_id();
+			string full_id = (node->get_next(option))->get_full_id();
 			interface.delete_node(full_id);
 			interface.save();
 			interface.write_log("Delete", get_username(), "Node deleted successfully. ", "SUCCESS");

@@ -179,5 +179,6 @@ int main(int argc, char *argv[])
 			Interface->set_level(choice);
 		}
 	} while (flag == true);
+	delete Interface;
 	return 0;
 }

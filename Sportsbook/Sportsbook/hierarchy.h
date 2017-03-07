@@ -50,6 +50,7 @@ public:
 	void set_visibility(bool hidden) { visibility = hidden; }
 	void set_visibility() { visibility = !visibility; } //overloaded function for set_visibility of betatzis
 	bool get_visibility() { return visibility; }
+	virtual void delete_node(int option) { }
 };
 
 class Selection : public Node {
@@ -142,6 +143,14 @@ public:
 	void place(BetAtzis* Interface);
 
 	Node* get_selection_ptr(int selection_id) { return Selections[selection_id - 1]; }
+	void delete_node(int option) {
+		Selections.erase(Selections.begin() + (option - 1));
+	}
+	void delete_nodes() {
+		while (!Selections.empty()) { // I dont delete the objects here because I need them in betatzis to get full id of the others
+			Selections.erase(Selections.begin());
+		}
+	}
 };
 
 class Event : public Node {
@@ -180,6 +189,16 @@ public:
 	int get_vector_size() {
 		return Markets.size();
 	}
+	void delete_node(int option) {
+		Markets[option-1]->delete_nodes();
+		Markets.erase(Markets.begin() + (option - 1));
+	}
+	void delete_nodes() {
+		while (!Markets.empty()) {
+			Markets[0]->delete_nodes();
+			Markets.erase(Markets.begin());
+		}
+	}
 };
 
 class Subcategory : public Node {
@@ -208,6 +227,16 @@ public:
 	int get_vector_size() {
 		return Events.size();
 	}
+	void delete_node(int option) {
+		Events[option-1]->delete_nodes();
+		Events.erase(Events.begin() + (option - 1));
+	}
+	void delete_nodes() {
+		while (!Events.empty()) {
+			Events[0]->delete_nodes();
+			Events.erase(Events.begin());
+		}
+	}
 };
 
 class Category : public Node {
@@ -233,6 +262,16 @@ public:
 	int get_vector_size() {
 		return Subcategories.size();
 	}
+	void delete_node(int option) {
+		Subcategories[option-1]->delete_nodes();
+		Subcategories.erase(Subcategories.begin() + (option-1));
+	}
+	void delete_nodes() {
+		while (!Subcategories.empty()) {
+			Subcategories[0]->delete_nodes();
+			Subcategories.erase(Subcategories.begin());
+		}
+	}
 };
 
 class Home : public Node {
@@ -250,4 +289,8 @@ public:
 		return Categories.size();
 	}
 	Node * get_node_byid(string id);
+	void delete_node(int option) {
+		Categories[option-1]->delete_nodes();
+		Categories.erase(Categories.begin() + (option - 1));
+	}
 };
