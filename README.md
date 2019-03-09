@@ -1,6 +1,6 @@
 # Betting-Platform
 
-Worked in a team of 2 to implement a virtual platform, where you can
+Worked in a team of 2 to implement a virtual platform, where you can:
 
   #### As a user:
   
